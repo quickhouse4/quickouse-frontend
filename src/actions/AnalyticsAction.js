@@ -1,0 +1,234 @@
+import axios from "axios";
+import {
+    GET_ANALYTICS_REQUEST,
+    GET_ANALYTICS_SUCCESS,
+    GET_ANALYTICS_FAIL,
+    GET_LIKE_ANALYTICS_REQUEST,
+    GET_LIKE_ANALYTICS_SUCCESS,
+    GET_LIKE_ANALYTICS_FAIL,
+    LIKE_NUMBER_REQUEST,
+    LIKE_NUMBER_SUCCESS,
+    LIKE_NUMBER_FAIL,
+    VIEWS_NUMBER_REQUEST,
+    VIEWS_NUMBER_SUCCESS,
+    VIEWS_NUMBER_FAIL,
+    POST_NUMBER_REQUEST,
+    POST_NUMBER_SUCCESS,
+    POST_NUMBER_FAIL,
+    PLOT_NUMBER_REQUEST,
+    PLOT_NUMBER_SUCCESS,
+    PLOT_NUMBER_FAIL,
+    RENT_NUMBER_REQUEST,
+    RENT_NUMBER_SUCCESS,
+    RENT_NUMBER_FAIL,
+    HOUSE_NUMBER_REQUEST,
+    HOUSE_NUMBER_SUCCESS,
+    HOUSE_NUMBER_FAIL,
+    SALE_NUMBER_REQUEST,
+    SALE_NUMBER_SUCCESS,
+    SALE_NUMBER_FAIL
+} from "./types";
+
+export const getDataAnalytic = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ANALYTICS_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/viewsAnalytics", {
+            headers: {
+                token: token
+            }
+        })
+
+        dispatch({
+            type: GET_ANALYTICS_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: GET_ANALYTICS_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getLikeAnalytic = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_LIKE_ANALYTICS_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/likes", {
+            headers: {
+                token: token
+            }
+        })
+
+        dispatch({
+            type: GET_LIKE_ANALYTICS_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        console.log(error);
+        dispatch({
+            type: GET_LIKE_ANALYTICS_FAIL,
+            payload: error
+        })
+    }
+}
+export const getPostNumber = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: POST_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/myPosts", {
+            headers: {
+                token: token
+            }
+        })
+
+        dispatch({
+            type: POST_NUMBER_SUCCESS,
+            response: response.data.data
+
+        })
+    } catch (error) {
+        dispatch({
+            type: POST_NUMBER_FAIL,
+            response: error
+        })
+    }
+}
+export const getLikeNumber = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: LIKE_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/allLikes", {
+            headers: {
+                token: token
+            }
+        })
+        dispatch({
+            type: LIKE_NUMBER_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: LIKE_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
+export const getViewsNumber = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: VIEWS_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/myViews", {
+            headers: {
+                token: token
+            }
+        });
+        dispatch({
+            type: VIEWS_NUMBER_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: VIEWS_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
+export const getPlotNumber = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: PLOT_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts/plot", {
+            headers: {
+                token: token
+            }
+        });
+
+        dispatch({
+            type: PLOT_NUMBER_SUCCESS,
+            response: response.data.data.plotPosts
+        })
+    } catch (error) {
+        dispatch({
+            type: PLOT_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getHouseNumber = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: HOUSE_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts/house", {
+            headers: {
+                token: token
+            }
+        });
+
+        dispatch({
+            type: HOUSE_NUMBER_SUCCESS,
+            response: response.data.data.housePosts
+        })
+    } catch (error) {
+        dispatch({
+            type: HOUSE_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getRentPosts = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: RENT_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts/forRent", {
+            headers: {
+                token: token
+            }
+        });
+      
+        dispatch({
+            type: RENT_NUMBER_SUCCESS,
+            response: response.data.data.rentPosts
+        })
+    } catch (error) {
+        dispatch({
+            type: RENT_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getSalePosts = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: SALE_NUMBER_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api//posts/forSale", {
+            headers: {
+                token: token
+            }
+        });
+        
+        dispatch({
+            type: SALE_NUMBER_SUCCESS,
+            response: response.data.data.salePosts
+        })
+    } catch (error) {
+        dispatch({
+            type: SALE_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
