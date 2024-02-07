@@ -34,7 +34,10 @@ import {
   GET_YEAR_LIKES_FAIL,
   TOTAL_POST_REQUEST,
   TOTAL_POST_SUCCESS,
-  TOTAL_POST_FAIL
+  TOTAL_POST_FAIL,
+  TOTAL_VIEWS_REQUEST,
+  TOTAL_VIEWS_SUCCESS,
+  TOTAL_VIEWS_FAIL
 } from "../actions/types";
 
 export const getAnalyticsReducer = (state = { analytics: [] }, action) => {
@@ -187,6 +190,19 @@ export const totalPostReducer = (state = { totalPost: [] }, action) => {
           return { totalPostLoading: false, totalPost: action.response };
       case TOTAL_POST_FAIL:
           return { totalPostLoading: false, totalPostError: action.response }
+      default:
+          return state;
+  }
+}
+
+export const totalViewsReducer = (state = { totalViews: [] }, action) => {
+  switch (action.type) {
+      case TOTAL_VIEWS_REQUEST:
+          return { totalViewsLoading: true, totalViews: [] }
+      case TOTAL_VIEWS_SUCCESS:
+          return { totalViewsLoading: false, totalViews: action.response };
+      case TOTAL_VIEWS_FAIL:
+          return { totalViewsLoading: false, totalViewsError: action.response }
       default:
           return state;
   }
