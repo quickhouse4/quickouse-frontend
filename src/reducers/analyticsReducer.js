@@ -25,7 +25,16 @@ import {
   RENT_NUMBER_FAIL,
   SALE_NUMBER_REQUEST,
   SALE_NUMBER_SUCCESS,
-  SALE_NUMBER_FAIL
+  SALE_NUMBER_FAIL,
+  GET_YEAR_VIEWS_REQUEST,
+  GET_YEAR_VIEWS_SUCCESS,
+  GET_YEAR_VIEWS_FAIL,
+  GET_YEAR_LIKES_REQUEST,
+  GET_YEAR_LIKES_SUCCESS,
+  GET_YEAR_LIKES_FAIL,
+  TOTAL_POST_REQUEST,
+  TOTAL_POST_SUCCESS,
+  TOTAL_POST_FAIL
 } from "../actions/types";
 
 export const getAnalyticsReducer = (state = { analytics: [] }, action) => {
@@ -36,6 +45,32 @@ export const getAnalyticsReducer = (state = { analytics: [] }, action) => {
       return { loading: false, analytics: action.response };
     case GET_ANALYTICS_FAIL:
       return { loading: false, analyticsError: action.response }
+    default:
+      return state;
+  }
+}
+
+export const getYearViewsReducer = (state = { yearViews: [] }, action) => {
+  switch (action.type) {
+    case GET_YEAR_VIEWS_REQUEST:
+      return { yearLoading: true, yearViews: [] }
+    case GET_YEAR_VIEWS_SUCCESS:
+      return { yearLoading: false, yearViews: action.response };
+    case GET_YEAR_VIEWS_FAIL:
+      return { yearLoading: false, yearError: action.response }
+    default:
+      return state;
+  }
+}
+
+export const getYearLikesReducer = (state = { yearLikes: [] }, action) => {
+  switch (action.type) {
+    case GET_YEAR_LIKES_REQUEST:
+      return { yearLoading: true, yearLikes: [] }
+    case GET_YEAR_LIKES_SUCCESS:
+      return { yearLoading: false, yearLikes: action.response };
+    case GET_YEAR_LIKES_FAIL:
+      return { yearLoading: false, yearError: action.response }
     default:
       return state;
   }
@@ -141,5 +176,18 @@ export const saleNumberReducer = (state = { saleNumbers: [] }, action) => {
       return { saleLoading: false, saleError: action.response }
     default:
       return state;
+  }
+}
+
+export const totalPostReducer = (state = { totalPost: [] }, action) => {
+  switch (action.type) {
+      case TOTAL_POST_REQUEST:
+          return { totalPostLoading: true, totalPost: [] }
+      case TOTAL_POST_SUCCESS:
+          return { totalPostLoading: false, totalPost: action.response };
+      case TOTAL_POST_FAIL:
+          return { totalPostLoading: false, totalPostError: action.response }
+      default:
+          return state;
   }
 }
