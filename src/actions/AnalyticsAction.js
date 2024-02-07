@@ -35,7 +35,10 @@ import {
     GET_YEAR_LIKES_FAIL,
     TOTAL_POST_REQUEST,
     TOTAL_POST_SUCCESS,
-    TOTAL_POST_FAIL
+    TOTAL_POST_FAIL,
+    TOTAL_VIEWS_REQUEST,
+    TOTAL_VIEWS_SUCCESS,
+    TOTAL_VIEWS_FAIL
 } from "./types";
 
 export const getDataAnalytic = (token) => async (dispatch) => {
@@ -94,7 +97,7 @@ export const getYearLikes = (token, year) => async (dispatch) => {
                 token: token
             }
         })
-        
+
         dispatch({
             type: GET_YEAR_LIKES_SUCCESS,
             response: response.data.data
@@ -297,8 +300,6 @@ export const getTotalPosts = (token) => async (dispatch) => {
                 token: token
             }
         });
-
-        console.log("act",response.data.data.activePosts)
         dispatch({
             type: TOTAL_POST_SUCCESS,
             response: response.data.data.activePosts
@@ -306,6 +307,28 @@ export const getTotalPosts = (token) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: TOTAL_POST_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getTotalViews = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: TOTAL_VIEWS_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/totalViews", {
+            headers: {
+                token: token
+            }
+        });
+        dispatch({
+            type: TOTAL_VIEWS_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: TOTAL_VIEWS_FAIL,
             payload: error
         })
     }
