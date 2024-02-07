@@ -11,7 +11,8 @@ import {
   getViewsNumber,
   getYearLikes,
   getYearViews,
-  getTotalPosts
+  getTotalPosts,
+  getTotalViews
 } from "../actions/AnalyticsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
@@ -29,6 +30,7 @@ const Statistics = () => {
   const numberView = useSelector((state) => state.getNumberViews)
   const commonProperties = useSelector((state) => state.propertyLists)
   const { totalPost } = useSelector((state) => state.totalPost)
+  const { totalViews } = useSelector((state) => state.totalViews)
   const plot = useSelector((state) => state.plotNumber)
   const house = useSelector((state) => state.houseNumber)
   const rent = useSelector((state) => state.rentNumber)
@@ -64,6 +66,7 @@ const Statistics = () => {
     dispatch(getRentPosts(token))
     dispatch(getSalePosts(token))
     dispatch(getTotalPosts(token))
+    dispatch(getTotalViews(token))
   }, [])
 
   const handleYearchange = year => {
@@ -111,7 +114,6 @@ const Statistics = () => {
     };
   });
 
-  console.log("totalPost", totalPost)
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -138,12 +140,10 @@ const Statistics = () => {
             </div>
           </div> */}
           <div className="col-md-2 mb-3" >
-            <div
-              className="card mt-3 analyticsField"
-            >
+            <div className="card mt-3 analyticsField">
               <div className="card-body">
                 <div className="d-flex justify-content-evenly align-items-center flex-wrap" >
-                  <h4 className="fs-6 mr-2 text-light">Total Views</h4>
+                  <h4 className="fs-6 mr-2 text-light">My Views</h4>
                   <span className="fs-4 text-light">{viewsNumber}</span>
                 </div>
               </div>
@@ -160,6 +160,16 @@ const Statistics = () => {
             </div>
           </div>
           {userToken.role === "admin" && <>
+            <div className="col-md-2 mb-3" >
+              <div className="card mt-3 analyticsField">
+                <div className="card-body">
+                  <div className="d-flex justify-content-evenly align-items-center flex-wrap" >
+                    <h4 className="fs-6 mr-2 text-light">Total Views</h4>
+                    <span className="fs-4 text-light">{totalViews}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="col-md-2 mb-3" >
               <div className="card mt-3 analyticsField">
                 <div className="card-body">
