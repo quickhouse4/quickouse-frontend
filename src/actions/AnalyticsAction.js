@@ -26,7 +26,16 @@ import {
     HOUSE_NUMBER_FAIL,
     SALE_NUMBER_REQUEST,
     SALE_NUMBER_SUCCESS,
-    SALE_NUMBER_FAIL
+    SALE_NUMBER_FAIL,
+    GET_YEAR_VIEWS_REQUEST,
+    GET_YEAR_VIEWS_SUCCESS,
+    GET_YEAR_VIEWS_FAIL,
+    GET_YEAR_LIKES_REQUEST,
+    GET_YEAR_LIKES_SUCCESS,
+    GET_YEAR_LIKES_FAIL,
+    TOTAL_POST_REQUEST,
+    TOTAL_POST_SUCCESS,
+    TOTAL_POST_FAIL
 } from "./types";
 
 export const getDataAnalytic = (token) => async (dispatch) => {
@@ -45,9 +54,54 @@ export const getDataAnalytic = (token) => async (dispatch) => {
             response: response.data.data
         })
     } catch (error) {
-        console.log(error);
         dispatch({
             type: GET_ANALYTICS_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getYearViews = (token, year) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_YEAR_VIEWS_REQUEST
+        })
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/viewsAnalytics?yearData=${year}`, {
+            headers: {
+                token: token
+            }
+        })
+        dispatch({
+            type: GET_YEAR_VIEWS_SUCCESS,
+            response: response.data.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: GET_YEAR_VIEWS_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getYearLikes = (token, year) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_YEAR_LIKES_REQUEST
+        })
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/likes?yearData=${year}`, {
+            headers: {
+                token: token
+            }
+        })
+        
+        dispatch({
+            type: GET_YEAR_LIKES_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_YEAR_LIKES_FAIL,
             payload: error
         })
     }
@@ -197,7 +251,7 @@ export const getRentPosts = (token) => async (dispatch) => {
                 token: token
             }
         });
-      
+
         dispatch({
             type: RENT_NUMBER_SUCCESS,
             response: response.data.data.rentPosts
@@ -220,7 +274,7 @@ export const getSalePosts = (token) => async (dispatch) => {
                 token: token
             }
         });
-        
+
         dispatch({
             type: SALE_NUMBER_SUCCESS,
             response: response.data.data.salePosts
@@ -228,6 +282,30 @@ export const getSalePosts = (token) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: SALE_NUMBER_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getTotalPosts = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: TOTAL_POST_REQUEST
+        })
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts", {
+            headers: {
+                token: token
+            }
+        });
+
+        console.log("act",response.data.data.activePosts)
+        dispatch({
+            type: TOTAL_POST_SUCCESS,
+            response: response.data.data.activePosts
+        })
+    } catch (error) {
+        dispatch({
+            type: TOTAL_POST_FAIL,
             payload: error
         })
     }
