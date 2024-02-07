@@ -174,7 +174,6 @@ export const getAppMessage = () => async (dispatch) => {
             type: GET_APP_MESSAGE_REQUEST
         })
         const response = await axios.get("https://quickhouse.herokuapp.com/api/orders")
-        console.log(response.data.data)
         dispatch({
             type: GET_APP_MESSAGE_SUCCESS,
             payload: response.data.data
