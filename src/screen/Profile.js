@@ -17,7 +17,6 @@ function Profile() {
     dispatch(getProfile(token))
   }, [])
 
-  console.log("pro",profile)
   return (
     <>
       <Header setLabel={setLabel} />

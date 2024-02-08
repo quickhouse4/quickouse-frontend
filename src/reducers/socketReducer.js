@@ -13,7 +13,7 @@ import {
 } from "../actions/types"
 
 const initial = {
-  socket: io('ws://localhost:5000'),
+  // socket: io('ws://localhost:5000'),
   userchats: []
 }
 

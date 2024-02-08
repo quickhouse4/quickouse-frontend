@@ -276,42 +276,42 @@ function Header({ setLabel }) {
                 <span className="text-light fs-6">All Category<i className="bi bi-chevron-down text-light"></i></span>
               </a>
               <ul className={!toggle ? "dropdown" : "dropdown-active d-flex flex-column"}>
-                <li className="dropdown"><a onClick={() => setMenuToggle(!menuToggle)}><Link>Warehouse</Link><i className="bi bi-chevron-right"></i></a>
+                <li className="dropdown"><a onClick={() => setMenuToggle(!menuToggle)}><Link to="">Warehouse</Link><i className="bi bi-chevron-right"></i></a>
                   <ul className={!menuToggle ? "" : "dropdown-active"}>
                     <li><Link to="/type/warehouseFilters" onClick={handleWarehouseForRent}>For Rent</Link></li>
                     <li><Link to="/type/warehouseSaleFilters" onClick={handleWarehouseForSale}> For Sale</Link></li>
                   </ul>
                 </li>
                 <li className="dropdown"><a onClick={() => setMenuToggle1(!menuToggle1)}>
-                  <Link >Apartments</Link><i className="bi bi-chevron-right"></i></a>
+                  <Link to="">Apartments</Link><i className="bi bi-chevron-right"></i></a>
                   <ul className={!menuToggle1 ? "" : "dropdown-active"}>
                     <li><Link to="/type/apartmentsFilters" onClick={handleApartmentForRent}>For Rent</Link></li>
                     <li><Link to="/type/apartmentsSaleFilters" onClick={handleApartmentForSale}> For Sale</Link></li>
                   </ul>
                 </li>
                 <li className="dropdown"><a onClick={() => setMenuToggle2(!menuToggle2)}>
-                  <Link >Vacant Plot</Link><i className="bi bi-chevron-right"></i></a>
+                  <Link to="">Vacant Plot</Link><i className="bi bi-chevron-right"></i></a>
                   <ul className={!menuToggle2 ? "" : "dropdown-active"}>
                     {/* <li><Link to="/type/vacantPlotsFilters" onClick={handlePlotForRent} >For Rent</Link></li> */}
                     <li><Link to="/type/vacantPlotsSaleFilters" onClick={handlePlotForSale}> For Sale</Link></li>
                   </ul>
                 </li>
                 <li className="dropdown"><a onClick={() => setMenuToggle3(!menuToggle3)}>
-                  <Link >Office</Link><i className="bi bi-chevron-right"></i></a>
+                  <Link to="">Office</Link><i className="bi bi-chevron-right"></i></a>
                   <ul className={!menuToggle3 ? "" : "dropdown-active"}>
                     <li><Link to="/type/officesFilters" onClick={handleOfficeForRent}>For Rent</Link></li>
                     <li><Link to="/type/officesSaleFilters" onClick={handleOfficeForSale}> For Sale</Link></li>
                   </ul>
                 </li>
                 <li className="dropdown"><a onClick={() => setMenuToggle4(!menuToggle4)}>
-                  <Link >Residentials</Link><i className="bi bi-chevron-right"></i></a>
+                  <Link to="">Residentials</Link><i className="bi bi-chevron-right"></i></a>
                   <ul className={!menuToggle4 ? "" : "dropdown-active"}>
                     <li><Link to="/type/residentialsFilters" onClick={handleResidentialForRent}>For Rent</Link></li>
                     <li><Link to="/type/residentialsSaleFilters" onClick={handleResidentialForSale}> For Sale</Link></li>
                   </ul>
                 </li>
                 <li className="dropdown"><a onClick={() => setMenuToggle5(!menuToggle5)}>
-                  <Link >Commercial</Link><i className="bi bi-chevron-right"></i></a>
+                  <Link to="">Commercial</Link><i className="bi bi-chevron-right"></i></a>
                   <ul className={!menuToggle5 ? "" : "dropdown-active"}>
                     <li><Link to="/type/commercialFilters" onClick={handleCommercialForRent}>For Rent</Link></li>
                     <li><Link to="/type/commercialSaleFilters" onClick={handleCommercialForSale}> For Sale</Link></li>
@@ -349,7 +349,7 @@ function Header({ setLabel }) {
                 <>
                   <li>
                     <a className="nav-link scrollto">
-                      <Link className="nav-link" data-toggle="modal" data-target="#exampleModalScrollable" >List Your propperty</Link>
+                      <Link to="" className="nav-link" data-toggle="modal" data-target="#exampleModalScrollable" >List Your propperty</Link>
                     </a>
                   </li>
                   <li>
@@ -408,7 +408,7 @@ function Header({ setLabel }) {
                 <div className="dropdown-content" >
                   <Link to="/profile">Profile</Link>
                   <Link to="/dashboard">Dashboard</Link>
-                  <Link className="dropdown-item" onClick={handleLogout}>
+                  <Link to="" className="dropdown-item" onClick={handleLogout}>
                     Logout
                   </Link>
                 </div>

@@ -109,7 +109,7 @@ const Sidebar = () => {
                 <AiFillUnlock style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Change password</span>
 
               </Link>
-              <Link onClick={handleLogout} class="nav-item nav-link align-middle px-0">
+              <Link to="" onClick={handleLogout} class="nav-item nav-link align-middle px-0">
 
                 <BiExit style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Logout</span>
 

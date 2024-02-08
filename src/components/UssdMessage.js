@@ -222,7 +222,7 @@ const UssdMessage = () => {
                     </span>
                   ) :
                     allUssd && allUssd.map((item, index) => (
-                      <Link  class="text-decoration-none ">
+                      <Link to="" class="text-decoration-none ">
                         <div
                           class="card mb-1 rounded-lg ussd-card"
                           key={index}
@@ -273,7 +273,8 @@ const UssdMessage = () => {
                         </div>
                       </Link>
                     ))
-                }</>
+                }
+                </>
             )}
         </div>
       </div>
