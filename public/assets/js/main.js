@@ -106,7 +106,6 @@
    * Scrool with ofset on links with a class name .scrollto
    */
   on('click', '.scrollto', function (e) {
-    console.log("yy")
     if (select(this.hash)) {
       e.preventDefault()
 
