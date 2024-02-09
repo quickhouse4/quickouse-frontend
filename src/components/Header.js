@@ -193,22 +193,32 @@ function Header({ setLabel }) {
       toast.warn("You have to be Loggedin")
     }
   }
+
   useEffect(() => {
     async function fetchProfile() {
-      const { data } = await axios.get(
-        `https://quickhouse.herokuapp.com/api/myProfile`,
-        {
-          headers: {
-            token: token,
-          },
+      try {
+        if (!token) {
+          console.log("User is not logged in");
+          return;
         }
-      );
-      setProfile(data.data);
-
-      // console.log(profile.firstname);
+        const { data } = await axios.get(
+          `https://quickhouse.herokuapp.com/api/myProfile`,
+          {
+            headers: {
+              token: token,
+            },
+          }
+        );
+  
+        setProfile(data.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
     }
+  
     fetchProfile();
-  }, []);
+  }, [token]);
+  
 
   useEffect(() => {
     const pathname = location.pathname;
