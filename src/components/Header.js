@@ -198,7 +198,7 @@ function Header({ setLabel }) {
     async function fetchProfile() {
       try {
         if (!token) {
-          history.push("/")
+          console.log(".");
           return;
         }
         const { data } = await axios.get(
