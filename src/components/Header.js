@@ -198,7 +198,7 @@ function Header({ setLabel }) {
     async function fetchProfile() {
       try {
         if (!token) {
-          console.log("User is not logged in");
+          history.push("/")
           return;
         }
         const { data } = await axios.get(
