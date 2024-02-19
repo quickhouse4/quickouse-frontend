@@ -44,6 +44,7 @@ const Deal = () => {
             setTitle({ value: em, message: "Write your Title" });
         }
     };
+
     const onCurrencyChange = (e) => {
 
         var em = e.target.value;
@@ -187,7 +188,6 @@ const Deal = () => {
                 <div className="my-5 px-3">
                     <form className="m-auto px-4 py-5 rounded shadow" style={{ maxWidth: "600px" }}>
                         <div className="mb-4 text-center">
-                            {/* <h4 className="fw-normal dark-blue">Dealing form</h4> */}
                         </div>
                         <fieldset>
                             <div class="form-outline mb-4">
@@ -234,20 +234,6 @@ const Deal = () => {
                                     <span class="text-danger">{title.message}</span>
                                 </div>
                             </div>
-                            {/* <div class="form-outline mb-4">
-                                <div class="form-floating">
-                                    <select
-                                        class="form-control "
-                                        id="sel1"
-                                        onChange={onTypeChange}
-                                    >
-                                        <option>Property Type</option>
-                                        <option>Offer </option>
-                                        <option>Request</option>
-                                    </select>
-                                    <span class="text-danger">{type.message}</span>
-                                </div>
-                            </div> */}
                             <div class="form-outline mb-4">
                                 <div class="form-floating">
                                     <select
@@ -279,7 +265,7 @@ const Deal = () => {
                                             </option>
                                         ))}
                                     </select>
-                                    <span class="text-danger">{province.message}</span>
+                                    <span class="text-danger">{province && province.message}</span>
                                 </div>
                             </div>
                             <div class="form-outline mb-4">
@@ -299,7 +285,7 @@ const Deal = () => {
                                             ))
                                         }
                                     </select>
-                                    <span class="text-danger">{district.message}</span>
+                                    <span class="text-danger">{district && district.message}</span>
                                 </div>
                             </div>
                             <div class="form-outline mb-4">
@@ -316,7 +302,7 @@ const Deal = () => {
                                             </option>
                                         ))}
                                     </select>
-                                    <span class="text-danger">{sector.message}</span>
+                                    <span class="text-danger">{sector && sector.message}</span>
                                 </div>
                             </div>
                             <div class="form-outline mb-4">
@@ -328,9 +314,9 @@ const Deal = () => {
                                     >
                                         <option>-- Select Cell --</option>
                                         {
-                                            sector && Cells(province, district, sector).map((sector, index) => (
-                                                <option key={index} value={sector}>
-                                                    {sector}
+                                            sector && Cells(province, district, sector).map((cell, index) => (
+                                                <option key={index} value={cell}>
+                                                    {cell}
                                                 </option>
                                             ))
                                         }
@@ -345,14 +331,14 @@ const Deal = () => {
                                         value={village}
                                         onChange={(e) => onVillageChange(e.target.value)}
                                     >
-                                        <option>-- Select Cell --</option>
-                                        {cell && Villages(province, district, sector, cell).map((sector, index) => (
-                                            <option key={index} value={sector}>
-                                                {sector}
+                                        <option>-- Select Village --</option>
+                                        {cell && Villages(province, district, sector, cell).map((village, index) => (
+                                            <option key={index} value={village}>
+                                                {village}
                                             </option>
                                         ))}
                                     </select>
-                                    <span class="text-danger">{village.message}</span>
+                                    <span class="text-danger">{village && village.message}</span>
                                 </div>
                             </div>
                             <div className="form-outline mb-4">
