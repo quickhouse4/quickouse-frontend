@@ -24,6 +24,7 @@ import UssdDetail from "./screen/UssdDetail";
 import ResetPassword from "./screen/ResetPassword";
 import UssdMessage from "./components/UssdMessage"
 import AppMessageDetails from "./screen/AppMessageDetails";
+import PaymentScreen from "./screen/paymentScreen";
 
 function App() {
   return (
@@ -100,9 +101,10 @@ function App() {
       <Route path="/detailsMessage/:id">
         <AppMessageDetails />
       </Route>
+      <Route path="/payment">
+        <PaymentScreen />
+      </Route>
     </Router>
-
-
   );
 }
 
