@@ -1,9 +1,10 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpecialProperty } from "../actions/propertiesAction";
-import { provinces, districts, sectors } from "../Data/Rwanda"
+import { property, plotType } from '../Data/Rwanda'
+import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
 
 
 
@@ -22,8 +23,6 @@ function CreateSpecialProperty() {
   const [type, setType] = useState({});
   const [title, setTitle] = useState({});
   const [street, setStreet] = useState({});
-  const [cell, setCell] = useState({});
-  const [village, setVillage] = useState({});
   const [currency, setCurrency] = useState({});
   const [price, setPrice] = useState({});
   const [neighbour, setNeighbour] = useState({});
@@ -36,9 +35,12 @@ function CreateSpecialProperty() {
   const [photo4, setPhoto4] = useState({});
   const [photo5, setPhoto5] = useState({});
   const [photo6, setPhoto6] = useState({});
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedSector, setSelectedSector] = useState('');
+  const [province, setProvince] = useState('')
+  const [district, setDistrict] = useState('')
+  const [sector, setSector] = useState('')
+  const [cell, setCell] = useState('')
+  const [village, setVillage] = useState('')
+  const [plotTypeVisible, setPlotTypeVisible] = useState(false);
 
   const onStatusChange = (e) => {
     var em = e.target.value;
@@ -73,24 +75,6 @@ function CreateSpecialProperty() {
       setStreet({ value: em });
     } else {
       setStreet({ value: em, message: "Write Street" });
-    }
-  };
-
-  const onCellChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setCell({ value: em });
-    } else {
-      setCell({ value: em, message: "Write Cell" });
-    }
-  };
-
-  const onVillageChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setVillage({ value: em });
-    } else {
-      setVillage({ value: em, message: "Write Village" });
     }
   };
 
@@ -196,26 +180,37 @@ function CreateSpecialProperty() {
       setPhoto6({ value: em, message: "Upload file six" });
     }
   };
-  const handleProvinceChange = (event) => {
-    setSelectedProvince(event.target.value);
-    setSelectedDistrict('');
-    setSelectedSector('');
-};
+  const onProvinceChange = (selectedProvince) => {
+    setProvince(selectedProvince);
+    setDistrict('');
+    setSector('');
+    setCell('');
+    setVillage('');
+  };
 
-const handleDistrictChange = (event) => {
-    setSelectedDistrict(event.target.value);
-    setSelectedSector('');
-};
+  const onDistrictChange = (selectedDistrict) => {
+    setDistrict(selectedDistrict);
+    setSector('');
+    setCell('');
+    setVillage('');
+  };
 
-const handleSectorChange = (event) => {
-    setSelectedSector(event.target.value);
-};
+  const onSectorChange = (selectedSector) => {
+    setSector(selectedSector);
+    setCell('');
+    setVillage('');
+  };
 
-useEffect(() => {
-    setSelectedDistrict('');
-    setSelectedSector('');
-}, [selectedProvince]);
+  const onCellChange = (selectedCell) => {
+    setCell(selectedCell);
+    setVillage('');
+  };
 
+  const onVillageChange = (selectedVillage) => {
+    setVillage(selectedVillage);
+  };
+
+  const provincesList = Provinces();
   const propertyRegister = async (e) => {
     e.preventDefault();
     if (status.value == "" || status.value == null) {
@@ -228,15 +223,15 @@ useEffect(() => {
       setDescription({ message: "write your descripton" })
     } else if (street.value == "" || street.value == null) {
       setStreet({ message: "write your street" })
-    } else if (selectedProvince == "" || selectedProvince == null) {
-      setSelectedProvince({ message: "Select your Province" })
-    } else if (selectedDistrict == "" || selectedDistrict == null) {
-      setSelectedDistrict({ message: "Select your district" })
-    } else if (selectedSector == "" || selectedSector == null) {
-      setSelectedSector({ message: "Select your sector" })
-    } else if (cell.value == "" || cell.value == null) {
+    } else if (province == "" || province == null) {
+      setProvince({ message: "Select your Province" })
+    } else if (district == "" || district == null) {
+      setDistrict({ message: "Select your district" })
+    } else if (sector == "" || sector == null) {
+      setSector({ message: "Select your sector" })
+    } else if (cell == "" || cell == null) {
       setCell({ message: "write your cell" })
-    } else if (village.value == "" || village.value == null) {
+    } else if (village == "" || village == null) {
       setVillage({ message: "write your village" })
     } else if (neighbour.value == "" || neighbour.value == null) {
       setNeighbour({ message: "set neighbour hood" })
@@ -268,11 +263,11 @@ useEffect(() => {
       formData.append("propertyName", title.value);
       formData.append("description", descripton.value);
       formData.append("street", street.value);
-      formData.append("city", selectedProvince);
-      formData.append("district", selectedDistrict);
-      formData.append("sector", selectedSector);
-      formData.append("cell", cell.value);
-      formData.append("village", village.value);
+      formData.append("city", province);
+      formData.append("district", district);
+      formData.append("sector", sector);
+      formData.append("cell", cell);
+      formData.append("village", village);
       formData.append("neighbourhood", neighbour.value);
       formData.append("price", price.value);
       formData.append("currency", currency.value);
@@ -359,7 +354,6 @@ useEffect(() => {
                   <option>Select Property Title</option>
                   <option>House </option>
                   <option>Plot</option>
-                  <option>Car</option>
                 </select>
                 <span class="text-danger">{title.message}</span>
               </div>
@@ -389,17 +383,17 @@ useEffect(() => {
                 <select
                   className="form-control text-primary"
                   id="provinceSelect"
-                  value={selectedProvince}
-                  onChange={handleProvinceChange}
+                  value={province}
+                  onChange={(e) => onProvinceChange(e.target.value)}
                 >
                   <option >-- Select Province --</option>
-                  {provinces && provinces.map((province, index) => (
+                  {provincesList && provincesList.map((province, index) => (
                     <option key={index} value={province}>
                       {province}
                     </option>
                   ))}
                 </select>
-                <span class="text-danger">{selectedProvince.message}</span>
+                <span class="text-danger">{province.message}</span>
               </div>
             </div>
             <div class="col-md-6">
@@ -410,19 +404,19 @@ useEffect(() => {
                 <select
                   className="form-control text-primary"
                   id="districtSelect"
-                  value={selectedDistrict}
-                  onChange={handleDistrictChange}
+                  value={district}
+                  onChange={(e) => onDistrictChange(e.target.value)}
                 >
                   <option>-- Select District --</option>
                   {
-                    selectedProvince && districts[selectedProvince] &&
-                    districts[selectedProvince].map((district, index) => (
+                    province && Districts(province).map((district, index) => (
                       <option key={index} value={district}>
                         {district}
                       </option>
-                    ))}
+                    ))
+                  }
                 </select>
-                <span class="text-danger">{selectedDistrict.message}</span>
+                <span class="text-danger">{district.message}</span>
               </div>
             </div>
           </div>
@@ -436,32 +430,37 @@ useEffect(() => {
                 <select
                   className="form-control text-primary"
                   id="sectorSelect"
-                  value={selectedSector}
-                  onChange={handleSectorChange}
+                  value={sector}
+                  onChange={(e) => onSectorChange(e.target.value)}
                 >
                   <option>-- Select Sector --</option>
-                  {selectedDistrict && sectors[selectedDistrict] &&
-                    sectors[selectedDistrict].map((sector, index) => (
-                      <option key={index} value={sector}>
-                        {sector}
-                      </option>
-                    ))}
+                  {district && Sectors(province, district).map((sector, index) => (
+                    <option key={index} value={sector}>
+                      {sector}
+                    </option>
+                  ))}
                 </select>
-                <span class="text-danger">{selectedSector.message}</span>
+                <span class="text-danger">{sector.message}</span>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="sel1" class="text-primary">
+                <label htmlFor="sectorSelect" class="text-primary">
                   Cell
                 </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="usr"
-                  name="cell"
-                  onChange={onCellChange}
-                />
+                <select
+                  className="form-control text-primary"
+                  id="sectorSelect"
+                  value={cell}
+                  onChange={(e) => onCellChange(e.target.value)}
+                >
+                  <option>-- Select Cell --</option>
+                  {sector && Cells(province, district, sector).map((cell, index) => (
+                    <option key={index} value={cell}>
+                      {cell}
+                    </option>
+                  ))}
+                </select>
                 <span class="text-danger">{cell.message}</span>
               </div>
             </div>
@@ -470,16 +469,22 @@ useEffect(() => {
           <div class="form-row">
             <div class="col-md-6">
               <div class="form-group">
-                <label for="sel1" class="text-primary">
+                <label htmlFor="sectorSelect" class="text-primary">
                   Village
                 </label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="usr"
-                  name="village"
-                  onChange={onVillageChange}
-                />
+                <select
+                  className="form-control text-primary"
+                  id="sectorSelect"
+                  value={village}
+                  onChange={(e) => onVillageChange(e.target.value)}
+                >
+                  <option>-- Select Village --</option>
+                  {cell && Villages(province, district, sector, cell).map((village, index) => (
+                    <option key={index} value={village}>
+                      {village}
+                    </option>
+                  ))}
+                </select>
                 <span class="text-danger">{village.message}</span>
               </div>
             </div>
