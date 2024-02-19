@@ -84,19 +84,6 @@ function Login() {
         />
 
         <div class="row">
-          {/* {loading ?  <Puff
-              height="100"
-              width="100"
-              radisu={1}
-              color="#4fa94d"
-              ariaLabel="puff-loading"
-              wrapperStyle={{
-                margin:"auto",
-                paddingTop:"6rem"
-              }}
-              wrapperClass=""
-              visible={true}
-              />:null} */}
           <div class="col-md-6 offset-md-3 col-xs-12 bg-light mt-4 pt-4 mb-4">
             <h4
               style={{

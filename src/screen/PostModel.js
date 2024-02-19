@@ -3,7 +3,8 @@ import { useHistory } from "react-router-dom";
 import { createProperty } from "../actions/propertiesAction";
 import { useDispatch, useSelector } from "react-redux";
 import "./postModel.css";
-import { provinces, districts, sectors } from "../Data/Rwanda"
+import { property, plotType } from '../Data/Rwanda';
+import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
 
 const PostModel = () => {
 
@@ -20,8 +21,6 @@ const PostModel = () => {
     const [type, setType] = useState({});
     const [title, setTitle] = useState({});
     const [street, setStreet] = useState({});
-    const [cell, setCell] = useState({});
-    const [village, setVillage] = useState({});
     const [currency, setCurrency] = useState({});
     const [price, setPrice] = useState({});
     const [neighbour, setNeighbour] = useState({});
@@ -34,9 +33,12 @@ const PostModel = () => {
     const [photo4, setPhoto4] = useState({});
     const [photo5, setPhoto5] = useState({});
     const [photo6, setPhoto6] = useState({});
-    const [selectedProvince, setSelectedProvince] = useState('');
-    const [selectedDistrict, setSelectedDistrict] = useState('');
-    const [selectedSector, setSelectedSector] = useState('');
+    const [province, setProvince] = useState('')
+    const [district, setDistrict] = useState('')
+    const [sector, setSector] = useState('')
+    const [cell, setCell] = useState('')
+    const [village, setVillage] = useState('')
+    const [plotTypeVisible, setPlotTypeVisible] = useState(false);
 
     const onStatusChange = (e) => {
         var em = e.target.value;
@@ -60,8 +62,14 @@ const PostModel = () => {
         var em = e.target.value;
         if (em != "") {
             setTitle({ value: em });
+            if (em === "plot") {
+                setPlotTypeVisible(true)
+            }
+            else {
+                setPlotTypeVisible(false)
+            }
         } else {
-            setTitle({ value: em, message: "Write Title" });
+            setTitle({ value: em, message: "Write your Title" });
         }
     };
 
@@ -71,25 +79,6 @@ const PostModel = () => {
             setStreet({ value: em });
         } else {
             setStreet({ value: em, message: "Write Street" });
-        }
-    };
-
-
-    const onCellChange = (e) => {
-        var em = e.target.value;
-        if (em != "") {
-            setCell({ value: em });
-        } else {
-            setCell({ value: em, message: "Write Cell" });
-        }
-    };
-
-    const onVillageChange = (e) => {
-        var em = e.target.value;
-        if (em != "") {
-            setVillage({ value: em });
-        } else {
-            setVillage({ value: em, message: "Write Village" });
         }
     };
 
@@ -195,70 +184,82 @@ const PostModel = () => {
         }
     };
 
-    const handleProvinceChange = (event) => {
-        setSelectedProvince(event.target.value);
-        setSelectedDistrict('');
-        setSelectedSector('');
+    const onProvinceChange = (selectedProvince) => {
+        setProvince(selectedProvince);
+        setDistrict('');
+        setSector('');
+        setCell('');
+        setVillage('');
     };
 
-    const handleDistrictChange = (event) => {
-        setSelectedDistrict(event.target.value);
-        setSelectedSector('');
+    const onDistrictChange = (selectedDistrict) => {
+        setDistrict(selectedDistrict);
+        setSector('');
+        setCell('');
+        setVillage('');
     };
 
-    const handleSectorChange = (event) => {
-        setSelectedSector(event.target.value);
+    const onSectorChange = (selectedSector) => {
+        setSector(selectedSector);
+        setCell('');
+        setVillage('');
     };
 
-    useEffect(() => {
-        setSelectedDistrict('');
-        setSelectedSector('');
-    }, [selectedProvince]);
+    const onCellChange = (selectedCell) => {
+        setCell(selectedCell);
+        setVillage('');
+    };
+
+    const onVillageChange = (selectedVillage) => {
+        setVillage(selectedVillage);
+    };
+
+    const provincesList = Provinces();
 
     const propertyRegister = (e) => {
         e.preventDefault();
 
-        if (status.value == "" || status.value == null) {
+        if (status.value === "" || status.value === null) {
             setStatus({ message: "Select status" });
-        } else if (type.value == "" || type.value == null) {
+        } else if (type.value === "" || type.value === null) {
             setType({ message: "Select type" })
-        } else if (title.value == "" || title.value == null) {
+        } else if (title.value === "" || title.value === null) {
             setTitle({ message: "write your title" })
-        } else if (descripton.value == "" || descripton.value == null) {
+        } else if (descripton.value === "" || descripton.value === null) {
             setDescription({ message: "write your descripton" })
-        } else if (street.value == "" || street.value == null) {
+        } else if (street.value === "" || street.value === null) {
             setStreet({ message: "write your street" })
-        } else if (selectedProvince == "" || selectedProvince == null) {
-            setSelectedProvince({ message: "select your province" })
-        } else if (selectedDistrict == "" || selectedDistrict == null) {
-            setSelectedDistrict({ message: "select your district" })
-        } else if (selectedSector == "" || selectedSector == null) {
-            setSelectedSector({ message: "select your sector" })
-        } else if (cell.value == "" || cell.value == null) {
-            setCell({ message: "write your cell" })
-        } else if (village.value == "" || village.value == null) {
-            setVillage({ message: "write your village" })
-        } else if (neighbour.value == "" || neighbour.value == null) {
+        } else if (province === "" || province === null) {
+            setProvince({ message: "select your province" })
+        } else if (district === "" || district === null) {
+            setDistrict({ message: "select your district" })
+        } else if (sector === "" || sector === null) {
+            setSector({ message: "select your sector" })
+        } else if (cell === "" || cell === null) {
+            setCell({ message: "select your cell" })
+        } else if (village === "" || village === null) {
+            setVillage({ message: "select your village" })
+        } else if (neighbour.value === "" || neighbour.value === null) {
             setNeighbour({ message: "set neighbour hood" })
-        } else if (price.value == "" || price.value == null) {
+        } else if (price.value === "" || price.value === null) {
             setPrice({ message: "set price" })
-        } else if (currency.value == "" || currency.value == null) {
+        } else if (currency.value === "" || currency.value === null) {
             setCurrency({ message: "select currency" })
-        } else if (negotiable.value == "" || negotiable.value == null) {
+        } else if (negotiable.value === "" || negotiable.value === null) {
             setNegotiable({ message: "select negotiable" })
-        } else if (mainPhoto.value == "" || mainPhoto.value == null) {
+        } else if (mainPhoto.value === "" || mainPhoto.value === null) {
             SetMainPhoto({ message: "Upload main photo" })
-        } else if (photo1.value == "" || photo1.value == null) {
+        } else if (photo1.value === "" || photo1.value === null) {
             setPhoto1({ message: "Upload photo one" })
-        } else if (photo2.value == "" || photo2.value == null) {
+        } else if (photo2.value === "" || photo2.value === null) {
             setPhoto2({ message: "Upload photo two" })
-        } else if (photo3.value == "" || photo3.value == null) {
+        } else if (photo3.value === "" || photo3.value === null) {
             setPhoto3({ message: "Upload photo three" })
-        } else if (photo4.value == "" || photo4.value == null) {
+        } else if (photo4.value === "" || photo4.value === null) {
             setPhoto4({ message: "Upload photo four" })
-        } else if (photo5.value == "" || photo5.value == null) {
+        } else if (photo5.value === "" || photo5.value === null) {
             setPhoto5({ message: "Upload photo five" })
-        } else if (photo6.value == "" || photo6.value == null) {
+        } else if (photo6.value === "" || photo6.value === null) {
             setPhoto6({ message: "Upload photo six" })
         } else {
             const formData = new FormData();
@@ -267,11 +268,11 @@ const PostModel = () => {
             formData.append("propertyName", title.value);
             formData.append("description", descripton.value);
             formData.append("street", street.value);
-            formData.append("city", selectedProvince);
-            formData.append("district", selectedDistrict);
-            formData.append("sector", selectedSector);
-            formData.append("cell", cell.value);
-            formData.append("village", village.value);
+            formData.append("city", province);
+            formData.append("district", district);
+            formData.append("sector", sector);
+            formData.append("cell", cell);
+            formData.append("village", village);
             formData.append("neighbourhood", neighbour.value);
             formData.append("price", price.value);
             formData.append("currency", currency.value);
@@ -329,6 +330,24 @@ const PostModel = () => {
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="">Property Title</label>
+                                        <select
+                                            class="form-control "
+                                            id="sel1"
+                                            onChange={onTitleChange}
+                                        >
+                                            <option>Select Propery title</option>
+                                            <option>house </option>
+                                            <option>plot</option>
+                                        </select>
+                                        <span class="text-danger">{title.message}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label htmlFor="" class="">
                                             Property Type
                                         </label>
@@ -339,33 +358,19 @@ const PostModel = () => {
                                         >
                                             <option>Select Propery type</option>
 
-                                            <option>residential house </option>
-                                            <option>apartment</option>
-                                            <option>commercial house</option>
-                                            <option>warehouse</option>
-                                            <option>vacant plot</option>
-                                            <option>offices</option>
+                                            {title && title.value === 'plot' && plotTypeVisible ? (
+                                                plotType.map((type, index) => (
+                                                    <option key={index} value={type}>
+                                                        {type}
+                                                    </option>
+                                                ))) : (property.map((type1, index) => (
+                                                    <option key={index} value={type1}>
+                                                        {type1}
+                                                    </option>
+                                                )))
+                                            }
                                         </select>
                                         <span class="text-danger">{type.message}</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="">Property Title</label>
-                                        <select
-                                            class="form-control "
-                                            id="sel1"
-                                            onChange={onTitleChange}
-                                        >
-                                            <option>Select Propery title</option>
-                                            <option>house </option>
-                                            <option>plot</option>
-                                            <option>car</option>
-                                        </select>
-                                        <span class="text-danger">{title.message}</span>
                                     </div>
                                 </div>
 
@@ -393,17 +398,17 @@ const PostModel = () => {
                                         <select
                                             className="form-control"
                                             id="provinceSelect"
-                                            value={selectedProvince}
-                                            onChange={handleProvinceChange}
+                                            value={province}
+                                            onChange={(e) => onProvinceChange(e.target.value)}
                                         >
                                             <option >-- Select Province --</option>
-                                            {provinces && provinces.map((province, index) => (
+                                            {provincesList && provincesList.map((province, index) => (
                                                 <option key={index} value={province}>
                                                     {province}
                                                 </option>
                                             ))}
                                         </select>
-                                        <span class="text-danger">{selectedProvince.message}</span>
+                                        <span class="text-danger">{province.toString().message}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -414,19 +419,19 @@ const PostModel = () => {
                                         <select
                                             className="form-control"
                                             id="districtSelect"
-                                            value={selectedDistrict}
-                                            onChange={handleDistrictChange}
+                                            value={district}
+                                            onChange={(e) => onDistrictChange(e.target.value)}
                                         >
                                             <option>-- Select District --</option>
                                             {
-                                                selectedProvince && districts[selectedProvince] &&
-                                                districts[selectedProvince].map((district, index) => (
+                                                province && Districts(province).map((district, index) => (
                                                     <option key={index} value={district}>
                                                         {district}
                                                     </option>
-                                                ))}
+                                                ))
+                                            }
                                         </select>
-                                        <span class="text-danger">{selectedDistrict.message}</span>
+                                        <span class="text-danger">{district.toString().message}</span>
                                     </div>
                                 </div>
                             </div>
@@ -440,51 +445,63 @@ const PostModel = () => {
                                         <select
                                             className="form-control"
                                             id="sectorSelect"
-                                            value={selectedSector}
-                                            onChange={handleSectorChange}
+                                            value={sector}
+                                            onChange={(e) => onSectorChange(e.target.value)}
                                         >
                                             <option>-- Select Sector --</option>
-                                            {selectedDistrict && sectors[selectedDistrict] &&
-                                                sectors[selectedDistrict].map((sector, index) => (
-                                                    <option key={index} value={sector}>
-                                                        {sector}
-                                                    </option>
-                                                ))}
+                                            {district && Sectors(province, district).map((sector, index) => (
+                                                <option key={index} value={sector}>
+                                                    {sector}
+                                                </option>
+                                            ))}
                                         </select>
-                                        <span class="text-danger">{selectedSector.message}</span>
+                                        <span class="text-danger">{sector.toString().message}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="sel1" class="">
+                                        <label htmlFor="sectorSelect">
                                             Cell
                                         </label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="usr"
-                                            name="cell"
-                                            onChange={onCellChange}
-                                        />
-                                        <span class="text-danger">{cell.message}</span>
+                                        <select
+                                            className="form-control"
+                                            id="sectorSelect"
+                                            value={cell}
+                                            onChange={(e) => onCellChange(e.target.value)}
+                                        >
+                                            <option>-- Select Cell --</option>
+                                            {
+                                                sector && Cells(province, district, sector).map((cell, index) => (
+                                                    <option key={index} value={cell}>
+                                                        {cell}
+                                                    </option>
+                                                ))
+                                            }
+                                        </select>
+                                        <span class="text-danger">{cell.toString().message}</span>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label htmlFor="sel1" class="">
+                                        <label htmlFor="sectorSelect">
                                             Village
                                         </label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="usr"
-                                            name="village"
-                                            onChange={onVillageChange}
-                                        />
-                                        <span class="text-danger">{village.message}</span>
+                                        <select
+                                            className="form-control"
+                                            id="sectorSelect"
+                                            value={village}
+                                            onChange={(e) => onVillageChange(e.target.value)}
+                                        >
+                                            <option>-- Select Village --</option>
+                                            {cell && Villages(province, district, sector, cell).map((village, index) => (
+                                                <option key={index} value={village}>
+                                                    {village}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <span class="text-danger">{village.toString().message}</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -653,7 +670,7 @@ const PostModel = () => {
                                         class="btn login-btn btn-lg btn-block"
                                         onClick={propertyRegister}
                                     >
-                                        Create property
+                                        List Your property
                                     </button>
                                 )}
                             </div>
