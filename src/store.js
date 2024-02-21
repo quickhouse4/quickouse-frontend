@@ -66,7 +66,8 @@ import {
   rentNumberReducer,
   saleNumberReducer,
   totalPostReducer,
-  totalViewsReducer
+  totalViewsReducer,
+  visitorsTrackReducer
 } from "./reducers/analyticsReducer";
 import { getProfileReducer } from "./reducers/profileReducer";
 import { 
@@ -152,7 +153,8 @@ const reducer = combineReducers({
   yearLikes: getYearLikesReducer,
   yearViews: getYearViewsReducer,
   totalPost: totalPostReducer,
-  totalViews: totalViewsReducer
+  totalViews: totalViewsReducer,
+  visitorTrack: visitorsTrackReducer,
 });//
 
 const initialState = { activeCategory: "" };
