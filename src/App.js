@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
@@ -25,8 +25,18 @@ import ResetPassword from "./screen/ResetPassword";
 import UssdMessage from "./components/UssdMessage"
 import AppMessageDetails from "./screen/AppMessageDetails";
 import PaymentScreen from "./screen/paymentScreen";
+import { useDispatch, useSelector } from "react-redux";
+import { visitorsTrack } from "./actions/AnalyticsAction"
 
 function App() {
+  const dispatch = useDispatch();
+  const { visitorsLoading, visitorsError } = useSelector((state) => state.visitorTrack)
+
+  useEffect(() => {
+      dispatch(visitorsTrack())
+  }, [dispatch]);
+
+
   return (
     <Router>
       <Route path="/" exact>

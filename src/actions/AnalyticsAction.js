@@ -38,7 +38,10 @@ import {
     TOTAL_POST_FAIL,
     TOTAL_VIEWS_REQUEST,
     TOTAL_VIEWS_SUCCESS,
-    TOTAL_VIEWS_FAIL
+    TOTAL_VIEWS_FAIL,
+    VISITORS_TRACK_REQUEST,
+    VISITORS_TRACK_SUCCESS,
+    VISITORS_TRACK_FAIL
 } from "./types";
 
 export const getDataAnalytic = (token) => async (dispatch) => {
@@ -329,6 +332,28 @@ export const getTotalViews = (token) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: TOTAL_VIEWS_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const visitorsTrack = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: VISITORS_TRACK_REQUEST
+        })
+        const response = await axios.post("https://quickhouse.herokuapp.com/api/visits");
+        console.log(
+            response.data.data
+        )
+        dispatch({
+            type: VISITORS_TRACK_SUCCESS,
+            response: response.data.data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: VISITORS_TRACK_FAIL,
             payload: error
         })
     }
