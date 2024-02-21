@@ -1,7 +1,7 @@
 import { Link, useHistory, useLocation } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { allData, propertyForRent, propertyForSale } from "../actions/propertiesAction";
 import "./header.css";
@@ -27,13 +27,11 @@ function Header({ setLabel }) {
   const [isMenuToggled, setIsMenuToggled] = useState(true)
   const [toggle, setToggle] = useState(false)
   const [menuToggle, setMenuToggle] = useState(false)
-  const [toggle1, setToggle1] = useState(false)
   const [menuToggle1, setMenuToggle1] = useState(false)
   const [menuToggle2, setMenuToggle2] = useState(false)
   const [menuToggle3, setMenuToggle3] = useState(false)
   const [menuToggle4, setMenuToggle4] = useState(false)
   const [menuToggle5, setMenuToggle5] = useState(false)
-  const [menuToggle6, setMenuToggle6] = useState(false)
   const [activeLink, setActiveLink] = useState('');
 
   const history = useHistory();
@@ -47,11 +45,10 @@ function Header({ setLabel }) {
   const [keyword, setKeyword] = useState("");
 
   const [profile, setProfile] = useState([]);
-  const [loading, setLoading] = useState(false)
   const [isTopOfPage, setIsTopOfPage] = useState(true)
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY === 0) {// means is at the top of the page
+      if (window.scrollY === 0) {
         setIsTopOfPage(true)
       }
       if (window.scrollY !== 0) setIsTopOfPage(false)
@@ -209,16 +206,16 @@ function Header({ setLabel }) {
             },
           }
         );
-  
+
         setProfile(data.data);
       } catch (error) {
         console.error("Error fetching profile:", error);
       }
     }
-  
+
     fetchProfile();
   }, [token]);
-  
+
 
   useEffect(() => {
     const pathname = location.pathname;
@@ -249,7 +246,7 @@ function Header({ setLabel }) {
             <Link
               className={`logo ${activeLink === 'QuickHouse' ? 'active-link' : ''}`}
               to="/"
-              style={{fontWeight:"600"}}
+              style={{ fontWeight: "600" }}
 
             >
               {/* <img src={logo} width="150px" height="120px"/> */}
