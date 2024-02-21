@@ -12,7 +12,7 @@ import {
   getYearLikes,
   getYearViews,
   getTotalPosts,
-  getTotalViews
+  getTotalViews,
 } from "../actions/AnalyticsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
@@ -20,6 +20,7 @@ import { listProperties } from "../actions/propertiesAction";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BsBarChart } from "react-icons/bs";
+
 
 
 const Statistics = () => {
@@ -216,6 +217,16 @@ const Statistics = () => {
                   <div className="d-flex justify-content-evenly align-items-center flex-wrap">
                     <h4 className="fs-6 mr-2" style={{ color: "#8884d8" }}>Property for Sales</h4>
                     <span className="fs-4 text-light">{saleNumbers}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-2 mb-3" >
+              <div className="card mt-3 analyticsField">
+                <div className="card-body">
+                  <div className="d-flex justify-content-evenly align-items-center flex-wrap">
+                    <h4 className="fs-6 mr-2" style={{ color: "#8884d8" }}>Total Visitors</h4>
+                    <span className="fs-4 text-light">12</span>
                   </div>
                 </div>
               </div>
