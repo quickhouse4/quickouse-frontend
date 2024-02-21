@@ -37,7 +37,10 @@ import {
   TOTAL_POST_FAIL,
   TOTAL_VIEWS_REQUEST,
   TOTAL_VIEWS_SUCCESS,
-  TOTAL_VIEWS_FAIL
+  TOTAL_VIEWS_FAIL,
+  VISITORS_TRACK_REQUEST,
+  VISITORS_TRACK_SUCCESS,
+  VISITORS_TRACK_FAIL
 } from "../actions/types";
 
 export const getAnalyticsReducer = (state = { analytics: [] }, action) => {
@@ -184,26 +187,47 @@ export const saleNumberReducer = (state = { saleNumbers: [] }, action) => {
 
 export const totalPostReducer = (state = { totalPost: [] }, action) => {
   switch (action.type) {
-      case TOTAL_POST_REQUEST:
-          return { totalPostLoading: true, totalPost: [] }
-      case TOTAL_POST_SUCCESS:
-          return { totalPostLoading: false, totalPost: action.response };
-      case TOTAL_POST_FAIL:
-          return { totalPostLoading: false, totalPostError: action.response }
-      default:
-          return state;
+    case TOTAL_POST_REQUEST:
+      return { totalPostLoading: true, totalPost: [] }
+    case TOTAL_POST_SUCCESS:
+      return { totalPostLoading: false, totalPost: action.response };
+    case TOTAL_POST_FAIL:
+      return { totalPostLoading: false, totalPostError: action.response }
+    default:
+      return state;
   }
 }
 
 export const totalViewsReducer = (state = { totalViews: [] }, action) => {
   switch (action.type) {
-      case TOTAL_VIEWS_REQUEST:
-          return { totalViewsLoading: true, totalViews: [] }
-      case TOTAL_VIEWS_SUCCESS:
-          return { totalViewsLoading: false, totalViews: action.response };
-      case TOTAL_VIEWS_FAIL:
-          return { totalViewsLoading: false, totalViewsError: action.response }
-      default:
-          return state;
+    case TOTAL_VIEWS_REQUEST:
+      return { totalViewsLoading: true, totalViews: [] }
+    case TOTAL_VIEWS_SUCCESS:
+      return { totalViewsLoading: false, totalViews: action.response };
+    case TOTAL_VIEWS_FAIL:
+      return { totalViewsLoading: false, totalViewsError: action.response }
+    default:
+      return state;
+  }
+}
+
+export const visitorsTrackReducer = (state = {}, action) => {
+  switch (action.type) {
+    case VISITORS_TRACK_REQUEST:
+      return {
+        visitorsLoading: true,
+      };
+    case VISITORS_TRACK_SUCCESS:
+      return {
+        visitorsLoading: false,
+        Response: action.payload
+      };
+    case VISITORS_TRACK_FAIL:
+      return {
+        visitorsLoading: false,
+        visitorsError: action.response
+      }
+    default:
+      return state;
   }
 }
