@@ -67,6 +67,7 @@ import {
   saleNumberReducer,
   totalPostReducer,
   totalViewsReducer,
+  visitorAnalyticsReducer,
   visitorsTrackReducer
 } from "./reducers/analyticsReducer";
 import { getProfileReducer } from "./reducers/profileReducer";
@@ -155,6 +156,7 @@ const reducer = combineReducers({
   totalPost: totalPostReducer,
   totalViews: totalViewsReducer,
   visitorTrack: visitorsTrackReducer,
+  visitorAnalytics: visitorAnalyticsReducer
 });//
 
 const initialState = { activeCategory: "" };

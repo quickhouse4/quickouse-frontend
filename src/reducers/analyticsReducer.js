@@ -40,7 +40,10 @@ import {
   TOTAL_VIEWS_FAIL,
   VISITORS_TRACK_REQUEST,
   VISITORS_TRACK_SUCCESS,
-  VISITORS_TRACK_FAIL
+  VISITORS_TRACK_FAIL,
+  VISITOR_ANALYTIC_REQUEST,
+  VISITOR_ANALYTIC_SUCCESS,
+  VISITOR_ANALYTIC_FAIL
 } from "../actions/types";
 
 export const getAnalyticsReducer = (state = { analytics: [] }, action) => {
@@ -227,6 +230,19 @@ export const visitorsTrackReducer = (state = {}, action) => {
         visitorsLoading: false,
         visitorsError: action.response
       }
+    default:
+      return state;
+  }
+}
+
+export const visitorAnalyticsReducer = (state = { visitorAnalytics: [] }, action) => {
+  switch (action.type) {
+    case VISITOR_ANALYTIC_REQUEST:
+      return { visitorLoading: true, visitorAnalytics: [] }
+    case VISITOR_ANALYTIC_SUCCESS:
+      return { visitorLoading: false, visitorAnalytics: action.response };
+    case VISITOR_ANALYTIC_FAIL:
+      return { visitorLoading: false, visitorError: action.response }
     default:
       return state;
   }
