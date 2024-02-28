@@ -635,11 +635,23 @@ li {
   padding-left: 0px !important;
 }
 .mainstatstics {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   height: 500px;
+  width: 30%;
 }
 
+.visitAnalytics{
+  height: 500px;
+  width: 30%;
+}
+
+.mainflex{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  /* width: 100%; */
+}
 @media (max-width: 851px) {
   .image {
     width: 158px !important;
@@ -676,10 +688,10 @@ li {
 }
 
 .recenthitpost {
-  flex: 1;
+  /* flex: 1; */
   width: 20%;
   margin-top: 40px;
-  margin-left: 100px
+  margin-right: 200px;
 }
 
 #deal div {
@@ -689,6 +701,11 @@ li {
 .analytics {
   width: 50%;
   height: 100% !important;
+}
+.totalHouse{
+  background-color:#071c36;
+  height:20%;
+  /* width: 20rem; */
 }
 
 .analyticsField {
@@ -709,16 +726,26 @@ li {
   .recent {
     width: 100% !important;
   }
-
-  .mainstatstics {
+  .mainflex{
     display: block;
     height: max-content;
     margin-bottom: 20px;
   }
+  .mainstatstics {
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+  .visitAnalytics{
+    width: 100% !important;
+  }
+  /* .totalHouse{
+    width: 100% !important;
+  } */
 
   .recenthitpost {
-    width: 100% !important;
+    width: 20rem !important;
     margin-left: 0px;
+  
   }
 
   .hr {
@@ -778,6 +805,9 @@ li {
     width: 100% !important;
     flex-wrap: wrap;
   }
+  .mainflex{
+    width: 100% !important;
+  }
 
   /* .deal-card{
     width: 100vw;
@@ -811,8 +841,9 @@ li {
 } */
 
 .recent {
-  width: 22rem;
-  background-color: #071c36 !important
+  width: 15rem;
+  background-color: #071c36 !important;
+  height: 27rem;
 }
 
 .user-list ::-webkit-scrollbar {

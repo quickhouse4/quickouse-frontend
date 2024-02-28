@@ -41,7 +41,11 @@ import {
     TOTAL_VIEWS_FAIL,
     VISITORS_TRACK_REQUEST,
     VISITORS_TRACK_SUCCESS,
-    VISITORS_TRACK_FAIL
+    VISITORS_TRACK_FAIL,
+    VISITOR_ANALYTIC_REQUEST,
+    VISITOR_ANALYTIC_SUCCESS,
+    VISITOR_ANALYTIC_FAIL
+
 } from "./types";
 
 export const getDataAnalytic = (token) => async (dispatch) => {
@@ -343,9 +347,6 @@ export const visitorsTrack = () => async (dispatch) => {
             type: VISITORS_TRACK_REQUEST
         })
         const response = await axios.post("https://quickhouse.herokuapp.com/api/visits");
-        console.log(
-            response.data.data
-        )
         dispatch({
             type: VISITORS_TRACK_SUCCESS,
             response: response.data.data
@@ -354,6 +355,28 @@ export const visitorsTrack = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: VISITORS_TRACK_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getVisitorAnalytics = (token, year) => async (dispatch) => {
+    try {
+        dispatch({
+            type: VISITOR_ANALYTIC_REQUEST
+        })
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/analyticsVisits?yearData=${year}`, {
+            headers: {
+                token: token
+            }
+        });
+        dispatch({
+            type: VISITOR_ANALYTIC_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: VISITOR_ANALYTIC_FAIL,
             payload: error
         })
     }
