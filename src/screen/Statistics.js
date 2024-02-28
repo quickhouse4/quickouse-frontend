@@ -110,8 +110,8 @@ const Statistics = () => {
   const formatAnalytics = Object.entries(visitorAnalytics).map(([month, { visits }]) => ({ month, visits }));
 
   const combinedData = formattedViews.map((view, i) => {
-  const month = view.month === "year" ? new Date().getFullYear() : view.month;
-  let likes, views;
+    const month = view.month === "year" ? new Date().getFullYear() : view.month;
+    let likes, views;
 
     if (startDate) {
       // Use data for the selected year
@@ -139,8 +139,9 @@ const Statistics = () => {
   return (
     <>
       <div className="col-xl-12 col-md-12 col-sm-6 statistics" style={{ marginTop: "120px" }}>
-        <div className="row mb-5 flex-wrap" style={{ marginRight: "300px" }} >
-          {/* <div className="col-md-2 mb-3" >
+        <div className="container-post">
+          <div className="row mb-5 mt-5 flex-wrap" style={{ width: "50%" }} >
+            {/* <div className="col-md-2 mb-3" >
             <div className="card mt-3 analyticsField">
               <div className="card-body">
                 <div className="d-flex justify-content-evenly align-items-center flex-wrap" >
@@ -150,34 +151,34 @@ const Statistics = () => {
               </div>
             </div>
           </div> */}
-          <div className="col-md-4 mb-3" >
-            <div className="mt-3">
-              <div className="rounded-2 p-3 totalHouse" >
-                <div className="d-flex justify-content-around align-items-center flex-wrap">
-                  <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                  <div className="text-end">
-                    <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Views</h4>
-                    <span className="fs-4 text-light">{viewsNumber ? viewsNumber : 0}</span>
+            <div className="col-md-4 mb-3" >
+              <div className="mt-3">
+                <div className="rounded-2 p-3 totalHouse" >
+                  <div className="d-flex justify-content-around align-items-center flex-wrap">
+                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                    <div className="text-end">
+                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Views</h4>
+                      <span className="fs-4 text-light">{viewsNumber ? viewsNumber : 0}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-4 mb-3" >
-            <div className="mt-3">
-              <div className="rounded-2 p-3 totalHouse" >
-                <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                  <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                  <div className="text-end">
-                    <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Post</h4>
-                    <span className="fs-4 text-light">{postNumber ? postNumber : 0}</span>
+            <div className="col-md-4 mb-3" >
+              <div className="mt-3">
+                <div className="rounded-2 p-3 totalHouse" >
+                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                    <div className="text-end">
+                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Post</h4>
+                      <span className="fs-4 text-light">{postNumber ? postNumber : 0}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          {userToken.role === "admin" && <>
-            {/* <div className="col-md-2 mb-3" >
+            {userToken.role === "admin" && <>
+              {/* <div className="col-md-2 mb-3" >
               <div className="card mt-3 analyticsField">
                 <div className="card-body">
                   <div className="d-flex justify-content-evenly align-items-center flex-wrap" >
@@ -188,20 +189,20 @@ const Statistics = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Views</h4>
-                      <span className="fs-4 text-light">{totalViews}</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Views</h4>
+                        <span className="fs-4 text-light">{totalViews}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="col-md-2 mb-3" >
+              {/* <div className="col-md-2 mb-3" >
               <div className="card mt-3 analyticsField">
                 <div className="card-body">
                   <div className="d-flex justify-content-evenly align-items-center flex-wrap">
@@ -211,20 +212,20 @@ const Statistics = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Posts</h4>
-                      <span className="fs-4 text-light">{totalPost}</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Posts</h4>
+                        <span className="fs-4 text-light">{totalPost}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="col-md-2 mb-3" >
+              {/* <div className="col-md-2 mb-3" >
               <div className="card mt-3 analyticsField">
                 <div className="card-body">
                   <div className="d-flex justify-content-evenly align-items-center flex-wrap">
@@ -234,33 +235,33 @@ const Statistics = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Plot</h4>
-                      <span className="fs-4 text-light">{plotNumbers}</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Plot</h4>
+                        <span className="fs-4 text-light">{plotNumbers}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total House</h4>
-                      <span className="fs-4 text-light">{houseNumbers}</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total House</h4>
+                        <span className="fs-4 text-light">{houseNumbers}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="col-md-2 mb-3" >
+              {/* <div className="col-md-2 mb-3" >
               <div className="card mt-3 analyticsField">
                 <div className="card-body">
                   <div className="d-flex justify-content-evenly align-items-center flex-wrap">
@@ -270,20 +271,20 @@ const Statistics = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} /> */}
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Property for Rent</h4>
-                      <span className="fs-4 text-light">{rentNumbers}</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} /> */}
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Property for Rent</h4>
+                        <span className="fs-4 text-light">{rentNumbers}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            {/* <div className="col-md-2 mb-3" >
+              {/* <div className="col-md-2 mb-3" >
               <div className="card mt-3 analyticsField">
                 <div className="card-body">
                   <div className="d-flex justify-content-evenly align-items-center flex-wrap">
@@ -293,34 +294,59 @@ const Statistics = () => {
                 </div>
               </div>
             </div> */}
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} /> */}
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Property for Sale</h4>
-                      <span className="fs-4 text-light">{saleNumbers}</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} /> */}
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Property for Sale</h4>
+                        <span className="fs-4 text-light">{saleNumbers}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-4 mb-3" >
-              <div className="mt-3">
-                <div className="rounded-2 p-3 totalHouse" >
-                  <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <FaUsers className="fs-1 mr-2" style={{ color: "#ffff" }} />
-                    <div className="text-end">
-                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Visitors</h4>
-                      <span className="fs-4 text-light">12</span>
+              <div className="col-md-4 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
+                      <FaUsers className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Visitors</h4>
+                        <span className="fs-4 text-light">12</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </>
+            }
+          </div>
+          < div className="recenthit" >
+            < h3 > Recent Hit Posts</h3 >
+            <hr className="hr" />
+            <div className="recentii shadow card ">
+              <div className="card-body">
+                {
+                  commonProperties.properties.sort((a, b) => b.views - a.views).slice(0, 4).map(property => (
+                    <div className="d-flex align-items-center" style={{ marginBottom: "12px" }}>
+                      <img src={property.mainPhoto} alt="prop_image" className="img-thumb rounded-circle me-2" style={{ width: "30px", height: '30px' }} />
+                      <div className="d-flex flex-column">
+                        <h5 className="card-title text-light">{capitalizeFirstLetter(property.propertyName)}</h5>
+                        <span className="text-light">
+                          <BsBarChart />
+                          {/* <i class="fs-6 bi bi-hand-thumbs-up"></i> */}
+                          : {property.views}</span>
+                        <i className="text-light">{new Date(property.publishedOn).toLocaleDateString()}</i>
+                      </div>
+                      <hr />
+                    </div>
+                  ))
+                }
+              </div>
             </div>
-          </>
-          }
+          </div >
         </div>
         <div className="mainflex">
           {/* <div className="mainstatstics"  > */}
@@ -362,38 +388,38 @@ const Statistics = () => {
             {/* </div> */}
           </div>
           {
-          userToken.role === "admin" &&
-          <div style={{ flex: 1, backgroundColor: "#071c36" }} className=" rounded-2 shadow mt-5 mb-5 pb-5 visitAnalytics">
-            <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
-              <h3 className="w-100"><span className="display-6 fs-3 text-light">Visitors</span></h3>
-              <DatePicker
-                selected={startDate}
-                showYearPicker
-                onChange={(date) => handleYearchange(date)}
-                maxDate={new Date()}
-                dateFormat="yyyy"
-                className="fs-4 text-center mt-2"
-              />
+            userToken.role === "admin" &&
+            <div style={{ flex: 1, backgroundColor: "#071c36" }} className=" rounded-2 shadow mt-5 mb-5 pb-5 visitAnalytics">
+              <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
+                <h3 className="w-100"><span className="display-6 fs-3 text-light">Visitors</span></h3>
+                <DatePicker
+                  selected={startDate}
+                  showYearPicker
+                  onChange={(date) => handleYearchange(date)}
+                  maxDate={new Date()}
+                  dateFormat="yyyy"
+                  className="fs-4 text-center mt-2"
+                />
+              </div>
+              <ResponsiveContainer>
+                <AreaChart width={730} height={250} data={formatAnalytics} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="visits" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#8884d8" stopOpacity={0.2} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="month" />
+                  <YAxis dataKey="visits" axisLine={{ strokeWidth: "0" }} />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <Tooltip />
+                  <Legend />
+                  <Area dot={true} type="monotone" dataKey="visits" stroke="#8884d8" fillOpacity={1} fill="url(#visits)" />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
-            <ResponsiveContainer>
-              <AreaChart width={730} height={250} data={formatAnalytics} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="visits" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#8884d8" stopOpacity={0.2} />
-                  </linearGradient>
-                </defs>
-                <XAxis dataKey="month" />
-                <YAxis dataKey="visits" axisLine={{ strokeWidth: "0" }} />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Legend />
-                <Area dot={true} type="monotone" dataKey="visits" stroke="#8884d8" fillOpacity={1} fill="url(#visits)" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
           }
-          < div className="recenthitpost" >
+          {/* <div className="recenthitpost" >
             < h3 > Recent Hit Posts</h3 >
             <hr className="hr" />
             <div className="recent shadow card ">
@@ -406,7 +432,6 @@ const Statistics = () => {
                         <h5 className="card-title text-light">{capitalizeFirstLetter(property.propertyName)}</h5>
                         <span className="text-light">
                           <BsBarChart />
-                          {/* <i class="fs-6 bi bi-hand-thumbs-up"></i> */}
                           : {property.views}</span>
                         <i className="text-light">{new Date(property.publishedOn).toLocaleDateString()}</i>
                       </div>
@@ -416,7 +441,7 @@ const Statistics = () => {
                 }
               </div>
             </div>
-          </div >
+          </div> */}
         </div>
       </div>
     </>

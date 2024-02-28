@@ -645,14 +645,21 @@ li {
   height: 500px;
   width: 30%;
 }
+.container-post{
+  display: flex;
+}
 
 .mainflex{
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-right: 20rem;
   /* width: 100%; */
 }
 @media (max-width: 851px) {
+  .container-post{
+    display: block;
+  }
   .image {
     width: 158px !important;
     height: 200px;
@@ -692,6 +699,10 @@ li {
   width: 20%;
   margin-top: 40px;
   margin-right: 200px;
+}
+.recenthit{
+  width: 30%;
+  margin-left: 20px;
 }
 
 #deal div {
@@ -845,7 +856,11 @@ li {
   background-color: #071c36 !important;
   height: 27rem;
 }
-
+.recentii {
+  width: 15rem;
+  background-color: #071c36 !important;
+  height: 25rem;
+}
 .user-list ::-webkit-scrollbar {
   width: 15px;
 }
