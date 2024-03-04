@@ -528,13 +528,20 @@ li {
   width: 200px;
   height: 200px;
 }
+.recent-title{
+  font-size: 20px;
+  font-weight: 600;
+
+}
 
 @media (max-width: 851px) {
   .properties {
     font-size: 15px;
     font-weight: 500;
   }
-
+  .recent-title{
+    font-size: 16px;
+  }
   .text-bold {
     font-weight: 500 !important
   }
@@ -638,23 +645,36 @@ li {
   /* display: flex;
   flex-direction: row; */
   height: 500px;
-  width: 30%;
+  width: 30%
+  /* width: 0.3rem; */
 }
 
 .visitAnalytics{
   height: 500px;
   width: 30%;
+  /* width: 0.3rem; */
 }
 .container-post{
   display: flex;
 }
 
 .mainflex{
+  flex: 1;
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  /* margin-right: 200rem !important;  */
+  width: 80% ;
+}
+.box-cont{
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.box{
+  width: 50%;
+  display: flex;
   flex-wrap: wrap;
-  margin-right: 20rem;
-  /* width: 100%; */
 }
 @media (max-width: 851px) {
   .container-post{
@@ -674,7 +694,6 @@ li {
     /* margin-bottom: -20px !important; */
     margin-bottom: 6px !important;
   }
-
   .fit {
     height: 100%;
     /* width: 40px; */
@@ -692,10 +711,17 @@ li {
   #deal {
     display: none;
   }
+  .box{
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .totalHouse{
+    width: 50% !important;
+  }
 }
 
 .recenthitpost {
-  /* flex: 1; */
+  flex: 1;
   width: 20%;
   margin-top: 40px;
   margin-right: 200px;
@@ -714,9 +740,12 @@ li {
   height: 100% !important;
 }
 .totalHouse{
-  background-color:#071c36;
+  background-color:white;
   height:20%;
   /* width: 20rem; */
+}
+.text-style{
+  color: #071c36
 }
 
 .analyticsField {
@@ -742,12 +771,17 @@ li {
     height: max-content;
     margin-bottom: 20px;
   }
-  .mainstatstics {
+  .statistics {
     width: 100% !important;
+    flex-wrap: wrap;
+  }
+  .mainstatstics {
+    width: 130% !important;
     margin-bottom: 20px;
   }
   .visitAnalytics{
-    width: 100% !important;
+    width: 130% !important;
+    margin-top:100px
   }
   /* .totalHouse{
     width: 100% !important;
@@ -858,8 +892,8 @@ li {
 }
 .recentii {
   width: 15rem;
-  background-color: #071c36 !important;
-  height: 25rem;
+  background-color: white !important;
+  height: 27rem;
 }
 .user-list ::-webkit-scrollbar {
   width: 15px;

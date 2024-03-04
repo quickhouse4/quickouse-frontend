@@ -138,9 +138,9 @@ const Statistics = () => {
 
   return (
     <>
-      <div className="col-xl-12 col-md-12 col-sm-6 statistics" style={{ marginTop: "120px" }}>
-        <div className="container-post">
-          <div className="row mb-5 mt-5 flex-wrap" style={{ width: "50%" }} >
+      <div className="col-xl-12 col-md-12 statistics" style={{ marginTop: "120px" }}>
+        <div className="container-post mb-5">
+          <div className="mt-5 box "  >
             {/* <div className="col-md-2 mb-3" >
             <div className="card mt-3 analyticsField">
               <div className="card-body">
@@ -151,170 +151,122 @@ const Statistics = () => {
               </div>
             </div>
           </div> */}
-            <div className="col-md-4 mb-3" >
+            <div className="col-md-4 col-sm-6 mb-3" >
               <div className="mt-3">
                 <div className="rounded-2 p-3 totalHouse" >
                   <div className="d-flex justify-content-around align-items-center flex-wrap">
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                    <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                     <div className="text-end">
                       <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Views</h4>
-                      <span className="fs-4 text-light">{viewsNumber ? viewsNumber : 0}</span>
+                      <span className="fs-4 text-style" >{viewsNumber ? viewsNumber : 0}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-4 mb-3" >
+            <div className="col-md-4 col-sm-6 mb-3" >
               <div className="mt-3">
                 <div className="rounded-2 p-3 totalHouse" >
                   <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                    <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                     <div className="text-end">
                       <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Post</h4>
-                      <span className="fs-4 text-light">{postNumber ? postNumber : 0}</span>
+                      <span className="fs-4 text-style">{postNumber ? postNumber : 0}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {userToken.role === "admin" && <>
-              {/* <div className="col-md-2 mb-3" >
-              <div className="card mt-3 analyticsField">
-                <div className="card-body">
-                  <div className="d-flex justify-content-evenly align-items-center flex-wrap" >
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }}/>
-                    <h4 className="fs-6 mr-2 text-light">Total Views</h4>
-                    <span className="fs-4 text-light">{totalViews}</span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-              <div className="col-md-4 mb-3" >
+            
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Views</h4>
-                        <span className="fs-4 text-light">{totalViews}</span>
+                        <span className="fs-4 text-style">{totalViews || 0}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <div className="col-md-2 mb-3" >
-              <div className="card mt-3 analyticsField">
-                <div className="card-body">
-                  <div className="d-flex justify-content-evenly align-items-center flex-wrap">
-                    <h4 className="fs-6 mr-2 text-light" style={{ color: "#8884d8" }}>Total Posts</h4>
-                    <span className="fs-4 text-light">{totalPost}</span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-              <div className="col-md-4 mb-3" >
+           
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Posts</h4>
-                        <span className="fs-4 text-light">{totalPost}</span>
+                        <span className="fs-4 text-style">{totalPost}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <div className="col-md-2 mb-3" >
-              <div className="card mt-3 analyticsField">
-                <div className="card-body">
-                  <div className="d-flex justify-content-evenly align-items-center flex-wrap">
-                    <h4 className="fs-6 mr-2 text-light" style={{ color: "#8884d8" }}>Total Plot</h4>
-                    <span className="fs-4 text-light">{plotNumbers}</span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-              <div className="col-md-4 mb-3" >
+            
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      <BsBarChart className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Plot</h4>
-                        <span className="fs-4 text-light">{plotNumbers}</span>
+                        <span className="fs-4 text-style">{plotNumbers}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 mb-3" >
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                      <BsBuildings className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total House</h4>
-                        <span className="fs-4 text-light">{houseNumbers}</span>
+                        <span className="fs-4 text-style">{houseNumbers}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <div className="col-md-2 mb-3" >
-              <div className="card mt-3 analyticsField">
-                <div className="card-body">
-                  <div className="d-flex justify-content-evenly align-items-center flex-wrap">
-                    <span className="fs-6 mr-2" style={{ color: "#8884d8" }}>Property for Rent</span>
-                    <span className="fs-4 text-light">{rentNumbers}</span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-              <div className="col-md-4 mb-3" >
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} /> */}
+                      {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#8884d8" }} /> */}
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Property for Rent</h4>
-                        <span className="fs-4 text-light">{rentNumbers}</span>
+                        <span className="fs-4 text-style">{rentNumbers}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* <div className="col-md-2 mb-3" >
-              <div className="card mt-3 analyticsField">
-                <div className="card-body">
-                  <div className="d-flex justify-content-evenly align-items-center flex-wrap">
-                    <h4 className="fs-6 mr-2" style={{ color: "#8884d8" }}>Property for Sales</h4>
-                    <span className="fs-4 text-light">{saleNumbers}</span>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-              <div className="col-md-4 mb-3" >
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
-                  <div className="rounded-2 p-3 totalHouse" >
+                  <div className="rounded-2 p-3 totalHouse " >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#ffff" }} /> */}
+                      {/* <BsBuildings className="fs-1 mr-2" style={{ color: "#8884d8" }} /> */}
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Property for Sale</h4>
-                        <span className="fs-4 text-light">{saleNumbers}</span>
+                        <span className="fs-4 text-style">{saleNumbers}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 mb-3" >
+              <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
-                    <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      <FaUsers className="fs-1 mr-2" style={{ color: "#ffff" }} />
+                    <div className="d-flex justify-content-around align-items-center flex-wrap">
+                      <FaUsers className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Visitors</h4>
-                        <span className="fs-4 text-light">12</span>
+                        <span className="fs-4 text-style">12</span>
                       </div>
                     </div>
                   </div>
@@ -324,8 +276,10 @@ const Statistics = () => {
             }
           </div>
           < div className="recenthit" >
-            < h3 > Recent Hit Posts</h3 >
-            <hr className="hr" />
+            <div className="w-100">
+              < h3 className="recent-title"> Recent Hit Posts</h3 >
+              <hr className="hr" />
+            </div>
             <div className="recentii shadow card ">
               <div className="card-body">
                 {
@@ -333,12 +287,12 @@ const Statistics = () => {
                     <div className="d-flex align-items-center" style={{ marginBottom: "12px" }}>
                       <img src={property.mainPhoto} alt="prop_image" className="img-thumb rounded-circle me-2" style={{ width: "30px", height: '30px' }} />
                       <div className="d-flex flex-column">
-                        <h5 className="card-title text-light">{capitalizeFirstLetter(property.propertyName)}</h5>
-                        <span className="text-light">
+                        <h5 className="card-title text-style">{capitalizeFirstLetter(property.propertyName)}</h5>
+                        <span className="text-style">
                           <BsBarChart />
                           {/* <i class="fs-6 bi bi-hand-thumbs-up"></i> */}
                           : {property.views}</span>
-                        <i className="text-light">{new Date(property.publishedOn).toLocaleDateString()}</i>
+                        <i className="text-style">{new Date(property.publishedOn).toLocaleDateString()}</i>
                       </div>
                       <hr />
                     </div>
@@ -351,9 +305,9 @@ const Statistics = () => {
         <div className="mainflex">
           {/* <div className="mainstatstics"  > */}
           {/* style={{ display: 'flex', flexDirection: 'row', height: '500px' }} */}
-          <div style={{ flex: 1, backgroundColor: "#071c36" }} className="mainstatstics rounded-2 shadow mt-5 mb-5 pb-5 ">
+          <div style={{ flex: 1, backgroundColor: "white" }} className="mainstatstics rounded-2 shadow  mb-5 pb-5 ">
             <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
-              <h3 className="w-100"><span className="display-6 fs-3 text-light">Views and Likes</span></h3>
+              <h3 className="w-100"><span className="display-6 fs-3" style={{color: "#071c36", fontWeight:500}} >Views and Likes</span></h3>
               <DatePicker
                 selected={startDate}
                 showYearPicker
@@ -389,9 +343,9 @@ const Statistics = () => {
           </div>
           {
             userToken.role === "admin" &&
-            <div style={{ flex: 1, backgroundColor: "#071c36" }} className=" rounded-2 shadow mt-5 mb-5 pb-5 visitAnalytics">
+            <div style={{ flex: 1, backgroundColor: "white" }} className=" rounded-2 shadow mb-5 pb-5 visitAnalytics">
               <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
-                <h3 className="w-100"><span className="display-6 fs-3 text-light">Visitors</span></h3>
+                <h3 className="w-100"><span className="display-6 fs-3" style={{color: "#071c36", fontWeight:500}}>Visitors</span></h3>
                 <DatePicker
                   selected={startDate}
                   showYearPicker
@@ -405,8 +359,8 @@ const Statistics = () => {
                 <AreaChart width={730} height={250} data={formatAnalytics} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="visits" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#8884d8" stopOpacity={0.2} />
+                      <stop offset="5%" stopColor="#071c36" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#071c36" stopOpacity={0.2} />
                     </linearGradient>
                   </defs>
                   <XAxis dataKey="month" />
@@ -414,7 +368,7 @@ const Statistics = () => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <Tooltip />
                   <Legend />
-                  <Area dot={true} type="monotone" dataKey="visits" stroke="#8884d8" fillOpacity={1} fill="url(#visits)" />
+                  <Area dot={true} type="monotone" dataKey="visits" stroke="#071c36" fillOpacity={1} fill="url(#visits)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
