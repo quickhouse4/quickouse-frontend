@@ -22,6 +22,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { BsBarChart, BsBuildings } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
+import { getAllUser } from "../actions/userAction";
 
 
 const Statistics = () => {
@@ -47,6 +48,8 @@ const Statistics = () => {
   const { yearLoading, yearViews } = useSelector((state) => state.yearViews)
   const { yearLikeLoading, yearLikes } = useSelector((state) => state.yearLikes)
   const { visitorAnalytics } = useSelector((state) => state.visitorAnalytics)
+  const myUser = useSelector((state) => state.allUser)
+  const { allUsers, userSLoading, totalPages } = myUser
   const [pageCount, setpageCount] = useState(1);
   const pageLimit = 25
 
@@ -74,14 +77,18 @@ const Statistics = () => {
     dispatch(getTotalViews(token))
   }, [])
 
+
+  useEffect(() => {
+    dispatch(getAllUser(token, pageCount, pageLimit))
+}, [])
+
   const handleYearchange = year => {
     setStartDate(year);
 
   }
 
-  const handleAnalyticsYear = year => {
-    setYear(year);
-
+  const handleAnalyticsYear = yr => {
+    setYear(yr);
   }
 
   useEffect(() => {
@@ -97,7 +104,7 @@ const Statistics = () => {
   }, [startDate])
 
   useEffect(() => {
-    dispatch(getVisitorAnalytics(token, startDate.getFullYear()))
+    dispatch(getVisitorAnalytics(token, year.getFullYear()))
   }, [year])
 
 
@@ -108,6 +115,13 @@ const Statistics = () => {
   const formattedYearViews = Object.entries(yearViews).map(([month, { views }]) => ({ month, views }));
 
   const formatAnalytics = Object.entries(visitorAnalytics).map(([month, { visits }]) => ({ month, visits }));
+
+  const Data = formatAnalytics.map((data) => {
+    return {
+      month: data.month == "year" ? new Date().getFullYear() : data.month,
+      visits: data.visits
+    }
+  })
 
   const combinedData = formattedViews.map((view, i) => {
     const month = view.month === "year" ? new Date().getFullYear() : view.month;
@@ -265,8 +279,8 @@ const Statistics = () => {
                     <div className="d-flex justify-content-around align-items-center flex-wrap">
                       <FaUsers className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
-                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Visitors</h4>
-                        <span className="fs-4 text-style">12</span>
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Users</h4>
+                        <span className="fs-4 text-style">{allUsers.length}</span>
                       </div>
                     </div>
                   </div>
@@ -347,16 +361,16 @@ const Statistics = () => {
               <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
                 <h3 className="w-100"><span className="display-6 fs-3" style={{color: "#071c36", fontWeight:500}}>Visitors</span></h3>
                 <DatePicker
-                  selected={startDate}
+                  selected={year}
                   showYearPicker
-                  onChange={(date) => handleYearchange(date)}
+                  onChange={(date) => handleAnalyticsYear(date)}
                   maxDate={new Date()}
                   dateFormat="yyyy"
                   className="fs-4 text-center mt-2"
                 />
               </div>
               <ResponsiveContainer>
-                <AreaChart width={730} height={250} data={formatAnalytics} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <AreaChart width={730} height={250} data={Data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="visits" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#071c36" stopOpacity={0.8} />
