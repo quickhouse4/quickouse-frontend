@@ -328,7 +328,7 @@ const Statistics = () => {
                 onChange={(date) => handleYearchange(date)}
                 maxDate={new Date()}
                 dateFormat="yyyy"
-                className="fs-4 text-center mt-2"
+                className="fs-4 text-center mt-2 border"
               />
             </div>
             <ResponsiveContainer >
@@ -366,7 +366,7 @@ const Statistics = () => {
                   onChange={(date) => handleAnalyticsYear(date)}
                   maxDate={new Date()}
                   dateFormat="yyyy"
-                  className="fs-4 text-center mt-2"
+                  className="fs-4 text-center mt-2 border"
                 />
               </div>
               <ResponsiveContainer>
