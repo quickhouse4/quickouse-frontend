@@ -43,7 +43,13 @@ import {
   VISITORS_TRACK_FAIL,
   VISITOR_ANALYTIC_REQUEST,
   VISITOR_ANALYTIC_SUCCESS,
-  VISITOR_ANALYTIC_FAIL
+  VISITOR_ANALYTIC_FAIL,
+  GET_TOTAL_VIEW_ANALYTIC_REQUEST,
+  GET_TOTAL_VIEW_ANALYTIC_SUCCESS,
+  GET_TOTAL_VIEW_ANALYTIC_FAIL,
+  GET_TOTAL_LIKE_ANALYTIC_REQUEST,
+  GET_TOTAL_LIKE_ANALYTIC_SUCCESS,
+  GET_TOTAL_LIKE_ANALYTIC_FAIL
 } from "../actions/types";
 
 export const getAnalyticsReducer = (state = { analytics: [] }, action) => {
@@ -243,6 +249,32 @@ export const visitorAnalyticsReducer = (state = { visitorAnalytics: [] }, action
       return { visitorLoading: false, visitorAnalytics: action.response };
     case VISITOR_ANALYTIC_FAIL:
       return { visitorLoading: false, visitorError: action.response }
+    default:
+      return state;
+  }
+}
+
+export const getTotalViewAnalyticsReducer = (state = { totalViewAnalytics: [] }, action) => {
+  switch (action.type) {
+    case GET_TOTAL_VIEW_ANALYTIC_REQUEST:
+      return { totalViewLoading: true, totalViewAnalytics: [] }
+    case GET_TOTAL_VIEW_ANALYTIC_SUCCESS:
+      return { totalViewLoading: false, totalViewAnalytics: action.response };
+    case GET_TOTAL_VIEW_ANALYTIC_FAIL:
+      return { totalViewLoading: false, totalViewError: action.response }
+    default:
+      return state;
+  }
+}
+
+export const getTotalLikeAnalyticsReducer = (state = { totalLikeAnalytics: [] }, action) => {
+  switch (action.type) {
+    case GET_TOTAL_LIKE_ANALYTIC_REQUEST:
+      return { totalLikeLoading: true, totalLikeAnalytics: [] }
+    case GET_TOTAL_LIKE_ANALYTIC_SUCCESS:
+      return { totalLikeLoading: false, totalLikeAnalytics: action.response };
+    case GET_TOTAL_LIKE_ANALYTIC_FAIL:
+      return { totalLikeLoading: false, totalLikeError: action.response }
     default:
       return state;
   }

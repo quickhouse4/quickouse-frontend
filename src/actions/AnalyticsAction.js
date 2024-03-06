@@ -44,8 +44,13 @@ import {
     VISITORS_TRACK_FAIL,
     VISITOR_ANALYTIC_REQUEST,
     VISITOR_ANALYTIC_SUCCESS,
-    VISITOR_ANALYTIC_FAIL
-
+    VISITOR_ANALYTIC_FAIL,
+    GET_TOTAL_VIEW_ANALYTIC_REQUEST,
+    GET_TOTAL_VIEW_ANALYTIC_SUCCESS,
+    GET_TOTAL_VIEW_ANALYTIC_FAIL,
+    GET_TOTAL_LIKE_ANALYTIC_REQUEST,
+    GET_TOTAL_LIKE_ANALYTIC_SUCCESS,
+    GET_TOTAL_LIKE_ANALYTIC_FAIL
 } from "./types";
 
 export const getDataAnalytic = (token) => async (dispatch) => {
@@ -377,6 +382,42 @@ export const getVisitorAnalytics = (token, year) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: VISITOR_ANALYTIC_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getTotalViewAnalytics = (year) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_TOTAL_VIEW_ANALYTIC_REQUEST
+        })
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/totalAnalyticsViews?yearData=${year}`);
+        dispatch({
+            type: GET_TOTAL_VIEW_ANALYTIC_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_TOTAL_VIEW_ANALYTIC_FAIL,
+            payload: error
+        })
+    }
+}
+
+export const getTotalLikeAnalytics = (year) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_TOTAL_LIKE_ANALYTIC_REQUEST
+        })
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/totalAnalyticsLikes?yearData=${year}`);
+        dispatch({
+            type: GET_TOTAL_LIKE_ANALYTIC_SUCCESS,
+            response: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_TOTAL_LIKE_ANALYTIC_FAIL,
             payload: error
         })
     }

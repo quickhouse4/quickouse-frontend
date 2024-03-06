@@ -13,7 +13,9 @@ import {
   getYearViews,
   getTotalPosts,
   getTotalViews,
-  getVisitorAnalytics
+  getVisitorAnalytics,
+  getTotalViewAnalytics,
+  getTotalLikeAnalytics
 } from "../actions/AnalyticsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
@@ -23,6 +25,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { BsBarChart, BsBuildings } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa";
 import { getAllUser } from "../actions/userAction";
+import { GiReceiveMoney } from "react-icons/gi";
+import { GiPayMoney } from "react-icons/gi";
+import { MdPostAdd } from "react-icons/md";
 
 
 const Statistics = () => {
@@ -38,31 +43,31 @@ const Statistics = () => {
   const house = useSelector((state) => state.houseNumber)
   const rent = useSelector((state) => state.rentNumber)
   const sale = useSelector((state) => state.saleNumber)
-  const { plotLoading, plotNumbers } = plot
-  const { houseLoading, houseNumbers } = house
-  const { likLoading, likeNumber } = numberLike
-  const { loadingView, viewsNumber } = numberView
-  const { postLoading, postNumber } = numberPost
-  const { rentLoading, rentNumbers } = rent
-  const { saleLoading, saleNumbers } = sale
-  const { yearLoading, yearViews } = useSelector((state) => state.yearViews)
-  const { yearLikeLoading, yearLikes } = useSelector((state) => state.yearLikes)
+  const { plotNumbers } = plot
+  const { houseNumbers } = house
+  const { likeNumber } = numberLike
+  const { viewsNumber } = numberView
+  const { postNumber } = numberPost
+  const { rentNumbers } = rent
+  const { saleNumbers } = sale
+  const { yearViews } = useSelector((state) => state.yearViews)
+  const { yearLikes } = useSelector((state) => state.yearLikes)
   const { visitorAnalytics } = useSelector((state) => state.visitorAnalytics)
+  const { totalViewAnalytics } = useSelector((state) => state.getTotalViewAnalytics)
+  const { totalLikeAnalytics } = useSelector((state) => state.getTotalLikeAnalytics)
   const myUser = useSelector((state) => state.allUser)
-  const { allUsers, userSLoading, totalPages } = myUser
+  const { allUsers } = myUser
   const [pageCount, setpageCount] = useState(1);
   const pageLimit = 25
 
   const dispatch = useDispatch()
-  const { loading, analytics } = data
-  const { likeLoading, analyticsLikes } = likeData
+  const { analytics } = data
+  const { analyticsLikes } = likeData
   const token = localStorage.getItem("token")
   const userToken = JSON.parse(atob(token.split('.')[1]));
-
   const [startDate, setStartDate] = useState(new Date());
-
   const [year, setYear] = useState(new Date());
-
+  const [yrDate, setYrDate] = useState(new Date());
 
   useEffect(() => {
     dispatch(getViewsNumber(token))
@@ -80,21 +85,32 @@ const Statistics = () => {
 
   useEffect(() => {
     dispatch(getAllUser(token, pageCount, pageLimit))
-}, [])
+  }, [])
 
   const handleYearchange = year => {
     setStartDate(year);
-
   }
 
   const handleAnalyticsYear = yr => {
     setYear(yr);
   }
 
+  const handleTotalYear = yrs => {
+    setYrDate(yrs);
+  
+  }
+
   useEffect(() => {
     dispatch(getDataAnalytic(token))
     dispatch(getLikeAnalytic(token))
   }, [])
+
+  useEffect(() => {
+    if (yrDate) {
+      dispatch(getTotalViewAnalytics(yrDate.getFullYear()))
+      dispatch(getTotalLikeAnalytics(yrDate.getFullYear()))
+    }
+  }, [yrDate])
 
   useEffect(() => {
     if (startDate) {
@@ -107,8 +123,8 @@ const Statistics = () => {
     dispatch(getVisitorAnalytics(token, year.getFullYear()))
   }, [year])
 
-
-
+  const formattedTotalLikes = Object.entries(totalLikeAnalytics).map(([month, { likes }]) => ({ month, likes }));
+  const formattedTotalViews = Object.entries(totalViewAnalytics).map(([month, { views }]) => ({ month, views }));
   const formattedViews = Object.entries(analytics).map(([month, { views }]) => ({ month, views }));
   const formattedLikes = Object.entries(analyticsLikes).map(([month, { likes }]) => ({ month, likes }));
   const formattedYearLikes = Object.entries(yearLikes).map(([month, { likes }]) => ({ month, likes }));
@@ -123,6 +139,25 @@ const Statistics = () => {
     }
   })
 
+  const combineTotalData = formattedTotalViews.map((view, i) => {
+    const month = view.month === "year" ? new Date().getFullYear() : view.month;
+    let likes, views;
+
+    if (yrDate) {
+      // Use data for the selected year
+      likes = formattedTotalLikes.find(data => data.month === month) ? formattedTotalLikes.find(data => data.month === month).likes : undefined;
+      views = formattedTotalViews.find(data => data.month === month) ? formattedTotalViews.find(data => data.month === month).views : undefined;
+    } else {
+      // Use data for the current year
+      likes = formattedTotalLikes[i] ? formattedTotalLikes[i].likes : undefined;
+      views = view.views;
+    }
+    return {
+      month,
+      likes,
+      views
+    };
+  })
   const combinedData = formattedViews.map((view, i) => {
     const month = view.month === "year" ? new Date().getFullYear() : view.month;
     let likes, views;
@@ -131,14 +166,11 @@ const Statistics = () => {
       // Use data for the selected year
       likes = formattedYearLikes.find(data => data.month === month) ? formattedYearLikes.find(data => data.month === month).likes : undefined;
       views = formattedYearViews.find(data => data.month === month) ? formattedYearViews.find(data => data.month === month).views : undefined;
-
     } else {
       // Use data for the current year
       likes = formattedLikes[i] ? formattedLikes[i].likes : undefined;
       views = view.views;
-
     }
-
     return {
       month,
       likes,
@@ -155,16 +187,6 @@ const Statistics = () => {
       <div className="col-xl-12 col-md-12 statistics" style={{ marginTop: "120px" }}>
         <div className="container-post mb-5">
           <div className="mt-5 box "  >
-            {/* <div className="col-md-2 mb-3" >
-            <div className="card mt-3 analyticsField">
-              <div className="card-body">
-                <div className="d-flex justify-content-evenly align-items-center flex-wrap" >
-                  <h4 className="fs-6 mr-2 text-light">My Views</h4>
-                  <span className="fs-4 text-light">{viewsNumber}</span>
-                </div>
-              </div>
-            </div>
-          </div> */}
             <div className="col-md-4 col-sm-6 mb-3" >
               <div className="mt-3">
                 <div className="rounded-2 p-3 totalHouse" >
@@ -182,7 +204,7 @@ const Statistics = () => {
               <div className="mt-3">
                 <div className="rounded-2 p-3 totalHouse" >
                   <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                    <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
+                    <MdPostAdd className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                     <div className="text-end">
                       <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>My Post</h4>
                       <span className="fs-4 text-style">{postNumber ? postNumber : 0}</span>
@@ -191,8 +213,33 @@ const Statistics = () => {
                 </div>
               </div>
             </div>
+            <div className="col-md-4 col-sm-6 mb-3" >
+              <div className="mt-3">
+                <div className="rounded-2 p-3 totalHouse" >
+                  <div className="d-flex justify-content-around align-items-center flex-wrap">
+                    <GiReceiveMoney className="fs-1 mr-2" style={{ color: "#8884d8" }} />
+                    <div className="text-end">
+                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Revenue</h4>
+                      <span className="fs-4 text-style">{userToken.role === "admin" ? '$793' : ' $0'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             {userToken.role === "admin" && <>
-            
+              <div className="col-md-4 col-sm-6 mb-3" >
+                <div className="mt-3">
+                  <div className="rounded-2 p-3 totalHouse" >
+                    <div className="d-flex justify-content-around align-items-center flex-wrap">
+                      <GiPayMoney className="fs-1 mr-2" style={{ color: "#8884d8" }} />
+                      <div className="text-end">
+                        <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Expense</h4>
+                        <span className="fs-4 text-style">$559</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
@@ -206,12 +253,12 @@ const Statistics = () => {
                   </div>
                 </div>
               </div>
-           
+
               <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around  align-items-center flex-wrap">
-                      <BsBarChart className="fs-1 mr-2" style={{ color: "#8884d8" }} />
+                      <MdPostAdd className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                       <div className="text-end">
                         <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Total Posts</h4>
                         <span className="fs-4 text-style">{totalPost}</span>
@@ -220,7 +267,7 @@ const Statistics = () => {
                   </div>
                 </div>
               </div>
-            
+
               <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
@@ -316,12 +363,80 @@ const Statistics = () => {
             </div>
           </div >
         </div>
+        {userToken.role === "admin" &&
+          <div className="mainflex">
+            <div style={{ flex: 1, backgroundColor: "white" }} className="mainstatstics rounded-2 shadow  mb-5 pb-5 ">
+              <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
+                <h3 className="w-100"><span className="display-6 fs-3" style={{ color: "#443dc2", fontWeight: 500 }} >Total Views</span></h3>
+                <DatePicker
+                  selected={yrDate}
+                  showYearPicker
+                  onChange={(date) => handleTotalYear(date)}
+                  maxDate={new Date()}
+                  dateFormat="yyyy"
+                  className="fs-4 text-center mt-2 border"
+                />
+              </div>
+              <ResponsiveContainer >
+                <AreaChart width={730} height={250} data={combineTotalData}
+                  margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="views" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#443dc2" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#443dc2" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="likes" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="month" />
+                  <YAxis dataKey="views" axisLine={{ strokeWidth: "0" }} />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <Tooltip />
+                  <Legend />
+                  <Area dot={true} type="monotone" dataKey="views" stroke="#443dc2" fillOpacity={1} fill="url(#views)" />
+                  <Area dot={true} type="monotone" dataKey="likes" stroke="#82ca9d" fillOpacity={1} fill="url(#likes)" />
+                </AreaChart>
+              </ResponsiveContainer>
+              {/* </div> */}
+            </div>
+            <div style={{ flex: 1, backgroundColor: "white" }} className=" rounded-2 shadow mb-5 pb-5 visitAnalytics">
+              <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
+                <h3 className="w-100"><span className="display-6 fs-3" style={{ color: "#009933", fontWeight: 500 }}>Revenue and expenses</span></h3>
+                <DatePicker
+                  selected={year}
+                  showYearPicker
+                  onChange={(date) => handleAnalyticsYear(date)}
+                  maxDate={new Date()}
+                  dateFormat="yyyy"
+                  className="fs-4 text-center mt-2 border"
+                />
+              </div>
+              <ResponsiveContainer>
+                <AreaChart width={730} height={250} data={Data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="revenue" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#009933" stopOpacity={0.8} />
+                      <stop offset="95%" stopColor="#009933" stopOpacity={0.2} />
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="month" />
+                  <YAxis dataKey="revenue" axisLine={{ strokeWidth: "0" }} />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <Tooltip />
+                  <Legend />
+                  <Area dot={true} type="monotone" dataKey="revenue" stroke="#009933" fillOpacity={1} fill="url(#revenue)" />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+
+          </div>
+        }
         <div className="mainflex">
-          {/* <div className="mainstatstics"  > */}
-          {/* style={{ display: 'flex', flexDirection: 'row', height: '500px' }} */}
           <div style={{ flex: 1, backgroundColor: "white" }} className="mainstatstics rounded-2 shadow  mb-5 pb-5 ">
             <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
-              <h3 className="w-100"><span className="display-6 fs-3" style={{color: "#071c36", fontWeight:500}} >Views and Likes</span></h3>
+              <h3 className="w-100"><span className="display-6 fs-3" style={{ color: "#8884d8", fontWeight: 500 }} >Views and Likes</span></h3>
               <DatePicker
                 selected={startDate}
                 showYearPicker
@@ -357,59 +472,38 @@ const Statistics = () => {
           </div>
           {
             userToken.role === "admin" &&
-            <div style={{ flex: 1, backgroundColor: "white" }} className=" rounded-2 shadow mb-5 pb-5 visitAnalytics">
-              <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
-                <h3 className="w-100"><span className="display-6 fs-3" style={{color: "#071c36", fontWeight:500}}>Visitors</span></h3>
-                <DatePicker
-                  selected={year}
-                  showYearPicker
-                  onChange={(date) => handleAnalyticsYear(date)}
-                  maxDate={new Date()}
-                  dateFormat="yyyy"
-                  className="fs-4 text-center mt-2 border"
-                />
+            <>
+              <div style={{ flex: 1, backgroundColor: "white" }} className=" rounded-2 shadow mb-5 pb-5 visitAnalytics">
+                <div className="d-flex justify-content-between mt-2 mr-4 ml-4">
+                  <h3 className="w-100"><span className="display-6 fs-3" style={{ color: "#071c36", fontWeight: 500 }}>Visitors</span></h3>
+                  <DatePicker
+                    selected={year}
+                    showYearPicker
+                    onChange={(date) => handleAnalyticsYear(date)}
+                    maxDate={new Date()}
+                    dateFormat="yyyy"
+                    className="fs-4 text-center mt-2 border"
+                  />
+                </div>
+                <ResponsiveContainer>
+                  <AreaChart width={730} height={250} data={Data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="visits" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#071c36" stopOpacity={0.8} />
+                        <stop offset="95%" stopColor="#071c36" stopOpacity={0.2} />
+                      </linearGradient>
+                    </defs>
+                    <XAxis dataKey="month" />
+                    <YAxis dataKey="visits" axisLine={{ strokeWidth: "0" }} />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Legend />
+                    <Area dot={true} type="monotone" dataKey="visits" stroke="#071c36" fillOpacity={1} fill="url(#visits)" />
+                  </AreaChart>
+                </ResponsiveContainer>
               </div>
-              <ResponsiveContainer>
-                <AreaChart width={730} height={250} data={Data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                  <defs>
-                    <linearGradient id="visits" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#071c36" stopOpacity={0.8} />
-                      <stop offset="95%" stopColor="#071c36" stopOpacity={0.2} />
-                    </linearGradient>
-                  </defs>
-                  <XAxis dataKey="month" />
-                  <YAxis dataKey="visits" axisLine={{ strokeWidth: "0" }} />
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <Tooltip />
-                  <Legend />
-                  <Area dot={true} type="monotone" dataKey="visits" stroke="#071c36" fillOpacity={1} fill="url(#visits)" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
+            </>
           }
-          {/* <div className="recenthitpost" >
-            < h3 > Recent Hit Posts</h3 >
-            <hr className="hr" />
-            <div className="recent shadow card ">
-              <div className="card-body">
-                {
-                  commonProperties.properties.sort((a, b) => b.views - a.views).slice(0, 4).map(property => (
-                    <div className="d-flex align-items-center" style={{ marginBottom: "12px" }}>
-                      <img src={property.mainPhoto} alt="prop_image" className="img-thumb rounded-circle me-2" style={{ width: "30px", height: '30px' }} />
-                      <div className="d-flex flex-column">
-                        <h5 className="card-title text-light">{capitalizeFirstLetter(property.propertyName)}</h5>
-                        <span className="text-light">
-                          <BsBarChart />
-                          : {property.views}</span>
-                        <i className="text-light">{new Date(property.publishedOn).toLocaleDateString()}</i>
-                      </div>
-                      <hr />
-                    </div>
-                  ))
-                }
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </>
