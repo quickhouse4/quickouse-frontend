@@ -58,6 +58,8 @@ import {
   getLikeNumberReducer,
   getLikeReducer,
   getPostNumberReducer,
+  getTotalLikeAnalyticsReducer,
+  getTotalViewAnalyticsReducer,
   getViewsNumberReducer,
   getYearLikesReducer,
   getYearViewsReducer,
@@ -156,7 +158,9 @@ const reducer = combineReducers({
   totalPost: totalPostReducer,
   totalViews: totalViewsReducer,
   visitorTrack: visitorsTrackReducer,
-  visitorAnalytics: visitorAnalyticsReducer
+  visitorAnalytics: visitorAnalyticsReducer,
+  getTotalViewAnalytics: getTotalViewAnalyticsReducer,
+  getTotalLikeAnalytics: getTotalLikeAnalyticsReducer
 });//
 
 const initialState = { activeCategory: "" };
