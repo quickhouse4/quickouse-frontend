@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { property, plotType } from '../Data/Rwanda'
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
 
-
-function CreateProperties() {
+const CreateProperties = () => {
   let token = localStorage.getItem("token");
 
   const createSpecial = useSelector((state) => state.createProperty);
