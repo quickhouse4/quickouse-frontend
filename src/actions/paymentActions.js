@@ -5,6 +5,7 @@ import {
     CASHOUT_SUCCESS,
     CASHOUT_REQUEST,
     CASHOUT_FAIL,
+    PUBLISH_PROPERTY_SUCCESS,
 } from "./types";
 import axios from "axios";
 
@@ -53,3 +54,15 @@ export const cashoutRequest = (payload, token) => async (dispatch) => {
         });
     }
 }
+
+export const addPropertyToPublish = (propertyData, history) => {
+    return dispatch => {
+      dispatch({
+        type: PUBLISH_PROPERTY_SUCCESS,
+        payload: propertyData
+      });
+      history.push('/payment');
+    };
+  };
+
+  

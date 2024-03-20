@@ -2,14 +2,18 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import { cashinRequest } from '../actions/paymentActions'
 import { useDispatch, useSelector } from 'react-redux'
+import { createProperty } from '../actions/propertiesAction'
+import { useHistory } from "react-router-dom";
 
 const PaymentScreen = () => {
+    let token = localStorage.getItem("token");
+    const [label, setLabel] = useState('');
+    const history = useHistory();
     const [number, setNumber] = useState({})
     const [amount, setAmount] = useState({})
     const dispatch = useDispatch()
+    const { publishProperty } = useSelector((state) => state.publishedProperty)
     const { loading } = useSelector(state => state.cashinpayment)
-    const [label, setLabel] = useState('')
-
     const onNumberChange = (e) => {
         var em = e.target.value;
         if (em != "") {
@@ -21,7 +25,7 @@ const PaymentScreen = () => {
 
     const onAmountChange = (e) => {
         var em = e.target.value
-        if (!em) {
+        if (em != "") {
             setAmount({ value: em })
         } else {
             setAmount({ value: em, message: "Amount should be equal to 2000 for one property" })
@@ -33,19 +37,25 @@ const PaymentScreen = () => {
         e.preventDefault();
         if (!number.value) {
             setNumber({ message: "Type your number" });
-        }  else if (parseFloat(amount.value) !== 2000 && !amount.value) {
-            setAmount({
-                message: "Amount should be equal to 2000 for one property",
-            });
+        } else if (parseFloat(amount.value) !== 2000 && !amount.value) {
+            setAmount({ message: "Amount should be equal to 1000 for one property" });
         } else {
             const payload = {
-                phone: number.value,
-                amount: parseFloat(amount.value), 
+                number: number.value,
+                amount: parseFloat(amount.value),
             };
-            dispatch(cashinRequest(payload));
+            dispatch(cashinRequest(payload, token)).then(() => {
+                // Payment successful, dispatch action to publish property
+                dispatch(createProperty(publishProperty, token, history));
+                // Redirect or show success message
+            }).catch((error) => {
+                // Handle payment error
+                console.log("err", error)
+            });
+
         }
     };
-    
+
     return (
         <>
             <Header setLabel={setLabel} />
@@ -64,7 +74,7 @@ const PaymentScreen = () => {
                     </div>
                     <div class="col-md-6 bg-light">
                         <h2>Mobile Money</h2>
-                        <p>Pay with MTN Mobile Money.</p>
+                        <p style={{ marginLeft: "-10px" }}>Pay with MTN Mobile Money.</p>
                         <ul>
                             <li>Amount to be paid for each property: RWF 2000 or $20</li>
                             <li>Enter your Momo Phone Number. to pay</li>
@@ -88,11 +98,20 @@ const PaymentScreen = () => {
                                     />
                                     <span class="text-danger">{number.message}</span>
                                 </div>
+                                {
+                                    loading ?
+                                    <button
+                                    class="btn login-btn btn-block fs-4"
+                                    name="submit"
+                                    onClick={paymentHandler}
+                                >Loading.....</button>
+                                :
                                 <button
-                                    class="btn login-btn"
+                                    class="btn login-btn btn-block fs-4"
                                     name="submit"
                                     onClick={paymentHandler}
                                 >Pay</button>
+                                }
                             </form>
                             <li>You will be prompted to enter your Mobile Money PIN to complete the payment.</li>
                         </ul>

@@ -83,7 +83,7 @@ import {
   requestFilterReducer, 
   requestFilterSaleReducer 
 } from "./reducers/ussdReducer";
-import { cashinReducer, cashoutReducer } from "./reducers/paymentReducer";
+import { cashinReducer, cashoutReducer, publishedPropertyReducer } from "./reducers/paymentReducer";
 
 
 const reducer = combineReducers({
@@ -163,7 +163,8 @@ const reducer = combineReducers({
   getTotalViewAnalytics: getTotalViewAnalyticsReducer,
   getTotalLikeAnalytics: getTotalLikeAnalyticsReducer,
   cashinpayment: cashinReducer,
-  cashoutpayment: cashoutReducer
+  cashoutpayment: cashoutReducer,
+  publishedProperty:publishedPropertyReducer
 });
 
 const initialState = { activeCategory: "" };

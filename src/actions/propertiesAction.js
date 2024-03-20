@@ -78,9 +78,10 @@ export const createProperty = (payload, token, history) => async (dispatch) => {
 
     const response = await axios.post(
       "https://quickhouse.herokuapp.com/api/property",
-      payload,
+      payload[0],
       {
         headers: {
+          'Content-Type': 'multipart/form-data',
           token: token,
         },
       }
@@ -144,7 +145,6 @@ export const SpecialProperties = (page, limit) => async (dispatch) => {
       limit: response.data.data.limit,
       page: response.data.data.page,
       totalPagesforSale: response.data.data.totalPages,
-
     });
   } catch (error) {
     // console.log("Error response: ", error.response);
@@ -207,7 +207,7 @@ export const propertyForSale = (pageCount, pageLimit) => async (dispatch) => {
     const response = await axios.get(
       `https://quickhouse.herokuapp.com/api/properties/sale?page=${pageCount}&limit=${pageLimit}`
     );
-    
+
     dispatch({
       type: PROPERTIES_FOR_SALE_SUCCESS,
       payload: response.data.data.docs,

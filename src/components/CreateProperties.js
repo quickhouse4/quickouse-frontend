@@ -1,18 +1,20 @@
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { createProperty } from "../actions/propertiesAction";
 import { useDispatch, useSelector } from "react-redux";
 import { property, plotType } from '../Data/Rwanda'
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
+import { addPropertyToPublish } from "../actions/paymentActions";
 
 const CreateProperties = () => {
   let token = localStorage.getItem("token");
-
   const createSpecial = useSelector((state) => state.createProperty);
 
   const { loading } = createSpecial;
+
+  const { pubLoading } = useSelector((state)=> state.publishedProperty)
 
   const history = useHistory()
 
@@ -39,6 +41,7 @@ const CreateProperties = () => {
   const [cell, setCell] = useState('')
   const [village, setVillage] = useState('')
   const [plotTypeVisible, setPlotTypeVisible] = useState(false);
+
 
   const onStatusChange = (e) => {
     var em = e.target.value;
@@ -216,7 +219,7 @@ const CreateProperties = () => {
 
   const provincesList = Provinces();
 
-  const propertyRegister = (e) => {
+  const propertyRegister = async (e) => {
     e.preventDefault();
 
     if (status.value === "" || status.value === null) {
@@ -287,8 +290,9 @@ const CreateProperties = () => {
       for (const pair of formData.entries()) {
         console.log(`${pair[0]}, ${pair[1]}`);
       }
-
-      dispatch(createProperty(formData, token, history));
+      
+      dispatch(addPropertyToPublish(formData, history));
+      // dispatch(createProperty(formData, token, history));
     };
   }
   return (
@@ -398,7 +402,7 @@ const CreateProperties = () => {
                   onChange={(e) => onProvinceChange(e.target.value)}
                 >
                   <option >-- Select Province --</option>
-                  {provincesList && provincesList.map((province, index) => (
+                  {provincesList && provincesList?.map((province, index) => (
                     <option key={index} value={province}>
                       {province}
                     </option>
@@ -420,11 +424,13 @@ const CreateProperties = () => {
                 >
                   <option>-- Select District --</option>
                   {
-                    province && Districts(province).map((district, index) => (
+                    province ?( Districts(province)?.map((district, index) => (
                       <option key={index} value={district}>
                         {district}
                       </option>
+                     
                     ))
+                    ):( <option>-- Select District --</option>)
                   }
                 </select>
                 <span class="text-danger">{district.toString().message}</span>
@@ -647,7 +653,7 @@ const CreateProperties = () => {
             <span class="text-danger">{photo6.message}</span>
           </div>
           <div class="form-group">
-            {loading ? (
+            {pubLoading ? (
               <button
                 class="btn btn-block  login-btn"
                 type="button"
