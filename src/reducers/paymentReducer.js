@@ -7,7 +7,10 @@ import {
     CASHOUT_SUCCESS,
     PUBLISH_PROPERTY_REQUEST,
     PUBLISH_PROPERTY_SUCCESS ,
-    PUBLISH_PROPERTY_FAIL
+    PUBLISH_PROPERTY_FAIL,
+    CHECK_PAYMENT_STATUS_REQUEST,
+    CHECK_PAYMENT_STATUS_SUCCESS,
+    CHECK_PAYMENT_STATUS_FAIL
 } from "../actions/types";
 
 export const cashinReducer = (state = {}, action) => {
@@ -48,6 +51,29 @@ export const publishedPropertyReducer = (state = { publishProperty : [] }, actio
             }
         case PUBLISH_PROPERTY_FAIL:
             return { pubLoading: false, error: action.payload }
+        default:
+            return state;
+    }
+}
+
+export const checkPaymentStatusReducer = (state = { paymentStatus:[] }, action) => {
+    switch (action.type) {
+        case CHECK_PAYMENT_STATUS_REQUEST:
+            return {
+                loading: true,
+                paymentStatus: []
+             };
+        case CHECK_PAYMENT_STATUS_SUCCESS:
+            console.log("action.payload", action.payload)
+            return { 
+                loading: false, 
+                paymentStatus: action.payload
+            }
+        case CHECK_PAYMENT_STATUS_FAIL:
+            return { 
+                loading: false, 
+                error: action.payload 
+            };
         default:
             return state;
     }
