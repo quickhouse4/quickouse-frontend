@@ -4,6 +4,8 @@ import { cashinRequest } from '../actions/paymentActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProperty } from '../actions/propertiesAction'
 import { useHistory } from "react-router-dom";
+import { paymentStatusAction } from '../actions/paymentActions'
+import { ToastContainer, toast } from "react-toastify";
 
 const PaymentScreen = () => {
     let token = localStorage.getItem("token");
@@ -33,33 +35,55 @@ const PaymentScreen = () => {
 
     }
 
-    const paymentHandler = (e) => {
+    const paymentHandler = async (e) => {
         e.preventDefault();
         if (!number.value) {
             setNumber({ message: "Type your number" });
         } else if (parseFloat(amount.value) !== 2000 && !amount.value) {
             setAmount({ message: "Amount should be equal to 1000 for one property" });
         } else {
-            const payload = {
-                number: number.value,
-                amount: parseFloat(amount.value),
-            };
-            dispatch(cashinRequest(payload, token)).then(() => {
-                // Payment successful, dispatch action to publish property
-                dispatch(createProperty(publishProperty, token, history));
-                // Redirect or show success message
-            }).catch((error) => {
-                // Handle payment error
-                console.log("err", error)
-            });
+            try {
+                const payload = {
+                    number: number.value,
+                    amount: parseFloat(amount.value),
+                };
+                const data = await dispatch(cashinRequest(payload, token));
 
+                const response = await dispatch(paymentStatusAction(data._id));
+
+                if (response.status === "successful") {
+
+                    setTimeout(() => {
+                        dispatch(createProperty(publishProperty, token, history));
+                    }, 4000);
+
+                    toast.success(response.message)
+                } else if (response.status === "failed") {
+                    toast.warn(response.message)
+                }
+            } catch (error) {
+                console.log("Error:", error);
+            }
         }
     };
+
 
     return (
         <>
             <Header setLabel={setLabel} />
             <div class="container" style={{ marginTop: "120px" }}>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Payment Options</h1>
@@ -100,17 +124,17 @@ const PaymentScreen = () => {
                                 </div>
                                 {
                                     loading ?
-                                    <button
-                                    class="btn login-btn btn-block fs-4"
-                                    name="submit"
-                                    onClick={paymentHandler}
-                                >Loading.....</button>
-                                :
-                                <button
-                                    class="btn login-btn btn-block fs-4"
-                                    name="submit"
-                                    onClick={paymentHandler}
-                                >Pay</button>
+                                        <button
+                                            class="btn login-btn btn-block fs-4"
+                                            name="submit"
+                                            onClick={paymentHandler}
+                                        >Loading.....</button>
+                                        :
+                                        <button
+                                            class="btn login-btn btn-block fs-4"
+                                            name="submit"
+                                            onClick={paymentHandler}
+                                        >Pay</button>
                                 }
                             </form>
                             <li>You will be prompted to enter your Mobile Money PIN to complete the payment.</li>
