@@ -1,8 +1,6 @@
 import React from 'react';
-// import HeaderDashboard from '../components/HeaderDashboard'
 import Footer from '../components/Footer';
 import Header from "../components/Header";
-
 import Sidebar from './Sidebar';
 import CreateProperties from '../components/CreateProperties'
 
