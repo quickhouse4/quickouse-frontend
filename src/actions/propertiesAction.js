@@ -102,6 +102,7 @@ export const createProperty = (payload, token, history) => async (dispatch) => {
   }
 };
 
+
 export const createSpecialProperty =
   (payload, token, history) => async (dispatch) => {
     try {
@@ -111,7 +112,7 @@ export const createSpecialProperty =
 
       const response = await axios.post(
         "https://quickhouse.herokuapp.com/api/specialProperty",
-        payload,
+        payload[0],
         {
           headers: {
             token: token,

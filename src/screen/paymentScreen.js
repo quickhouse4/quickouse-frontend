@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import { cashinRequest } from '../actions/paymentActions'
 import { useDispatch, useSelector } from 'react-redux'
-import { createProperty } from '../actions/propertiesAction'
+import { createProperty, createSpecialProperty } from '../actions/propertiesAction'
 import { useHistory } from "react-router-dom";
 import { paymentStatusAction } from '../actions/paymentActions'
 import { ToastContainer, toast } from "react-toastify";
@@ -55,6 +55,7 @@ const PaymentScreen = () => {
 
                     setTimeout(() => {
                         dispatch(createProperty(publishProperty, token, history));
+                        // await dispatch(createSpecialProperty(publishProperty, token, history));
                     }, 4000);
 
                     toast.success(response.message)
