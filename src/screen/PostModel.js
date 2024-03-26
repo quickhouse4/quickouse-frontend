@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./postModel.css";
 import { property, plotType } from '../Data/Rwanda';
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
+import { addPropertyToPublish } from "../actions/paymentActions";
 
 const PostModel = () => {
 
@@ -12,7 +13,9 @@ const PostModel = () => {
 
     const propertyCreate = useSelector((state) => state.createProperty);
 
+
     const { loading } = propertyCreate;
+    const { pubLoading } = useSelector((state)=> state.publishedProperty)
 
     const history = useHistory();
 
@@ -288,7 +291,8 @@ const PostModel = () => {
                 console.log(`${pair[0]}, ${pair[1]}`);
             }
 
-            dispatch(createProperty(formData, token, history));
+            dispatch(addPropertyToPublish(formData, history));
+            // dispatch(createProperty(formData, token, history));
         };
     }
     return (
