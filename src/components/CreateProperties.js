@@ -9,9 +9,6 @@ import { addPropertyToPublish } from "../actions/paymentActions";
 
 const CreateProperties = () => {
   let token = localStorage.getItem("token");
-  const createSpecial = useSelector((state) => state.createProperty);
-
-  const { loading } = createSpecial;
 
   const { pubLoading } = useSelector((state)=> state.publishedProperty)
 
