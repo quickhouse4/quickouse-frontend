@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { createSpecialProperty } from "../actions/propertiesAction";
 import { property, plotType } from '../Data/Rwanda'
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
-
+import { addPropertyToPublish } from "../actions/paymentActions";
 
 
 function CreateSpecialProperty() {
@@ -13,12 +13,11 @@ function CreateSpecialProperty() {
   const propertyCreate = useSelector((state) => state.createSpecialProperty);
 
   const { loading } = propertyCreate;
-
+  const { pubLoading } = useSelector((state)=> state.publishedProperty)
   let token = localStorage.getItem("token");
 
   const dispatch = useDispatch()
   const history = useHistory();
-
   const [status, setStatus] = useState({});
   const [type, setType] = useState({});
   const [title, setTitle] = useState({});
@@ -64,8 +63,14 @@ function CreateSpecialProperty() {
     var em = e.target.value;
     if (em != "") {
       setTitle({ value: em });
+      if (em === "plot") {
+        setPlotTypeVisible(true)
+      }
+      else {
+        setPlotTypeVisible(false)
+      }
     } else {
-      setTitle({ value: em, message: "Write Title" });
+      setTitle({ value: em, message: "Write your Title" });
     }
   };
 
@@ -279,12 +284,11 @@ function CreateSpecialProperty() {
       formData.append("photo4", photo4.value);
       formData.append("photo5", photo5.value);
       formData.append("photo6", photo6.value);
-
-      try {
-        await dispatch(createSpecialProperty(formData, token, history));
-      } catch (error) {
-        // console.log("error2", error);
+      for (const pair of formData.entries()) {
+        console.log(`${pair[0]}, ${pair[1]}`);
       }
+        dispatch(addPropertyToPublish(formData, history));
+        // await dispatch(createSpecialProperty(formData, token, history));
     }
 
   };
@@ -319,7 +323,28 @@ function CreateSpecialProperty() {
               </div>
             </div>
 
+            
+
             <div class="col-md-6">
+              <div class="form-group">
+                <label class="text-primary">Property Title</label>
+                <select
+                  class="form-control text-primary"
+                  id="sel1"
+                  onChange={onTitleChange}
+                >
+                  <option>Select Property Title</option>
+                  <option>house </option>
+                  <option>plot</option>
+                </select>
+                <span class="text-danger">{title.message}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            
+          <div class="col-md-6">
               <div class="form-group">
                 <label for="" class="text-primary">
                   Property Type
@@ -330,35 +355,27 @@ function CreateSpecialProperty() {
                   onChange={onTypeChange}
                 >
                   <option>Select Property Type</option>
-                  <option>Residential house </option>
+                  {title && title.value === 'plot' && plotTypeVisible ? (
+                    plotType.map((type, index) => (
+                      <option key={index} value={type}>
+                        {type}
+                      </option>
+                    ))) : (property.map((type1, index) => (
+                      <option key={index} value={type1}>
+                        {type1}
+                      </option>
+                    )))
+                  }
+                  {/* <option>Residential house </option>
                   <option>Apartment</option>
                   <option>Commercial house</option>
                   <option>Warehouse</option>
                   <option>Vacant plot</option>
-                  <option>Offices</option>
+                  <option>Offices</option> */}
                 </select>
                 <span class="text-danger">{type.message}</span>
               </div>
             </div>
-          </div>
-
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label class="text-primary">Property Title</label>
-                <select
-                  class="form-control text-primary"
-                  id="sel1"
-                  onChange={onTitleChange}
-                >
-                  <option>Select Property Title</option>
-                  <option>House </option>
-                  <option>Plot</option>
-                </select>
-                <span class="text-danger">{title.message}</span>
-              </div>
-            </div>
-
             <div class="col-md-6">
               <div class="form-group">
                 <label class="text-primary">Street</label>

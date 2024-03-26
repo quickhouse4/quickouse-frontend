@@ -2,7 +2,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createProperty } from "../actions/propertiesAction";
 import { useDispatch, useSelector } from "react-redux";
 import { property, plotType } from '../Data/Rwanda'
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
