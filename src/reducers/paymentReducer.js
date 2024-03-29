@@ -10,7 +10,19 @@ import {
     PUBLISH_PROPERTY_FAIL,
     CHECK_PAYMENT_STATUS_REQUEST,
     CHECK_PAYMENT_STATUS_SUCCESS,
-    CHECK_PAYMENT_STATUS_FAIL
+    CHECK_PAYMENT_STATUS_FAIL,
+    REVENUE_REQUEST,
+    REVENUE_SUCCESS,
+    REVENUE_FAIL,
+    GET_USER_PAYMENT_REQUEST,
+    GET_USER_PAYMENT_SUCCESS,
+    GET_USER_PAYMENT_FAIL,
+    EXPENSE_REQUEST,
+    EXPENSE_SUCCESS,
+    EXPENSE_FAIL,
+    GET_USER_REVENUE_SUCCESS,
+    GET_USER_REVENUE_REQUEST,
+    GET_USER_REVENUE_FAIL
 } from "../actions/types";
 
 export const cashinReducer = (state = {}, action) => {
@@ -74,6 +86,57 @@ export const checkPaymentStatusReducer = (state = { paymentStatus:[] }, action) 
                 loading: false, 
                 error: action.payload 
             };
+        default:
+            return state;
+    }
+}
+export const revenueReducer = (state = { revenue: [] }, action) => {
+    switch (action.type) {
+        case REVENUE_REQUEST:
+            return { loading: true, revenue: [] };
+        case REVENUE_SUCCESS:
+            return { loading: false, revenue: action.payload };
+        case REVENUE_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export const getUserPaymentReducer = (state = { userPayment: [] }, action) => {
+    switch (action.type) {
+        case GET_USER_PAYMENT_REQUEST:
+            return { loading: true, userPayment: [] };
+        case GET_USER_PAYMENT_SUCCESS:
+            return { loading: false, userPayment: action.payload };
+        case GET_USER_PAYMENT_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export const expenseReducer = (state = { expense: [] }, action) => {
+    switch (action.type) {
+        case EXPENSE_REQUEST:
+            return { loading: true, expense: [] };
+        case EXPENSE_SUCCESS:
+            return { loading: false, expense: action.payload };
+        case EXPENSE_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export const getUserRevenueReducer = (state = { userRevenue: [] }, action) => {
+    switch (action.type) {
+        case GET_USER_REVENUE_REQUEST:
+            return { loading: true, userRevenue: [] };
+        case GET_USER_REVENUE_SUCCESS:
+            return { loading: false, userRevenue: action.payload };
+        case GET_USER_REVENUE_FAIL:
+            return { loading: false, error: action.payload };
         default:
             return state;
     }

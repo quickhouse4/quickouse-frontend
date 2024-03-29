@@ -28,6 +28,7 @@ import { getAllUser } from "../actions/userAction";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
 import { MdPostAdd } from "react-icons/md";
+import { revenueAction, userAmountAction, expenseAction, userRevenueAction } from "../actions/paymentAction";
 
 
 const Statistics = () => {
@@ -57,6 +58,10 @@ const Statistics = () => {
   const { totalLikeAnalytics } = useSelector((state) => state.getTotalLikeAnalytics)
   const myUser = useSelector((state) => state.allUser)
   const { allUsers } = myUser
+  const { revenue } = useSelector((state) => state.revenueAmount)
+  const { userPayment } = useSelector((state) => state.userPayment)
+  const { expense } = useSelector((state) => state.expenseAmount)
+  const { userRevenue } = useSelector((state) => state.userRevenue)
   const [pageCount, setpageCount] = useState(1);
   const pageLimit = 25
 
@@ -80,6 +85,10 @@ const Statistics = () => {
     dispatch(getSalePosts(token))
     dispatch(getTotalPosts(token))
     dispatch(getTotalViews(token))
+    dispatch(revenueAction(token))
+    dispatch(userAmountAction(token))
+    dispatch(expenseAction(token))
+    dispatch(userRevenueAction(token))
   }, [])
 
 
@@ -97,7 +106,7 @@ const Statistics = () => {
 
   const handleTotalYear = yrs => {
     setYrDate(yrs);
-  
+
   }
 
   useEffect(() => {
@@ -181,7 +190,7 @@ const Statistics = () => {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-
+  
   return (
     <>
       <div className="col-xl-12 col-md-12 statistics" style={{ marginTop: "120px" }}>
@@ -220,14 +229,27 @@ const Statistics = () => {
                     <GiReceiveMoney className="fs-1 mr-2" style={{ color: "#8884d8" }} />
                     <div className="text-end">
                       <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Revenue</h4>
-                      <span className="fs-4 text-style">{userToken.role === "admin" ? '$793' : ' $0'}</span>
+                      <span className="fs-4 text-style">Rwf{" "}{userToken.role === "admin" ? `${revenue[0]?.totalAmount ? revenue[0]?.totalAmount : 0}` : `${userRevenue ? userRevenue : 0}`}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-4 col-sm-6 mb-3" >
+              <div className="mt-3">
+                <div className="rounded-2 p-3 totalHouse" >
+                  <div className="d-flex justify-content-around align-items-center flex-wrap">
+                    <GiPayMoney className="fs-1 mr-2" style={{ color: "#8884d8" }} />
+                    <div className="text-end">
+                      <h4 className="fs-5 mt-3" style={{ color: "#8884d8" }}>Expense</h4>
+                      <span className="fs-4 text-style">Rwf{" "}{userToken.role === "admin" ? `${expense ? expense : 0}` : `${userPayment[0]?.totalAmount ? userPayment[0]?.totalAmount : 0}`}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {userToken.role === "admin" && <>
-              <div className="col-md-4 col-sm-6 mb-3" >
+              {/* <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
                     <div className="d-flex justify-content-around align-items-center flex-wrap">
@@ -239,7 +261,7 @@ const Statistics = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col-md-4 col-sm-6 mb-3" >
                 <div className="mt-3">
                   <div className="rounded-2 p-3 totalHouse" >
