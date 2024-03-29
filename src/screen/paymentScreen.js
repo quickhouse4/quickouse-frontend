@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
-import { cashinRequest } from '../actions/paymentActions'
+import { cashinRequest } from '../actions/paymentAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { createProperty, createSpecialProperty } from '../actions/propertiesAction'
 import { useHistory } from "react-router-dom";
-import { paymentStatusAction } from '../actions/paymentActions'
+import { paymentStatusAction } from '../actions/paymentAction'
 import { ToastContainer, toast } from "react-toastify";
 
 const PaymentScreen = () => {

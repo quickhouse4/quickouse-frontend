@@ -27,7 +27,6 @@ import AppMessageDetails from "./screen/AppMessageDetails";
 import PaymentScreen from "./screen/paymentScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { visitorsTrack } from "./actions/AnalyticsAction"
-import SuccessScreen from "./screen/SuccessScreen";
 
 function App() {
   const dispatch = useDispatch();
@@ -114,9 +113,6 @@ function App() {
       </Route>
       <Route path="/payment">
         <PaymentScreen />
-      </Route>
-      <Route path="/success">
-        <SuccessScreen />
       </Route>
     </Router>
   );

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./postModel.css";
 import { property, plotType } from '../Data/Rwanda';
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
-import { addPropertyToPublish } from "../actions/paymentActions";
+import { addPropertyToPublish } from "../actions/paymentAction";
 
 const PostModel = () => {
 
