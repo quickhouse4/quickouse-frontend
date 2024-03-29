@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createSpecialProperty } from "../actions/propertiesAction";
 import { property, plotType } from '../Data/Rwanda'
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
-import { addPropertyToPublish } from "../actions/paymentActions";
+import { addPropertyToPublish } from "../actions/paymentAction";
 
 
 function CreateSpecialProperty() {

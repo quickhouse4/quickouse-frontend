@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { property, plotType } from '../Data/Rwanda'
 import { Provinces, Districts, Sectors, Cells, Villages } from 'rwanda';
-import { addPropertyToPublish } from "../actions/paymentActions";
+import { addPropertyToPublish } from "../actions/paymentAction";
 
 const CreateProperties = () => {
   let token = localStorage.getItem("token");
