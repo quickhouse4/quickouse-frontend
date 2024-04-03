@@ -22,7 +22,10 @@ import {
     EXPENSE_FAIL,
     GET_USER_REVENUE_SUCCESS,
     GET_USER_REVENUE_REQUEST,
-    GET_USER_REVENUE_FAIL
+    GET_USER_REVENUE_FAIL,
+    GET_TRANSACTION_REQUEST,
+    GET_TRANSACTION_FAIL,
+    GET_TRANSACTION_SUCCESS
 } from "../actions/types";
 
 export const cashinReducer = (state = {}, action) => {
@@ -136,6 +139,19 @@ export const getUserRevenueReducer = (state = { userRevenue: [] }, action) => {
         case GET_USER_REVENUE_SUCCESS:
             return { loading: false, userRevenue: action.payload };
         case GET_USER_REVENUE_FAIL:
+            return { loading: false, error: action.payload };
+        default:
+            return state;
+    }
+}
+
+export const getTransactionsReducer = (state = { transactions: [] }, action) => {
+    switch (action.type) {
+        case GET_TRANSACTION_REQUEST:
+            return { loading: true, transactions: [] };
+        case GET_TRANSACTION_SUCCESS:
+            return { loading: false, transactions: action.payload };
+        case GET_TRANSACTION_FAIL:
             return { loading: false, error: action.payload };
         default:
             return state;
