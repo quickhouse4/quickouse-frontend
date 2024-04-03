@@ -7,8 +7,7 @@ import { BiExit } from "react-icons/bi";
 import { FcHome } from "react-icons/fc";
 import { FaUsers } from "react-icons/fa"
 import { GrTransaction } from "react-icons/gr";
-
-
+import { GiPayMoney } from "react-icons/gi";
 
 const Sidebar = () => {
 
@@ -36,8 +35,10 @@ const Sidebar = () => {
       setActiveLink("createSpecialProperty");
     } else if (pathname === "/allUser") {
       setActiveLink("allUser");
-    }else if(pathname === "/transactions"){
+    } else if (pathname === "/transactions") {
       setActiveLink("transactions")
+    }else if (pathname === "/expenses") {
+      setActiveLink("expenses")
     }else if (pathname === "/myDeals") {
       setActiveLink("myDeals")
     } else if (pathname === "/aboutUs") {
@@ -88,6 +89,9 @@ const Sidebar = () => {
                     <GrTransaction style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Transactions</span>
 
                   </Link>
+                  <Link to="/expenses" class={`nav-item nav-link align-middle px-0 ${activeLink === "expenses" ? "active-link1" : ""}`}>
+                    <GiPayMoney style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Expenses</span>
+                  </Link>
                 </>
               }
 
@@ -97,11 +101,11 @@ const Sidebar = () => {
 
               </Link>
 
-              <Link to="/dashboard" class="nav-item nav-link align-middle px-0">
+              {/* <Link to="/dashboard" class="nav-item nav-link align-middle px-0">
 
                 <MdToc style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">My Listing</span>
 
-              </Link>
+              </Link> */}
               <Link to="/messages" class="nav-item nav-link align-middle px-0">
 
                 <MdOutlineMessage style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Messages</span>

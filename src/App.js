@@ -28,6 +28,7 @@ import PaymentScreen from "./screen/paymentScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { visitorsTrack } from "./actions/AnalyticsAction"
 import Transactions from "./screen/Transactions";
+import Expenses from "./screen/Expenses";
 
 function App() {
   const dispatch = useDispatch();
@@ -117,6 +118,9 @@ function App() {
       </Route>
       <Route path="/transactions">
         <Transactions />
+      </Route>
+      <Route path="/expenses">
+        <Expenses />
       </Route>
     </Router>
   );
