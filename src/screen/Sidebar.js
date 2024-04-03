@@ -6,6 +6,8 @@ import { AiFillUnlock } from "react-icons/ai";
 import { BiExit } from "react-icons/bi";
 import { FcHome } from "react-icons/fc";
 import { FaUsers } from "react-icons/fa"
+import { GrTransaction } from "react-icons/gr";
+
 
 
 const Sidebar = () => {
@@ -34,7 +36,9 @@ const Sidebar = () => {
       setActiveLink("createSpecialProperty");
     } else if (pathname === "/allUser") {
       setActiveLink("allUser");
-    } else if (pathname === "/myDeals") {
+    }else if(pathname === "/transactions"){
+      setActiveLink("transactions")
+    }else if (pathname === "/myDeals") {
       setActiveLink("myDeals")
     } else if (pathname === "/aboutUs") {
       setActiveLink("AboutUs")
@@ -79,7 +83,11 @@ const Sidebar = () => {
                     <FaUsers style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">All Users</span>
 
                   </Link>
+                  <Link to="/transactions" class={`nav-item nav-link align-middle px-0 ${activeLink === "transactions" ? "active-link1" : ""}`}>
 
+                    <GrTransaction style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Transactions</span>
+
+                  </Link>
                 </>
               }
 
