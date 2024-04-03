@@ -83,7 +83,7 @@ import {
   requestFilterReducer, 
   requestFilterSaleReducer 
 } from "./reducers/ussdReducer";
-import { cashinReducer, cashoutReducer, checkPaymentStatusReducer, expenseReducer, getUserPaymentReducer, getUserRevenueReducer, publishedPropertyReducer, revenueReducer } from "./reducers/paymentReducer";
+import { cashinReducer, cashoutReducer, checkPaymentStatusReducer, expenseReducer, getTransactionsReducer, getUserPaymentReducer, getUserRevenueReducer, publishedPropertyReducer, revenueReducer } from "./reducers/paymentReducer";
 
 
 const reducer = combineReducers({
@@ -169,7 +169,8 @@ const reducer = combineReducers({
   revenueAmount: revenueReducer,
   userPayment: getUserPaymentReducer,
   expenseAmount: expenseReducer,
-  userRevenue: getUserRevenueReducer
+  userRevenue: getUserRevenueReducer,
+  getTransactions:getTransactionsReducer
 });
 
 const initialState = { activeCategory: "" };
