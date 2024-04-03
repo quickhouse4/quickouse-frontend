@@ -22,7 +22,10 @@ import {
     GET_USER_REVENUE_FAIL,
     GET_TRANSACTION_REQUEST,
     GET_TRANSACTION_FAIL,
-    GET_TRANSACTION_SUCCESS
+    GET_TRANSACTION_SUCCESS,
+    GET_USER_EXPENSES_REQUEST,
+    GET_USER_EXPENSES_SUCCESS,
+    GET_USER_EXPENSES_FAIL,
 } from "./types";
 import axios from "axios";
 
@@ -62,7 +65,7 @@ export const cashoutRequest = (payload, token) => async (dispatch) => {
                 token: token,
             }
         });
-        
+
         dispatch({
             type: CASHOUT_SUCCESS,
             payload: response.data.data
@@ -86,7 +89,7 @@ export const addPropertyToPublish = (propertyData, history) => {
 };
 
 export const paymentStatusAction = (id) => async (dispatch) => {
-    
+
     try {
         dispatch({
             type: CHECK_PAYMENT_STATUS_REQUEST,
@@ -119,7 +122,7 @@ export const revenueAction = (token) => async (dispatch) => {
             type: REVENUE_SUCCESS,
             payload: response.data.data
         });
-        
+
     } catch (error) {
         dispatch({
             type: CASHIN_FAIL,
@@ -138,11 +141,12 @@ export const userAmountAction = (token) => async (dispatch) => {
                 token: token,
             }
         });
+        console.log("act",response.data.data);
         dispatch({
             type: GET_USER_PAYMENT_SUCCESS,
             payload: response.data.data
         });
-        
+
     } catch (error) {
         dispatch({
             type: GET_USER_PAYMENT_FAIL,
@@ -161,7 +165,7 @@ export const expenseAction = (token) => async (dispatch) => {
                 token: token,
             }
         });
-       
+
         dispatch({
             type: EXPENSE_SUCCESS,
             payload: response.data.data
@@ -179,7 +183,7 @@ export const userRevenueAction = (token) => async (dispatch) => {
         dispatch({
             type: GET_USER_REVENUE_REQUEST,
         });
-       const response = await axios.get('https://quickhouse.herokuapp.com/api/userRevenue', {
+        const response = await axios.get('https://quickhouse.herokuapp.com/api/userRevenue', {
             headers: {
                 token: token,
             }
@@ -190,7 +194,7 @@ export const userRevenueAction = (token) => async (dispatch) => {
             payload: response.data.data
         });
     } catch (error) {
-       dispatch({
+        dispatch({
             type: GET_USER_REVENUE_FAIL,
             payload: error,
         });
@@ -216,5 +220,28 @@ export const getTransactionAction = (token) => async (dispatch) => {
             type: GET_TRANSACTION_FAIL,
             payload: error,
         });
+    }
+}
+
+export const getUserExpense = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_USER_EXPENSES_REQUEST,
+        });
+        const response = await axios.get('https://quickhouse.herokuapp.com/api/eachUserExpenses', {
+            headers: {
+                token: token,
+            }
+        })
+
+        dispatch({
+            type: GET_USER_EXPENSES_SUCCESS,
+            payload: response.data.data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_USER_EXPENSES_FAIL,
+            payload: error,
+        })
     }
 }

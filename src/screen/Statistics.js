@@ -190,7 +190,7 @@ const Statistics = () => {
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  
+  console.log("user",userPayment)
   return (
     <>
       <div className="col-xl-12 col-md-12 statistics" style={{ marginTop: "120px" }}>
