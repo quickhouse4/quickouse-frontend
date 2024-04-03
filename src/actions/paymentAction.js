@@ -19,7 +19,10 @@ import {
     EXPENSE_FAIL,
     GET_USER_REVENUE_SUCCESS,
     GET_USER_REVENUE_REQUEST,
-    GET_USER_REVENUE_FAIL
+    GET_USER_REVENUE_FAIL,
+    GET_TRANSACTION_REQUEST,
+    GET_TRANSACTION_FAIL,
+    GET_TRANSACTION_SUCCESS
 } from "./types";
 import axios from "axios";
 
@@ -194,3 +197,24 @@ export const userRevenueAction = (token) => async (dispatch) => {
     }
 }
 
+export const getTransactionAction = (token) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_TRANSACTION_REQUEST,
+        });
+        const response = await axios.get('https://quickhouse.herokuapp.com/api/transactions', {
+            headers: {
+                token: token,
+            }
+        });
+        dispatch({
+            type: GET_TRANSACTION_SUCCESS,
+            payload: response.data.data
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_TRANSACTION_FAIL,
+            payload: error,
+        });
+    }
+}
