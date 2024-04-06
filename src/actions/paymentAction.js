@@ -30,16 +30,18 @@ import {
 import axios from "axios";
 
 export const cashinRequest = (payload, token) => async (dispatch) => {
+    
     try {
         dispatch({
             type: CASHIN_REQUEST,
         });
-        const response = await axios.post('http://localhost:5000/api/cashin', payload, {
+        const response = await axios.post('https://quickhouse.herokuapp.com/api/cashin', payload, {
             headers: {
                 token: token,
             }
         });
         const data = response.data.data;
+        console.log("kbs", response.data);
         dispatch({
             type: CASHIN_SUCCESS,
             payload: response.data.data
@@ -60,7 +62,7 @@ export const cashoutRequest = (payload, token) => async (dispatch) => {
         dispatch({
             type: CASHOUT_REQUEST,
         });
-        const response = await axios.post('http://localhost:5000/api/cashout', payload, {
+        const response = await axios.post('https://quickhouse.herokuapp.com/api/cashout', payload, {
             headers: {
                 token: token,
             }
@@ -89,12 +91,13 @@ export const addPropertyToPublish = (propertyData, history) => {
 };
 
 export const paymentStatusAction = (id) => async (dispatch) => {
-
+       
     try {
         dispatch({
             type: CHECK_PAYMENT_STATUS_REQUEST,
         });
-        const response = await axios.get(`http://localhost:5000/api/checkpaymentstatus/${id}`);
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/checkpaymentstatus/${id}`);
+
         dispatch({
             type: CHECK_PAYMENT_STATUS_SUCCESS,
             payload: response.data
@@ -141,7 +144,6 @@ export const userAmountAction = (token) => async (dispatch) => {
                 token: token,
             }
         });
-        console.log("act",response.data.data);
         dispatch({
             type: GET_USER_PAYMENT_SUCCESS,
             payload: response.data.data
