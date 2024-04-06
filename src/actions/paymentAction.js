@@ -30,6 +30,7 @@ import {
 import axios from "axios";
 
 export const cashinRequest = (payload, token) => async (dispatch) => {
+    
     try {
         dispatch({
             type: CASHIN_REQUEST,
@@ -90,7 +91,7 @@ export const addPropertyToPublish = (propertyData, history) => {
 };
 
 export const paymentStatusAction = (id) => async (dispatch) => {
-
+       
     try {
         dispatch({
             type: CHECK_PAYMENT_STATUS_REQUEST,
@@ -142,7 +143,6 @@ export const userAmountAction = (token) => async (dispatch) => {
                 token: token,
             }
         });
-        console.log("act",response.data.data);
         dispatch({
             type: GET_USER_PAYMENT_SUCCESS,
             payload: response.data.data
