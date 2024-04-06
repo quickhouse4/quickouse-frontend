@@ -48,9 +48,9 @@ const PaymentScreen = () => {
                     amount: parseFloat(amount.value),
                 };
                 const data = await dispatch(cashinRequest(payload, token));
-
-                const response = await dispatch(paymentStatusAction(data._id));
-
+                console.log("data", data._id)
+                const response = await dispatch(paymentStatusAction(data?._id));
+                console.log("res", response)
                 if (response.status === "successful") {
 
                     setTimeout(() => {
