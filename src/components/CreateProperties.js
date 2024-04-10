@@ -183,8 +183,6 @@ const CreateProperties = () => {
     };
   }
 
-  console.log("title", title);
-
   return (
     <>
       <div class="col-md-10 col-xl-10" style={{ marginTop: "120px" }} >
