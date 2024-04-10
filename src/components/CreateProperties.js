@@ -10,27 +10,27 @@ import { addPropertyToPublish } from "../actions/paymentAction";
 const CreateProperties = () => {
   let token = localStorage.getItem("token");
 
-  const { pubLoading } = useSelector((state)=> state.publishedProperty)
+  const { pubLoading } = useSelector((state) => state.publishedProperty)
 
   const history = useHistory()
 
   const dispatch = useDispatch();
-  const [status, setStatus] = useState({});
-  const [type, setType] = useState({});
-  const [title, setTitle] = useState({});
-  const [street, setStreet] = useState({});
-  const [currency, setCurrency] = useState({});
-  const [price, setPrice] = useState({});
-  const [neighbour, setNeighbour] = useState({});
-  const [negotiable, setNegotiable] = useState({});
-  const [descripton, setDescription] = useState({});
-  const [mainPhoto, SetMainPhoto] = useState({});
-  const [photo1, setPhoto1] = useState({});
-  const [photo2, setPhoto2] = useState({});
-  const [photo3, setPhoto3] = useState({});
-  const [photo4, setPhoto4] = useState({});
-  const [photo5, setPhoto5] = useState({});
-  const [photo6, setPhoto6] = useState({});
+  const [status, setStatus] = useState("");
+  const [type, setType] = useState("");
+  const [title, setTitle] = useState("");
+  const [street, setStreet] = useState("");
+  const [currency, setCurrency] = useState("");
+  const [price, setPrice] = useState("");
+  const [neighbour, setNeighbour] = useState("");
+  const [negotiable, setNegotiable] = useState("");
+  const [descripton, setDescription] = useState("");
+  const [mainPhoto, SetMainPhoto] = useState("");
+  const [photo1, setPhoto1] = useState("");
+  const [photo2, setPhoto2] = useState("");
+  const [photo3, setPhoto3] = useState("");
+  const [photo4, setPhoto4] = useState("");
+  const [photo5, setPhoto5] = useState("");
+  const [photo6, setPhoto6] = useState("");
   const [province, setProvince] = useState('')
   const [district, setDistrict] = useState('')
   const [sector, setSector] = useState('')
@@ -38,149 +38,38 @@ const CreateProperties = () => {
   const [village, setVillage] = useState('')
   const [plotTypeVisible, setPlotTypeVisible] = useState(false);
 
-
-  const onStatusChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setStatus({ value: em });
-    } else {
-      setStatus({ value: em, message: "Select status" });
-    }
-  };
-
-  const onTypeChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setType({ value: em });
-    } else {
-      setType({ value: em, message: "Select Type" });
-    }
-  };
-
   const onTitleChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setTitle({ value: em });
-      if (em === "plot") {
-        setPlotTypeVisible(true)
-      }
-      else {
-        setPlotTypeVisible(false)
-      }
+    const value = e.target.value;
+    setTitle(value);
+    if (value === "plot") {
+      setPlotTypeVisible(true);
     } else {
-      setTitle({ value: em, message: "Write your Title" });
+      setPlotTypeVisible(false);
     }
   };
 
-  const onStreetChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setStreet({ value: em });
-    } else {
-      setStreet({ value: em, message: "Write Street" });
-    }
-  };
 
-  const onCurrencyChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setCurrency({ value: em });
-    } else {
-      setCurrency({ value: em, message: "Set currency" });
-    }
-  };
-
-  const onPriceChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setPrice({ value: em });
-    } else {
-      setPrice({ value: em, message: "Set price" });
-    }
-  };
-
-  const onNeighbourChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setNeighbour({ value: em });
-    } else {
-      setNeighbour({ value: em, message: "Set neighbour hood" });
-    }
-  };
-
-  const onNeogotiableChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setNegotiable({ value: em });
-    } else {
-      setNegotiable({ value: em, message: "Select neighbourhood" });
-    }
-  };
-
-  const onDescriptionChange = (e) => {
-    var em = e.target.value;
-    if (em != "") {
-      setDescription({ value: em });
-    } else {
-      setDescription({ value: em, message: "Select Description" });
-    }
-  };
   const onFileChange = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      SetMainPhoto({ value: em });
-    } else {
-      SetMainPhoto({ value: em, message: "Upload main photo" });
-    }
+    SetMainPhoto(e.target.files[0]);
   };
 
   const onFile1Change = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      setPhoto1({ value: em });
-    } else {
-      setPhoto1({ value: em, message: "Upload photo one" });
-    }
+    setPhoto1(e.target.files[0]);
   };
   const onFile2Change = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      setPhoto2({ value: em });
-    } else {
-      setPhoto2({ value: em, message: "Upload file two" });
-    }
+    setPhoto2(e.target.files[0]);
   };
   const onFile3Change = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      setPhoto3({ value: em });
-    } else {
-      setPhoto3({ value: em, message: "Upload file three" });
-    }
+    setPhoto3(e.target.files[0]);
   };
   const onFile4Change = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      setPhoto4({ value: em });
-    } else {
-      setPhoto4({ value: em, message: "Upload file four" });
-    }
+    setPhoto4(e.target.files[0]);
   };
   const onFile5Change = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      setPhoto5({ value: em });
-    } else {
-      setPhoto5({ value: em, message: "Upload file five" });
-    }
+    setPhoto5(e.target.files[0]);
   };
   const onFile6Change = (e) => {
-    var em = e.target.files[0];
-    if (em != "") {
-      setPhoto6({ value: em });
-    } else {
-      setPhoto6({ value: em, message: "Upload file six" });
-    }
+    setPhoto6(e.target.files[0]);
   };
 
   const onProvinceChange = (selectedProvince) => {
@@ -212,21 +101,23 @@ const CreateProperties = () => {
   const onVillageChange = (selectedVillage) => {
     setVillage(selectedVillage);
   };
-
+  const onNegotiableChange = (e) => {
+    setNegotiable(e.target.value === "true");
+  };
   const provincesList = Provinces();
 
   const propertyRegister = async (e) => {
     e.preventDefault();
 
-    if (status.value === "" || status.value === null) {
+    if (status === "" || status === null) {
       setStatus({ message: "Select status" });
-    } else if (type.value === "" || type.value === null) {
+    } else if (type === "" || type === null) {
       setType({ message: "Select type" })
-    } else if (title.value === "" || title.value === null) {
-      setTitle({ message: "write your title" })
-    } else if (descripton.value === "" || descripton.value === null) {
+    } else if (title === "" || title === null) {
+      setTitle({ message: "select title" })
+    } else if (descripton === "" || descripton === null) {
       setDescription({ message: "write your descripton" })
-    } else if (street.value === "" || street.value === null) {
+    } else if (street === "" || street === null) {
       setStreet({ message: "write your street" })
     } else if (province === "" || province === null) {
       setProvince({ message: "select your province" })
@@ -238,59 +129,62 @@ const CreateProperties = () => {
       setCell({ message: "select your cell" })
     } else if (village === "" || village === null) {
       setVillage({ message: "select your village" })
-    } else if (neighbour.value === "" || neighbour.value === null) {
+    } else if (neighbour === "" || neighbour === null) {
       setNeighbour({ message: "set neighbour hood" })
-    } else if (price.value === "" || price.value === null) {
+    } else if (price === "" || price === null) {
       setPrice({ message: "set price" })
-    } else if (currency.value === "" || currency.value === null) {
+    } else if (currency === "" || currency === null) {
       setCurrency({ message: "select currency" })
-    } else if (negotiable.value === "" || negotiable.value === null) {
+    } else if (negotiable === "" || negotiable === null) {
       setNegotiable({ message: "select negotiable" })
-    } else if (mainPhoto.value === "" || mainPhoto.value === null) {
+    } else if (mainPhoto === "" || mainPhoto === null) {
       SetMainPhoto({ message: "Upload main photo" })
-    } else if (photo1.value === "" || photo1.value === null) {
+    } else if (photo1 === "" || photo1 === null) {
       setPhoto1({ message: "Upload photo one" })
-    } else if (photo2.value === "" || photo2.value === null) {
+    } else if (photo2 === "" || photo2 === null) {
       setPhoto2({ message: "Upload photo two" })
-    } else if (photo3.value === "" || photo3.value === null) {
+    } else if (photo3 === "" || photo3 === null) {
       setPhoto3({ message: "Upload photo three" })
-    } else if (photo4.value === "" || photo4.value === null) {
+    } else if (photo4 === "" || photo4 === null) {
       setPhoto4({ message: "Upload photo four" })
-    } else if (photo5.value === "" || photo5.value === null) {
+    } else if (photo5 === "" || photo5 === null) {
       setPhoto5({ message: "Upload photo five" })
-    } else if (photo6.value === "" || photo6.value === null) {
+    } else if (photo6 === "" || photo6 === null) {
       setPhoto6({ message: "Upload photo six" })
     } else {
       const formData = new FormData();
-      formData.append("businessStatus", status.value);
-      formData.append("type", type.value);
-      formData.append("propertyName", title.value);
-      formData.append("description", descripton.value);
-      formData.append("street", street.value);
+      formData.append("businessStatus", status);
+      formData.append("type", type);
+      formData.append("propertyName", title);
+      formData.append("description", descripton);
+      formData.append("street", street);
       formData.append("city", province);
       formData.append("district", district);
       formData.append("sector", sector);
       formData.append("cell", cell);
       formData.append("village", village);
-      formData.append("neighbourhood", neighbour.value);
-      formData.append("price", price.value);
-      formData.append("currency", currency.value);
-      formData.append("negotiable", negotiable.value);
-      formData.append("mainPhoto", mainPhoto.value);
-      formData.append("photo1", photo1.value);
-      formData.append("photo2", photo2.value);
-      formData.append("photo3", photo3.value);
-      formData.append("photo4", photo4.value);
-      formData.append("photo5", photo5.value);
-      formData.append("photo6", photo6.value);
+      formData.append("neighbourhood", neighbour);
+      formData.append("price", price);
+      formData.append("currency", currency);
+      formData.append("negotiable", negotiable);
+      formData.append("mainPhoto", mainPhoto);
+      formData.append("photo1", photo1);
+      formData.append("photo2", photo2);
+      formData.append("photo3", photo3);
+      formData.append("photo4", photo4);
+      formData.append("photo5", photo5);
+      formData.append("photo6", photo6);
       for (const pair of formData.entries()) {
         console.log(`${pair[0]}, ${pair[1]}`);
       }
-      
+
       dispatch(addPropertyToPublish(formData, history));
       // dispatch(createProperty(formData, token, history));
     };
   }
+
+  console.log("title", title);
+
   return (
     <>
       <div class="col-md-10 col-xl-10" style={{ marginTop: "120px" }} >
@@ -307,7 +201,8 @@ const CreateProperties = () => {
                 <select
                   class="form-control"
                   id="sel1"
-                  onChange={onStatusChange}
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
                 >
                   <option>Select bussiness status</option>
 
@@ -344,11 +239,12 @@ const CreateProperties = () => {
                 <select
                   class="form-control "
                   id="sel1"
-                  onChange={onTypeChange}
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
                 >
                   <option>Select Propery type</option>
 
-                  {title && title.value === 'plot' && plotTypeVisible ? (
+                  {title && title === 'plot' && plotTypeVisible ? (
                     plotType.map((type, index) => (
                       <option key={index} value={type}>
                         {type}
@@ -359,12 +255,6 @@ const CreateProperties = () => {
                       </option>
                     )))
                   }
-                  {/* <option>residential house </option>
-                  <option>apartment</option>
-                  <option>commercial house</option>
-                  <option>warehouse</option>
-                  <option>vacant plot</option>
-                  <option>offices</option> */}
                 </select>
                 <span class="text-danger">{type.message}</span>
               </div>
@@ -378,9 +268,12 @@ const CreateProperties = () => {
                   class="form-control"
                   id="usr"
                   name="street"
-                  onChange={onStreetChange}
+                  value={typeof street === 'object' ? '' : street}
+                  onChange={(e) => setStreet(e.target.value)}
                 />
-                <span class="text-danger">{street.message}</span>
+                {street && typeof street === 'object' && street.message && (
+                  <span class="text-danger">{street.message}</span>
+                )}
               </div>
             </div>
           </div>
@@ -407,6 +300,7 @@ const CreateProperties = () => {
                 <span class="text-danger">{province.toString().message}</span>
               </div>
             </div>
+
             <div class="col-md-6">
               <div class="form-group">
                 <label for="" class="">
@@ -420,13 +314,13 @@ const CreateProperties = () => {
                 >
                   <option>-- Select District --</option>
                   {
-                    province ?( Districts(province)?.map((district, index) => (
+                    province && (Districts(province)?.map((district, index) => (
                       <option key={index} value={district}>
                         {district}
                       </option>
-                     
+
                     ))
-                    ):( <option>-- Select District --</option>)
+                    )
                   }
                 </select>
                 <span class="text-danger">{district.toString().message}</span>
@@ -447,7 +341,7 @@ const CreateProperties = () => {
                   onChange={(e) => onSectorChange(e.target.value)}
                 >
                   <option>-- Select Sector --</option>
-                  {district && Sectors(province, district).map((sector, index) => (
+                  {province && district && Sectors(province, district).map((sector, index) => (
                     <option key={index} value={sector}>
                       {sector}
                     </option>
@@ -456,6 +350,7 @@ const CreateProperties = () => {
                 <span class="text-danger">{sector.toString().message}</span>
               </div>
             </div>
+
             <div class="col-md-6">
               <div class="form-group">
                 <label htmlFor="sectorSelect">
@@ -469,7 +364,7 @@ const CreateProperties = () => {
                 >
                   <option>-- Select Cell --</option>
                   {
-                    sector && Cells(province, district, sector).map((cell, index) => (
+                    province && district && sector && Cells(province, district, sector).map((cell, index) => (
                       <option key={index} value={cell}>
                         {cell}
                       </option>
@@ -493,25 +388,30 @@ const CreateProperties = () => {
                   onChange={(e) => onVillageChange(e.target.value)}
                 >
                   <option>-- Select Village --</option>
-                  {cell && Villages(province, district, sector, cell).map((village, index) => (
-                    <option key={index} value={village}>
-                      {village}
-                    </option>
-                  ))}
+                  {
+                    province && district && sector && cell && Villages(province, district, sector, cell).map((village, index) => (
+                      <option key={index} value={village}>
+                        {village}
+                      </option>
+                    ))
+                  }
                 </select>
                 <span class="text-danger">{village.toString().message}</span>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="sel1" class="">Currency</label>
+                <label htmlFor="se" class="">
+                  Currency
+                </label>
                 <select
-                  class="form-control "
-                  id="usr"
-                  name="price"
-                  onChange={onCurrencyChange}
+                  class="form-control"
+                  id="sel1"
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value)}
                 >
                   <option>Select Currency</option>
+
                   <option>rwf </option>
                   <option>usd</option>
                 </select>
@@ -528,7 +428,8 @@ const CreateProperties = () => {
                   class="form-control"
                   id="usr"
                   name="price"
-                  onChange={onPriceChange}
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                 />
                 <span class="text-danger">{price.message}</span>
               </div>
@@ -542,8 +443,9 @@ const CreateProperties = () => {
                   type="text"
                   class="form-control"
                   id="sel1"
-                  name="neighbourhood"
-                  onChange={onNeighbourChange}
+                  name="neighbour"
+                  value={typeof neighbour === 'object' ? '' : neighbour}
+                  onChange={(e) => setNeighbour(e.target.value)}
                 />
                 <span class="text-danger">{neighbour.message}</span>
               </div>
@@ -556,9 +458,10 @@ const CreateProperties = () => {
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="negetition"
+                    name="negotiation"
                     value="true"
-                    onChange={onNeogotiableChange}
+                    checked={negotiable === true}
+                    onChange={onNegotiableChange}
                   />
                   <label class="form-check-label" for="inlineRadio1">
                     Yes
@@ -568,9 +471,10 @@ const CreateProperties = () => {
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="negetition"
+                    name="negotiation"
                     value="false"
-                    onChange={onNeogotiableChange}
+                    checked={negotiable === false}
+                    onChange={onNegotiableChange}
                   />
                   <label class="form-check-label" for="inlineRadio2">
                     No
@@ -587,7 +491,8 @@ const CreateProperties = () => {
               class="form-control"
               rows="5"
               id="comment"
-              onChange={onDescriptionChange}
+              value={typeof descripton === 'object' ? '' : descripton}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
             <span class="text-danger">{descripton.message}</span>
           </div>
@@ -648,6 +553,7 @@ const CreateProperties = () => {
             </label>
             <span class="text-danger">{photo6.message}</span>
           </div>
+
           <div class="form-group">
             {pubLoading ? (
               <button
