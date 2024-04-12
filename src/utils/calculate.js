@@ -10,7 +10,7 @@ export const calculateTotalCashIn = (payments) => {
 
 
 export const calculateTotalCashOut = (payments) => {
-    let totalCashOut = 0;
+    let totalCashOut = 0
     for (const payment of payments) {
         if (payment.type === 'CASHOUT') {
             totalCashOut += payment.amount;
