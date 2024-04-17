@@ -47,11 +47,11 @@ export const cashinReducer = (state = {}, action) => {
 export const cashoutReducer = (state = {}, action) => {
     switch (action.type) {
         case CASHOUT_REQUEST:
-            return { loading: true };
+            return { loadingCashout: true };
         case CASHOUT_SUCCESS:
-            return { loading: false, success: "successfull paid", Response: action.payload }
+            return { loadingCashout: false, success: "successfull paid", Response: action.payload }
         case CASHOUT_FAIL:
-            return { loading: false, error: action.payload };
+            return { loadingCashout: false, error: action.payload };
         default:
             return state;
     }

@@ -288,7 +288,7 @@ function CreateSpecialProperty() {
         console.log(`${pair[0]}, ${pair[1]}`);
       }
         dispatch(addPropertyToPublish(formData, history));
-        // await dispatch(createSpecialProperty(formData, token, history));
+        //await dispatch(createSpecialProperty(formData, token, history));
     }
 
   };

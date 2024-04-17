@@ -28,7 +28,7 @@ const ChangeStatus = ({ selectedUserId, closeModal }) => {
     };
 
     return (
-        <div className="modal fade" role="dialog">
+        <div className="modal fade" role="dialog" id="myModal">
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <h4 className="modal-title text-center mt-2 fw-bold">Update Status</h4>
@@ -36,7 +36,7 @@ const ChangeStatus = ({ selectedUserId, closeModal }) => {
                         <div className="form-row">
                             <div className="col-md-12">
                                 <div className="form-group">
-                                    <label>Role</label>
+                                    <label className='fs-4'>Role</label>
                                     <select
                                         className="form-control text-primary"
                                         id="sel1"
@@ -57,13 +57,7 @@ const ChangeStatus = ({ selectedUserId, closeModal }) => {
                                 <button
                                     className="btn btn-block login-btn"
                                     type="button"
-                                    disabled
                                 >
-                                    <span
-                                        className="spinner-grow spinner-grow-sm"
-                                        role="status"
-                                        aria-hidden="true"
-                                    ></span>
                                     Loading...
                                 </button>
                             ) : (
@@ -71,7 +65,7 @@ const ChangeStatus = ({ selectedUserId, closeModal }) => {
                                     type="button"
                                     className="btn login-btn btn-lg btn-block"
                                     onClick={changeRole}
-                                    disabled={!role}
+                                    // disabled={!role}
                                 >
                                     Update
                                 </button>
