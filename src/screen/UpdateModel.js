@@ -34,7 +34,6 @@ const UpdateModel = () => {
             setAddress2({ value: em, message: "Write Address2" });
         }
     };
-
     const onCityChange = (e) => {
         var em = e.target.value;
         if (em != "") {
@@ -43,7 +42,6 @@ const UpdateModel = () => {
             setCity({ value: em, message: "Write City" });
         }
     };
-
     const onPhoneNumber = (e) => {
         var em = e.target.value
         if (em != "") {

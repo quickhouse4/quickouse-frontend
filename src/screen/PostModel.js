@@ -10,10 +10,7 @@ import { addPropertyToPublish } from "../actions/paymentAction";
 const PostModel = () => {
 
     let token = localStorage.getItem("token");
-
     const propertyCreate = useSelector((state) => state.createProperty);
-
-
     const { loading } = propertyCreate;
     const { pubLoading } = useSelector((state)=> state.publishedProperty)
 

@@ -41,7 +41,7 @@ const AllUser = () => {
     };
 
     const closeChangeStatusModal = () => {
-        setModel(false);
+        setModel(!model);
     };
 
     const columns = [
@@ -75,6 +75,8 @@ const AllUser = () => {
                         <MdOutlineModeEditOutline
                             onClick={() => openChangeStatusModal(row.original._id)}
                             cursor="pointer"
+                            data-toggle="modal"
+                            data-target="#myModal"
                             className="btn-primary text-white rounded-circle p-1 w-100 h-100"
                         />
                     </div>
