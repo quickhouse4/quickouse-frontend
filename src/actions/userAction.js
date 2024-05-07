@@ -212,7 +212,6 @@ export const userRoleUpdate = (id, payload, token ,history) => async (dispatch) 
       }
     })
 
-   console.log("res",response.data.role)
     dispatch({
       type: UPDATE_USER_ROLE,
       payload: response.data.role
