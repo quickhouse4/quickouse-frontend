@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { userRoleUpdate } from '../actions/userAction';
 
-const ChangeStatus = ({ selectedUserId, closeModal }) => {
+const ChangeStatus = ({ selectedUserId }) => {
     const { loading } = useSelector((state) => state.userRole);
     const [role, setRole] = useState('');
     const dispatch = useDispatch();
@@ -20,8 +20,7 @@ const ChangeStatus = ({ selectedUserId, closeModal }) => {
             role: role
         };
         try {
-            dispatch(userRoleUpdate(selectedUserId, payload, token, history));
-            closeModal(); 
+            dispatch(userRoleUpdate(selectedUserId, payload, token, history)); 
         } catch (error) {
             console.error("Error updating role:", error);
         }
@@ -72,11 +71,11 @@ const ChangeStatus = ({ selectedUserId, closeModal }) => {
                             )}
                         </div>
                     </form>
-                    <div className="modal-footer">
+                    <div class="modal-footer">
                         <button
                             type="button"
-                            className="btn login-btn"
-                            onClick={closeModal}
+                            class="btn login-btn  "
+                            data-dismiss="modal"
                         >
                             Close
                         </button>

@@ -41,7 +41,7 @@ const AllUser = () => {
     };
 
     const closeChangeStatusModal = () => {
-        setModel(!model);
+        setModel(false);
     };
 
     const columns = [
@@ -117,7 +117,7 @@ const AllUser = () => {
                         </div>
                     )}
                 </div>
-                {model && selectedUserId && (
+                {selectedUserId && (
                     <ChangeStatus
                         selectedUserId={selectedUserId}
                         closeModal={closeChangeStatusModal}
