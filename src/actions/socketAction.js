@@ -9,7 +9,7 @@ import {
     USER_REQUEST,
     USER_SUCCESS,
     USER_FAIL,
-
+    ADD_SENT_MESSAGE
 } from "./types"
 import { io } from "socket.io-client";
 import axios from "axios";
@@ -105,3 +105,11 @@ export const getUser = (token) => async (dispatch) =>{
       })
     }
   }
+
+
+export const addSentMessage = (message) => ({
+    type: ADD_SENT_MESSAGE,
+    payload: message,
+  });
+  
+

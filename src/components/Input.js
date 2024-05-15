@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getOneUser } from '../actions/userAction'
 import { getUser } from '../actions/socketAction'
 import { getProfile } from '../actions/profileAction'
+import { AiOutlineSend } from "react-icons/ai";
+import { addSentMessage } from '../actions/socketAction';
 
 
 const Input = ({ contactId }) => {
@@ -32,9 +34,10 @@ const Input = ({ contactId }) => {
     useEffect(() => {
         dispatch(getProfile(token))
     }, [])
-    // console.log(profile)
+   
+
     function emitMessage() {
-        socket.emit('message', {
+        const newMessage = {
             receiverId: contactId,
             senderId: payload.id,
             profilePhoto: "https://library.sportingnews.com/2023-01/cristiano-ronaldo-al-nassr-presentation.jpg",
@@ -42,14 +45,14 @@ const Input = ({ contactId }) => {
                 firstname: userToken && userToken.firstname,
                 lastname: userToken && userToken.lastname
             },
-
             receiver: {
                 contactLastname: OneUser.lastname,
                 contactFirstname: OneUser.firstname
             },
             message: state.message
-
-        })
+        };
+        socket.emit('message', newMessage);
+        dispatch(addSentMessage(newMessage));
     }
 
     const sendMessage = () => {
@@ -68,16 +71,16 @@ const Input = ({ contactId }) => {
 
             <div className='send'>
                 <div className='icon'>
-                    < BsImage />
+                    < BsImage className='fs-3'/>
                 </div>
                 <input type="file" style={{ display: "none" }} id="file" />
                 <label htmlFor='file'>
                     <div className='icon'>
-                        <BsPaperclip />
+                        <BsPaperclip className='fs-3' />
                     </div>
                 </label>
-                <button type='submit' onClick={sendMessage}>
-                    Send
+                <button  type='submit'  onClick={sendMessage}>
+                    <AiOutlineSend className='fs-3'/>
                 </button>
             </div>
         </div>
@@ -85,3 +88,24 @@ const Input = ({ contactId }) => {
 }
 
 export default Input
+
+
+
+ // function emitMessage() {
+    //     socket.emit('message', {
+    //         receiverId: contactId,
+    //         senderId: payload.id,
+    //         profilePhoto: "https://library.sportingnews.com/2023-01/cristiano-ronaldo-al-nassr-presentation.jpg",
+    //         sender: {
+    //             firstname: userToken && userToken.firstname,
+    //             lastname: userToken && userToken.lastname
+    //         },
+
+    //         receiver: {
+    //             contactLastname: OneUser.lastname,
+    //             contactFirstname: OneUser.firstname
+    //         },
+    //         message: state.message
+
+    //     })
+    // }

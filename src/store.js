@@ -17,6 +17,7 @@ import { activeCategoryReducer } from "./reducers/categoryReducer";
 import {
   getAllChatReducers,
   getMessagesReducer,
+  sentMessageReducer,
   socketReducer,
   userReducer
 } from "./reducers/socketReducer";
@@ -171,7 +172,8 @@ const reducer = combineReducers({
   expenseAmount: expenseReducer,
   userRevenue: getUserRevenueReducer,
   getTransactions:getTransactionsReducer,
-  userExpense:getUserExepenseReducer
+  userExpense:getUserExepenseReducer,
+  sentMessage:sentMessageReducer
 });
 
 const initialState = { activeCategory: "" };
