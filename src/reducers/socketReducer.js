@@ -9,11 +9,12 @@ import {
   ALL_MESSAGES_FAIL,
   USER_REQUEST,
   USER_SUCCESS,
-  USER_FAIL
+  USER_FAIL,
+  ADD_SENT_MESSAGE
 } from "../actions/types"
 
 const initial = {
-  // socket: io('ws://localhost:5000'),
+  socket: io('ws://localhost:5000'),
   userchats: []
 }
 
@@ -28,6 +29,18 @@ export const socketReducer = (state = initial, { type, payload }) => {
       return state
   }
 }
+
+export const sentMessageReducer = (state = {}, action) =>{
+    switch(action.type){
+      case ADD_SENT_MESSAGE:
+        return {
+          Response: action.payload
+        };
+      default:
+          return state;
+    }
+}
+
 
 export const getMessagesReducer = (state = { messages: [] }, action) => {
   switch (action.type) {
