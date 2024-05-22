@@ -1,55 +1,53 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { chatMessage } from '../actions/socketAction'
-import { getOneUser } from '../actions/userAction'
-import { useHistory } from 'react-router-dom'
-import { capitalizeFirstLetter } from '../utils/Capitalize'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { getOneUser } from '../actions/userAction';
+import { useHistory } from 'react-router-dom';
+import { capitalizeFirstLetter } from '../utils/Capitalize';
+import moment from 'moment';
 
-const Chats = ({ setCurrentChat ,chats }) => {
-
-    const dispatch = useDispatch()
+const Chats = ({ setCurrentChat, chats, filteredChats }) => {
+    const dispatch = useDispatch();
     const token = localStorage.getItem('token');
-    const history = useHistory()
-    const payload = JSON.parse(atob(token.split('.')[1]));
-
-    useEffect(() => {
-        dispatch(chatMessage(payload.id))
-    }, [payload.id])
+    const history = useHistory();
 
     const handleLoadUserMessages = (id) => {
-        setCurrentChat(id)
-        dispatch(getOneUser(id, token))
-        history.push(`/chat/${id}`)
-    }
-
-    const formatMessageTime = (timeString) => {
-        const time = new Date(timeString);
-        const options = { hour: '2-digit', minute: '2-digit', hour12: true };
-        return time.toLocaleTimeString([], options);
+        setCurrentChat(id);
+        dispatch(getOneUser(id, token));
+        history.push(`/chat/${id}`);
     };
+
+
+    const chatList = filteredChats.length > 0 ? filteredChats : chats;
 
     return (
         <div className='chats'>
-            {!chats ?
-                <h1> there is no chat start chat </h1> :
-                chats.length > 0 && chats.map((user, index) => (
+            {chatList.length === 0 ? (
+                <div className='d-flex justify-content-center mt-5'>
+                    <h4 className='fs-5 align-self-center'>There are no chats</h4>
+                </div>
+            ) : (
+                chatList.map((user, index) => (
                     <div key={index} className='userChat' onClick={() => handleLoadUserMessages(user.contactId)}>
                         <div className='avatar'>
-                            <p className='text-light avatar-text' >{user && user.contactLastname.charAt(0).toUpperCase()}</p>
+                            <p className='text-light avatar-text'>
+                                {user.contactLastname.charAt(0).toUpperCase()}
+                            </p>
                         </div>
                         <div className='userChatInfo'>
                             <div style={{ flexDirection: "row" }}>
-                                <span style={{ color: "white", fontSize: "18px", paddingRight: "10px" }}>{capitalizeFirstLetter(user.contactLastname)}</span>
-                                <span style={{ color: "white", fontSize: "10px", }}>{
-                                    formatMessageTime(user.lastConversation)
-                                }</span>
+                                <span style={{ color: "white", fontSize: "18px", paddingRight: "10px" }}>
+                                    {capitalizeFirstLetter(user.contactLastname)}
+                                </span>
+                                <span style={{ color: "white", fontSize: "10px" }}>
+                                    {moment(user.lastConversation).format("HH:mm:ss")}
+                                </span>
                             </div>
-                            {/* <p>{user.message}</p> */}
                         </div>
                     </div>
-                ))}
+                ))
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default Chats
+export default Chats;
