@@ -79,11 +79,11 @@ function Footer() {
                     <Link className="text-light" to="/Deal" onClick={handlePropert}>Order</Link>
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a>
                     <Link to="/allRequest" className="text-light" >Requested</Link>
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a>
                     <Link className="text-light" to="/aboutUs">About Us</Link>

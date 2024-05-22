@@ -7,6 +7,7 @@ import { getUser } from '../actions/socketAction'
 import { getProfile } from '../actions/profileAction'
 import { AiOutlineSend } from "react-icons/ai";
 import { addSentMessage } from '../actions/socketAction';
+import moment from 'moment'
 
 
 const Input = ({ contactId }) => {

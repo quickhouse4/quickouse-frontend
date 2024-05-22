@@ -14,6 +14,15 @@ import {
 import { io } from "socket.io-client";
 import axios from "axios";
 
+
+const socketUrl = process.env.NODE_ENV === 'production'
+    ? 'wss://quickhouse.herokuapp.com'
+    : 'ws://localhost:5000';
+
+const sockUrl = process.env.NODE_ENV === 'production'
+    ? 'https://quickhouse.herokuapp.com'
+    : 'http://localhost:5000';
+
 export const setUpSocket = () => async (dispatch, getState) => {
     const token = localStorage.getItem('token');
 
@@ -21,7 +30,7 @@ export const setUpSocket = () => async (dispatch, getState) => {
     const { socket } = socketChat;
 
     if (token && !socket) {
-        const newSocket = io('ws://localhost:5000', {
+        const newSocket = io(socketUrl, {
             query: {
                 token
             }
@@ -48,7 +57,7 @@ export const chatMessage = (id) => async (dispatch) => {
         dispatch({
             type: ALL_CHATS_REQUEST
         })
-        const response = await axios.get(`http://localhost:5000/api/getuserchat/${id}`)
+        const response = await axios.get(`${sockUrl}/api/getuserchat/${id}`)
         dispatch({
             type: ALL_CHATS_SUCCESS,
             payload: response.data.data
@@ -67,7 +76,7 @@ export const allMessagesBetweenUsers = (contactId, token) => async (dispatch) =>
         dispatch({
             type: ALL_MESSAGES_REQUEST
         })
-        const response = await axios.get(`http://localhost:5000/api/chats/${contactId}`, {
+        const response = await axios.get(`${sockUrl}/api/chats/${contactId}`, {
             headers: {
                 token: token
             }
@@ -84,32 +93,32 @@ export const allMessagesBetweenUsers = (contactId, token) => async (dispatch) =>
     }
 }
 
-export const getUser = (token) => async (dispatch) =>{
+export const getUser = (token) => async (dispatch) => {
     try {
-      dispatch({
-        type:USER_REQUEST
-      })
-      const response = await axios.get(`http://localhost:5000/api/user`,{
-        headers:{
-          token
-        }
-      })
-      dispatch({
-        type:USER_SUCCESS,
-        payload: response.data.data
-      })
+        dispatch({
+            type: USER_REQUEST
+        })
+        const response = await axios.get(`${sockUrl}/api/user`, {
+            headers: {
+                token
+            }
+        })
+        dispatch({
+            type: USER_SUCCESS,
+            payload: response.data.data
+        })
     } catch (error) {
-      dispatch({
-        type:USER_FAIL,
-        payload: error
-      })
+        dispatch({
+            type: USER_FAIL,
+            payload: error
+        })
     }
-  }
+}
 
 
 export const addSentMessage = (message) => ({
     type: ADD_SENT_MESSAGE,
     payload: message,
-  });
-  
+});
+
 
