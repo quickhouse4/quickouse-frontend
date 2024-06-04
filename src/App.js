@@ -29,6 +29,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { visitorsTrack } from "./actions/AnalyticsAction"
 import Transactions from "./screen/Transactions";
 import Expenses from "./screen/Expenses";
+import MyLists from "./screen/MyLists";
 
 function App() {
   const dispatch = useDispatch();
@@ -121,6 +122,9 @@ function App() {
       </Route>
       <Route path="/expenses">
         <Expenses />
+      </Route>
+      <Route path="/myLists">
+        <MyLists />
       </Route>
     </Router>
   );

@@ -31,10 +31,10 @@ export const getClientUssd = () => async (dispatch) => {
         dispatch({
             type: GET_USSD_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/ussdProperties?page=1&limit=10")
+        const response = await axios.get("https://quickhouse.herokuapp.com/ussdProperties")
         dispatch({
             type: GET_USSD_SUCCESS,
-            payload: response.data.data.docs
+            payload: response.data.data
         })
     } catch (error) {
         dispatch({

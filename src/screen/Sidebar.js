@@ -37,13 +37,17 @@ const Sidebar = () => {
       setActiveLink("allUser");
     } else if (pathname === "/transactions") {
       setActiveLink("transactions")
-    }else if (pathname === "/expenses") {
+    } else if (pathname === "/expenses") {
       setActiveLink("expenses")
-    }else if (pathname === "/myDeals") {
+    } else if (pathname === "/myDeals") {
       setActiveLink("myDeals")
     } else if (pathname === "/aboutUs") {
       setActiveLink("AboutUs")
-    } else {
+    }else if(pathname === "/myLists"){
+      setActiveLink("myLists")
+    }else if (pathname === "/messages") {
+      setActiveLink("messages")
+    }else {
       setActiveLink("");
     }
   }, [location.pathname]);
@@ -89,8 +93,15 @@ const Sidebar = () => {
                     <GrTransaction style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Transactions</span>
 
                   </Link>
+
                   <Link to="/expenses" class={`nav-item nav-link align-middle px-0 ${activeLink === "expenses" ? "active-link1" : ""}`}>
                     <GiPayMoney style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Expenses</span>
+                  </Link>
+
+                  <Link to="/myLists" class={`nav-item nav-link align-middle px-0 ${activeLink === "myLists" ? "active-link1" : ""}`}>
+
+                    <MdToc style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">My Lists</span>
+
                   </Link>
                 </>
               }
@@ -106,7 +117,7 @@ const Sidebar = () => {
                 <MdToc style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">My Listing</span>
 
               </Link> */}
-              <Link to="/messages" class="nav-item nav-link align-middle px-0">
+              <Link to="/messages" class={`nav-item nav-link align-middle px-0 ${activeLink === "messages" ? "active-link1" : ""}`}>
 
                 <MdOutlineMessage style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">Messages</span>
 
