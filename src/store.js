@@ -11,6 +11,7 @@ import {
   getAllDataReducer,
   propertiesForRentListReducer,
   propertiesForSaleListReducer,
+  myPropertiesListReducer,
 } from "./reducers/propertiesReducers";
 
 import { activeCategoryReducer } from "./reducers/categoryReducer";
@@ -173,7 +174,8 @@ const reducer = combineReducers({
   userRevenue: getUserRevenueReducer,
   getTransactions:getTransactionsReducer,
   userExpense:getUserExepenseReducer,
-  sentMessage:sentMessageReducer
+  sentMessage:sentMessageReducer,
+  myPropertiesList: myPropertiesListReducer
 });
 
 const initialState = { activeCategory: "" };
