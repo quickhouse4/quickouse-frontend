@@ -49,7 +49,8 @@
     "simple-react-lightbox": "^3.6.9-0",
     "socket.io-client": "^4.6.1",
     "sweetpagination": "^1.0.15",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "xlsx": "^0.18.5"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
