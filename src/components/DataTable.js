@@ -107,4 +107,4 @@ function DataTable({ data, columns, title }) {
     )
 }
 
-export default DataTable;   
+export default DataTable;

@@ -8,6 +8,8 @@ import { FcHome } from "react-icons/fc";
 import { FaUsers } from "react-icons/fa"
 import { GrTransaction } from "react-icons/gr";
 import { GiPayMoney } from "react-icons/gi";
+import { LuTableProperties } from "react-icons/lu";
+
 
 const Sidebar = () => {
 
@@ -47,6 +49,8 @@ const Sidebar = () => {
       setActiveLink("myLists")
     }else if (pathname === "/messages") {
       setActiveLink("messages")
+    }else if(pathname === "/myProperties"){
+      setActiveLink("myProperties")
     }else {
       setActiveLink("");
     }
@@ -105,6 +109,9 @@ const Sidebar = () => {
                   </Link>
                 </>
               }
+              <Link to="/myProperties" class={`nav-item nav-link align-middle px-0 ${activeLink === "myProperties" ? "active-link1" : ""}`}>
+                <LuTableProperties style={{ color: "#fff", fontSize: "1.4rem" }} /> <span class="ms-1 d-none d-sm-inline">My Properties</span>
+              </Link>
 
               <Link to="/myDeals" class={`nav-item nav-link align-middle px-0 ${activeLink === "myDeals" ? "active-link1" : ""}`}>
 

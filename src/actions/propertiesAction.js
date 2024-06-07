@@ -20,7 +20,10 @@ import {
   PROPERTIES_FOR_RENT_FAIL,
   PROPERTIES_FOR_SALE_REQUEST,
   PROPERTIES_FOR_SALE_SUCCESS,
-  PROPERTIES_FOR_SALE_FAIL
+  PROPERTIES_FOR_SALE_FAIL,
+  MY_PROPERTIES_REQUEST,
+  MY_PROPERTIES_SUCCESS,
+  MY_PROPERTIES_FAIL,
 
 } from "../actions/types";
 
@@ -222,3 +225,25 @@ export const propertyForSale = (pageCount, pageLimit) => async (dispatch) => {
   }
 };
 
+export const myProperties = (token) => async (dispatch) => {
+  try {
+    dispatch({ type: MY_PROPERTIES_REQUEST });
+
+    const response = await axios.get(
+      `https://quickhouse.herokuapp.com/api/myproperty`,
+      {
+        headers: {
+          token: token,
+        },
+      }
+    );
+    // console.log("response", response.data.data);
+
+    dispatch({
+      type: MY_PROPERTIES_SUCCESS,
+      payload: response.data.data,
+    });
+  } catch (error) {
+    dispatch({ type: MY_PROPERTIES_FAIL, payload: error });
+  }
+};

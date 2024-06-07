@@ -21,7 +21,10 @@ import {
   PROPERTIES_FOR_RENT_FAIL,
   PROPERTIES_FOR_SALE_REQUEST,
   PROPERTIES_FOR_SALE_SUCCESS,
-  PROPERTIES_FOR_SALE_FAIL
+  PROPERTIES_FOR_SALE_FAIL,
+  MY_PROPERTIES_REQUEST,
+  MY_PROPERTIES_SUCCESS,
+  MY_PROPERTIES_FAIL,
 } from "../actions/types";
 
 export const propertiesListReducer = (state = { properties: [] }, action) => {
@@ -172,6 +175,22 @@ export const propertiesForSaleListReducer = (state = { propertiesForSale: [] }, 
         loadingForSale: false, 
         errorForSale: action.payload 
       };
+    default:
+      return state;
+  }
+};
+
+export const myPropertiesListReducer = (state = { myProperty: [] }, action) => {
+  switch (action.type) {
+    case MY_PROPERTIES_REQUEST:
+      return { loadingMyProperties: true, myProperty: [] };
+    case MY_PROPERTIES_SUCCESS:
+      return {
+        myProperty: action.payload,
+        loadingMyProperties: false,
+      };
+    case MY_PROPERTIES_FAIL:
+      return { loadingMyProperties: false, errorMyProperties: action.payload };
     default:
       return state;
   }

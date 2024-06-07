@@ -30,6 +30,7 @@ import { visitorsTrack } from "./actions/AnalyticsAction"
 import Transactions from "./screen/Transactions";
 import Expenses from "./screen/Expenses";
 import MyLists from "./screen/MyLists";
+import MyPropertes from "./screen/MyPropertes";
 
 function App() {
   const dispatch = useDispatch();
@@ -125,6 +126,9 @@ function App() {
       </Route>
       <Route path="/myLists">
         <MyLists />
+      </Route>
+      <Route path="/myProperties">
+        <MyPropertes />
       </Route>
     </Router>
   );
