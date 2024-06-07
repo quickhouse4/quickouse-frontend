@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
     useGlobalFilter,
     usePagination,
@@ -6,9 +6,10 @@ import {
     useTable,
 } from "react-table";
 import DataPagination from "./DataPagination";
+import * as XLSX from 'xlsx';
 
 function DataTable({ data, columns, title }) {
-    const sortedColumns = React.useMemo(() => [...columns], [columns]);
+    const sortedColumns = useMemo(() => [...columns], [columns]);
     const sortedData = data;
     const TableInstance = useTable(
         { data: sortedData, columns: sortedColumns, initialState: { pageSize: 5 } },
@@ -34,8 +35,17 @@ function DataTable({ data, columns, title }) {
         prepareRow,
         state,
     } = TableInstance;
+
     // @ts-ignore
     const { globalFilter, pageIndex, pageSize } = state;
+
+    const downloadExcel = () => {
+        const worksheet = XLSX.utils.json_to_sheet(sortedData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+        XLSX.writeFile(workbook, `${title}.xlsx`);
+    };
+
     return (
         <div className="bg-white border shadow-md px-5 py-8 rounded-md w-100 mx-auto lg:w-80 lg:ml-60 mb-10">
             <div className="d-flex items-center justify-content-between pb-6">
@@ -43,7 +53,6 @@ function DataTable({ data, columns, title }) {
                     <h2 className="font-weight-bold text-xl">
                         {title}
                     </h2>
-                    {/* <span className="text-xs text-gray-600">Current cohort</span> */}
                     <input
                         defaultValue={globalFilter || ""}
                         placeholder="Filter"
@@ -51,6 +60,13 @@ function DataTable({ data, columns, title }) {
                         onChange={(e) => setGlobalFilter(e.target.value)}
                     />
                 </div>
+                <button
+                    onClick={downloadExcel}
+                    className="btn  px-4 py-2 text-white font-sans fs-6 my-4 font-weight-bold"
+                    style={{ background: "#010a14", borderRadius: "10px", height: "40px"}}
+                >
+                    Download Excel
+                </button>
             </div>
             <div style={{ overflowX: "auto" }}>
                 <table className="table table-hover" {...getTableProps()}>
@@ -103,8 +119,7 @@ function DataTable({ data, columns, title }) {
                 />
             </div>
         </div>
-
-    )
+    );
 }
 
 export default DataTable;
