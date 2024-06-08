@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
-import { personDeal } from '../actions/dealAction'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { personDeal } from '../actions/dealAction';
 import Spinner from "react-bootstrap/Spinner";
 import Sidebar from './Sidebar';
-import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getClientUssd } from '../actions/ussdAction';
@@ -14,31 +13,30 @@ import { MdDelete } from "react-icons/md";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import axios from 'axios';
 
-
 const MyLists = () => {
     const [label, setLabel] = useState('');
-    const token = localStorage.getItem("token")
-    const { ussd } = useSelector((state) => state.getUssdMessage)
-    const dispatch = useDispatch()
+    const token = localStorage.getItem("token");
+    const { ussd, ussdLoading } = useSelector((state) => state.getUssdMessage);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getClientUssd())
-    }, [])
+        dispatch(getClientUssd());
+    }, [dispatch]);
 
-    const deleteHandler = async(id) => {
-        const response = await axios.delete(`https://quickhouse.herokuapp.com/ussd/${id}`)
-        if(response.status === 200){
-            window.location.reload()
+    const deleteHandler = async (id) => {
+        const response = await axios.delete(`https://quickhouse.herokuapp.com/ussd/${id}`);
+        if (response.status === 200) {
+            window.location.reload();
         }
-    }
+    };
 
-    const openChangeStatusModal = (id) => {}
+    const openChangeStatusModal = (id) => {};
 
     const columns = [
         {
             Header: 'Options',
             accessor: 'Options',
-            Cell: ({ value }) => value
+            Cell: ({ value }) => value,
         },
         {
             Header: 'Type',
@@ -79,7 +77,6 @@ const MyLists = () => {
                             className="btn-primary text-white rounded-circle p-1 w-100 h-100"
                         />
                     </div>
-
                     <div className="w-25">
                         <MdDelete
                             onClick={() => deleteHandler(row.original._id)}
@@ -87,32 +84,40 @@ const MyLists = () => {
                             className="bg-danger text-white rounded-circle p-1 w-100 h-100"
                         />
                     </div>
-
                 </div>
             ),
         },
     ];
+
     return (
         <>
-           <Header setLabel={setLabel} />
+            <Header setLabel={setLabel} />
             <div className="w-100 pt-2">
                 <div className="d-flex position-relative flex-nowrap">
                     <Sidebar />
-                        <div className="mb-4" style={{ marginTop: '117px' }}>
-                            {ussd.length > 0 && (
-                                <DataTable
-                                    data={ussd}
-                                    columns={columns}
-                                    title="All Ussd Lists"
-                                    placeholder=""
-                                />
-                            )}
+                    {ussdLoading ? (
+                        <div className="d-flex justify-content-center align-items-center flex-grow-1">
+                            <Spinner animation="border" variant="dark" />
                         </div>
+                    ) : ussd.length === 0 ? (
+                        <div className="d-flex justify-content-center align-items-center flex-grow-1">
+                            <h2 className='fs-3'>No Lists Available</h2>
+                        </div>
+                    ) : (
+                        <div className="mb-4" style={{ marginTop: '117px' }}>
+                            <DataTable
+                                data={ussd}
+                                columns={columns}
+                                title="All Ussd Lists"
+                                placeholder=""
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
             <Footer />
         </>
-    )
-}
+    );
+};
 
-export default MyLists
+export default MyLists;

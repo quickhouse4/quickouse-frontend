@@ -10,6 +10,8 @@ import DataTable from '../components/DataTable';
 import { MdDelete } from "react-icons/md";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import Spinner from "react-bootstrap/Spinner";
+import { capitalizeFirstLetter } from '../utils/Capitalize';
+import { Cell } from 'recharts';
 
 const AllUser = () => {
     const [selectedUserId, setSelectedUserId] = useState(null);
@@ -48,11 +50,13 @@ const AllUser = () => {
         {
             Header: 'First Name',
             accessor: 'firstname',
+            Cell: ({ row }) => capitalizeFirstLetter(row.original.firstname)
         },
 
         {
             Header: 'Last Name',
             accessor: 'lastname',
+            Cell: ({ row }) => capitalizeFirstLetter(row.original.lastname)
         },
         {
             Header: 'Email',
