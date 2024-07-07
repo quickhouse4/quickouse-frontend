@@ -12,6 +12,7 @@ import {
   propertiesForRentListReducer,
   propertiesForSaleListReducer,
   myPropertiesListReducer,
+  blockPropertyReducer,
 } from "./reducers/propertiesReducers";
 
 import { activeCategoryReducer } from "./reducers/categoryReducer";
@@ -175,7 +176,8 @@ const reducer = combineReducers({
   getTransactions:getTransactionsReducer,
   userExpense:getUserExepenseReducer,
   sentMessage:sentMessageReducer,
-  myPropertiesList: myPropertiesListReducer
+  myPropertiesList: myPropertiesListReducer,
+  blockProperty:blockPropertyReducer
 });
 
 const initialState = { activeCategory: "" };

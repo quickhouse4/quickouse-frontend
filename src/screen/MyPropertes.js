@@ -5,17 +5,29 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { getClientUssd } from '../actions/ussdAction';
 import DataTable from '../components/DataTable';
-import { formatPrice } from '../priceFormated';
+import { formatPrice  } from '../priceFormated';
 import { MdDelete } from "react-icons/md";
-import { FaRegEye } from "react-icons/fa6";
+import { FaRegEye ,FaRegEyeSlash } from "react-icons/fa6";
 import { myProperties } from '../actions/propertiesAction';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
+
 
 const MyProperties = () => {
     const [label, setLabel] = useState('');
     const token = localStorage.getItem("token")
     const { myProperty, loadingMyProperties } = useSelector((state) => state.myPropertiesList)
     const dispatch = useDispatch()
+
+    const deleteHandler = (id) => { 
+        
+    }
+    const openChangeStatusModal = (id) => { 
+
+    }
+    const viewProperty = (id) => { 
+
+    }
 
     useEffect(() => {
         dispatch(getClientUssd())
@@ -31,7 +43,7 @@ const MyProperties = () => {
         {
             Header: 'Image',
             accessor: 'mainPhoto',
-            Cell: ({ value }) => value ? <img src={value} alt="Image" style={{width: '50px', height: '50px', borderRadius: '50%'}} /> : null,
+            Cell: ({ value }) => value ? <img src={value} alt="Image" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /> : null,
         },
         {
             Header: 'Status',
@@ -59,15 +71,41 @@ const MyProperties = () => {
             accessor: 'district',
         },
         {
-            Header: 'Sector',
-            accessor: 'sector',
+            Header: 'Viewable',
+            accessor: 'viewable',
+            Cell: ({ value }) => value ? "Yes" : "No", 
         },
         {
-            Header: 'Views',
-            accessor: 'views',
+            Header: 'Action',
+            accessor: '',
+            Cell: ({ row }) => (
+                <div className="d-flex gap-3">
+                    <div className="w-25">
+                        <FaRegEyeSlash
+                            onClick={() => deleteHandler(row.original._id)}
+                            cursor="pointer"
+                            className="bg-success text-white rounded-circle p-1 w-100 h-100"
+                        />
+                    </div>
+                    <div className="w-25">
+                        <MdDelete
+                            onClick={() => deleteHandler(row.original._id)}
+                            cursor="pointer"
+                            className="bg-danger text-white rounded-circle p-1 w-100 h-100"
+                        />
+                    </div>
+                    <div className="w-25">
+                        <FaRegEye
+                            onClick={() => viewProperty(row.original._id)}
+                            cursor="pointer"
+                            className="bg-danger text-white rounded-circle p-1 w-100 h-100"
+                        />
+                    </div>
+                </div>
+            )
         },
     ];
-
+    console.log("myProperty",myProperty)
     return (
         <>
             <Header setLabel={setLabel} />
@@ -76,7 +114,7 @@ const MyProperties = () => {
                     <Sidebar />
                     <div className="mb-4" style={{ marginTop: '117px' }}>
                         {loadingMyProperties ? (
-                            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh', marginLeft:"500px" }}>
+                            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh', marginLeft: "500px" }}>
                                 <div className="spinner-border" role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div>

@@ -25,6 +25,9 @@ import {
   MY_PROPERTIES_REQUEST,
   MY_PROPERTIES_SUCCESS,
   MY_PROPERTIES_FAIL,
+  BLOCK_PROPERTY_REQUEST,
+  BLOCK_PROPERTY_SUCCESS,
+  BLOCK_PROPERTY_FAIL
 } from "../actions/types";
 
 export const propertiesListReducer = (state = { properties: [] }, action) => {
@@ -196,3 +199,15 @@ export const myPropertiesListReducer = (state = { myProperty: [] }, action) => {
   }
 };
 
+export const blockPropertyReducer = (state = {}, action) => {
+  switch (action.type) {
+    case BLOCK_PROPERTY_REQUEST:
+      return { loading: true };
+    case BLOCK_PROPERTY_SUCCESS:
+      return { loading: false, success: action.payload };
+    case BLOCK_PROPERTY_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}

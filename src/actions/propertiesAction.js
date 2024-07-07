@@ -24,7 +24,9 @@ import {
   MY_PROPERTIES_REQUEST,
   MY_PROPERTIES_SUCCESS,
   MY_PROPERTIES_FAIL,
-
+  BLOCK_PROPERTY_REQUEST,
+  BLOCK_PROPERTY_SUCCESS,
+  BLOCK_PROPERTY_FAIL
 } from "../actions/types";
 
 import axios from "axios";
@@ -247,3 +249,28 @@ export const myProperties = (token) => async (dispatch) => {
     dispatch({ type: MY_PROPERTIES_FAIL, payload: error });
   }
 };
+
+export const blockProperty = (id, payload, token) => async (dispatch) => {
+  try {
+    dispatch({ type: BLOCK_PROPERTY_REQUEST });
+
+    const response = await axios.put(
+      `https://quickhouse.herokuapp.com/api/property/visibility/${id}`,
+      payload,
+      {
+        headers: {
+          token: token,
+        },
+      }
+    );
+
+    dispatch({
+      type: BLOCK_PROPERTY_SUCCESS,
+      payload: response.data,
+    });
+
+  } catch (error) {
+    console.log("error", error);
+    dispatch({ type: BLOCK_PROPERTY_FAIL, payload: error });
+  }
+}
