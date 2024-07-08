@@ -20,7 +20,7 @@ export const createDeal = (payload, token, history) => async (dispatch) => {
             type: CREATE_DEAL_REQUEST
         })
 
-        const response = await axios.post("https://quickhouse.herokuapp.com/api/deal",
+        const response = await axios.post("https://quickhouse.herokuapp.com/api/order",
             payload,
             {
                 headers: {
@@ -33,7 +33,8 @@ export const createDeal = (payload, token, history) => async (dispatch) => {
             payload: response.data.data
         })
 
-        history.push(`/dealProperty/${response.data.data._id}`)
+        // history.push(`/dealProperty/${response.data.data._id}`)
+        history.push(`/detailsMessage/${response.data.data._id}`)
         window.location.reload();
     } catch (error) {
         console.log("error", error);
