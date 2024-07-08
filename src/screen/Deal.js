@@ -19,7 +19,7 @@ const Deal = () => {
     const [conditions, setConditions] = useState({})
     const [description, setDescription] = useState({})
     const [type, setType] = useState({})
-    const [category, setCategory] = useState({})
+    const [businessStatus, setBusinessStatus] = useState({})
     const [price, setPrice] = useState({})
     const [currency, setCurrency] = useState({})
     const [province, setProvince] = useState('')
@@ -82,9 +82,9 @@ const Deal = () => {
     const onCategoryChange = (e) => {
         var em = e.target.value;
         if (em != "") {
-            setCategory({ value: em });
+            setBusinessStatus({ value: em });
         } else {
-            setCategory({ value: em, message: "Select Your Category" });
+            setBusinessStatus({ value: em, message: "Select Your Category" });
         }
     }
     const onTypeChange = (e) => {
@@ -141,16 +141,19 @@ const Deal = () => {
             setDistrict({ message: "Select your district" })
         } else if (sector == "" || sector == null) {
             setSector({ message: "Select your sector" })
-        } else if (cell == "" || cell == null) {
+        } 
+        else if (cell == "" || cell == null) {
             setCell({ message: "Select your cell" })
-        } else if (village == "" || village == null) {
+        } 
+        else if (village == "" || village == null) {
             setVillage({ message: "Select your village" })
-        } else if (conditions.value == "" || conditions.value == null) {
+        } 
+        else if (conditions.value == "" || conditions.value == null) {
             setConditions({ message: "Tell us your conditions" })
         } else if (description.value == "" || description.value == null) {
             setDescription({ message: "Your descriptions" })
-        } else if (category.value == "" || category.value == null) {
-            setCategory({ message: "Select Your Category" })
+        } else if (businessStatus.value == "" || businessStatus.value == null) {
+            setBusinessStatus({ message: "Select Your Category" })
         } else if (type.value == "" || type.value == null) {
             setType({ message: "Select Your Type" })
         } else if (price.value == "" || price.value == null) {
@@ -162,7 +165,7 @@ const Deal = () => {
                 currency: currency.value,
                 conditions: conditions.value,
                 description: description.value,
-                category: category.value,
+                businessStatus: businessStatus.value,
                 price: price.value,
                 province: province,
                 district: district,
@@ -247,7 +250,7 @@ const Deal = () => {
                                         <option>For Sale</option>
                                         <option>For Rent Out</option>
                                     </select>
-                                    <span class="text-danger">{category.message}</span>
+                                    <span class="text-danger">{businessStatus.message}</span>
                                 </div>
                             </div>
                             <div class="form-outline mb-4">
