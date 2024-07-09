@@ -54,17 +54,16 @@ const MyProperties = () => {
             const payload = {
                 visible: `${!selectedProperty.viewable}`
             }
-            const res = await axios.put(`https://quickhouse.herokuapp.com/api/property/visibility/${selectedProperty._id}`,payload, {
+            console.log("payload", payload)
+            const res = await axios.patch(`https://quickhouse.herokuapp.com/api/property/visibility/${selectedProperty._id}`, payload, {
                 headers: {
-                    Authorization: token
+                    token: token
                 }
             });
-            console.log("res", res.data)
             dispatch(myProperties(token));
-            // closeModal();
+            closeModal();
         } catch (error) {
             console.error("Error", error);
-            alert("Failed to change property visibility. Please try again.");
         }
     };
 
@@ -72,7 +71,9 @@ const MyProperties = () => {
         if (window.confirm("Are you sure you want to delete this property?")) {
             try {
                 await axios.delete(`https://quickhouse.herokuapp.com/api/property/${id}`, {
-                    headers: { token }
+                    headers: {
+                        token: token
+                    }
                 });
                 dispatch(myProperties(token));
             } catch (error) {
