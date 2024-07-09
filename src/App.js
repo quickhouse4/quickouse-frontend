@@ -34,8 +34,6 @@ import MyPropertes from "./screen/MyPropertes";
 
 function App() {
   const dispatch = useDispatch();
-  const { visitorsLoading, visitorsError } = useSelector((state) => state.visitorTrack)
-
   useEffect(() => {
       dispatch(visitorsTrack())
   }, [dispatch]);
@@ -91,9 +89,9 @@ function App() {
       <Route path="/myDeals">
         <MyDeals />
       </Route>
-      <Route path="/allRequest">
+      {/* <Route path="/allRequest">
         <AllDeal />
-      </Route>
+      </Route> */}
       <Route path="/allUser">
         <AllUser />
       </Route>
