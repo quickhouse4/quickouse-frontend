@@ -162,9 +162,9 @@ const UssdMessage = () => {
           <div className='navbar1 d-flex justify-content-center align-items-center'>
             <ul >
               <li className="dropdown1">
-                <a className="" onClick={() => setToggle(!toggle)} >
+                <Link to="/" className="" onClick={() => setToggle(!toggle)} >
                   <h4 className="text-center fs-3" style={{ fontWeight: "600" }}>SMS</h4>
-                </a>
+                </Link>
                 {/*<i className="bi bi-chevron-down "></i> <ul className={!toggle ? "dropdown1" : "dropdown1-active d-flex flex-column"}>
                   <li className="dropdown1"><a onClick={() => setMenuToggle(!menuToggle)}><Link>Offer</Link><i className="bi bi-chevron-right"></i></a>
                     <ul className={!menuToggle ? "" : "dropdown1-active"}>
@@ -231,7 +231,7 @@ const UssdMessage = () => {
                             <div class="card-text d-flex justify-content-between">
                               <div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Options:</span>
+                                  <span className="sms-title">Status:</span>
                                   {" "}
                                   <span className="sms-text">{getOptionsDisplayText(capitalizeFirstLetter(item.Options))}</span>
                                 </div>

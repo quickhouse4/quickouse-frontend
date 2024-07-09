@@ -1,38 +1,86 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import moment from 'moment';
+import { MdDelete } from "react-icons/md";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
+
 import Sidebar from './Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { getClientUssd } from '../actions/ussdAction';
 import DataTable from '../components/DataTable';
-import { formatPrice  } from '../priceFormated';
-import { MdDelete } from "react-icons/md";
-import { FaRegEye ,FaRegEyeSlash } from "react-icons/fa6";
+import { getClientUssd } from '../actions/ussdAction';
 import { myProperties } from '../actions/propertiesAction';
-import moment from 'moment';
-import { Link } from 'react-router-dom';
-
+import { formatPrice } from '../priceFormated';
 
 const MyProperties = () => {
     const [label, setLabel] = useState('');
-    const token = localStorage.getItem("token")
-    const { myProperty, loadingMyProperties } = useSelector((state) => state.myPropertiesList)
-    const dispatch = useDispatch()
-
-    const deleteHandler = (id) => { 
-        
-    }
-    const openChangeStatusModal = (id) => { 
-
-    }
-    const viewProperty = (id) => { 
-
-    }
+    const token = localStorage.getItem("token");
+    const { myProperty, loadingMyProperties } = useSelector((state) => state.myPropertiesList);
+    const dispatch = useDispatch();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedProperty, setSelectedProperty] = useState(null);
+    const modalRef = useRef(null);
 
     useEffect(() => {
-        dispatch(getClientUssd())
-        dispatch(myProperties(token))
-    }, [dispatch, token])
+        dispatch(getClientUssd());
+        dispatch(myProperties(token));
+    }, [dispatch, token]);
+
+    useEffect(() => {
+        const handleEsc = (event) => {
+            if (event.keyCode === 27) closeModal();
+        };
+        document.addEventListener('keydown', handleEsc);
+        return () => {
+            document.removeEventListener('keydown', handleEsc);
+        };
+    }, []);
+
+    const openModal = (property) => {
+        setSelectedProperty(property);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedProperty(null);
+    };
+
+    const changeVisibility = async () => {
+        if (!selectedProperty) return;
+
+        try {
+            const payload = {
+                visible: `${!selectedProperty.viewable}`
+            }
+            const res = await axios.put(`https://quickhouse.herokuapp.com/api/property/visibility/${selectedProperty._id}`,payload, {
+                headers: {
+                    Authorization: token
+                }
+            });
+            console.log("res", res.data)
+            dispatch(myProperties(token));
+            // closeModal();
+        } catch (error) {
+            console.error("Error", error);
+            alert("Failed to change property visibility. Please try again.");
+        }
+    };
+
+    const deleteHandler = async (id) => {
+        if (window.confirm("Are you sure you want to delete this property?")) {
+            try {
+                await axios.delete(`https://quickhouse.herokuapp.com/api/property/${id}`, {
+                    headers: { token }
+                });
+                dispatch(myProperties(token));
+            } catch (error) {
+                console.error("Error deleting property:", error);
+                alert("Failed to delete property. Please try again.");
+            }
+        }
+    };
 
     const columns = [
         {
@@ -43,7 +91,7 @@ const MyProperties = () => {
         {
             Header: 'Image',
             accessor: 'mainPhoto',
-            Cell: ({ value }) => value ? <img src={value} alt="Image" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /> : null,
+            Cell: ({ value }) => value ? <img src={value} alt="Property" style={{ width: '50px', height: '50px', borderRadius: '50%' }} /> : null,
         },
         {
             Header: 'Status',
@@ -73,7 +121,7 @@ const MyProperties = () => {
         {
             Header: 'Viewable',
             accessor: 'viewable',
-            Cell: ({ value }) => value ? "Yes" : "No", 
+            Cell: ({ value }) => value ? "Yes" : "No",
         },
         {
             Header: 'Action',
@@ -81,11 +129,19 @@ const MyProperties = () => {
             Cell: ({ row }) => (
                 <div className="d-flex gap-3">
                     <div className="w-25">
-                        <FaRegEyeSlash
-                            onClick={() => deleteHandler(row.original._id)}
-                            cursor="pointer"
-                            className="bg-success text-white rounded-circle p-1 w-100 h-100"
-                        />
+                        {row.original.viewable ? (
+                            <FaRegEyeSlash
+                                onClick={() => openModal(row.original)}
+                                cursor="pointer"
+                                className="bg-success text-white rounded-circle p-1 w-100 h-100"
+                            />
+                        ) : (
+                            <FaRegEye
+                                onClick={() => openModal(row.original)}
+                                cursor="pointer"
+                                className="bg-danger text-white rounded-circle p-1 w-100 h-100"
+                            />
+                        )}
                     </div>
                     <div className="w-25">
                         <MdDelete
@@ -94,18 +150,11 @@ const MyProperties = () => {
                             className="bg-danger text-white rounded-circle p-1 w-100 h-100"
                         />
                     </div>
-                    <div className="w-25">
-                        <FaRegEye
-                            onClick={() => viewProperty(row.original._id)}
-                            cursor="pointer"
-                            className="bg-danger text-white rounded-circle p-1 w-100 h-100"
-                        />
-                    </div>
                 </div>
             )
         },
     ];
-    console.log("myProperty",myProperty)
+
     return (
         <>
             <Header setLabel={setLabel} />
@@ -135,8 +184,30 @@ const MyProperties = () => {
                 </div>
             </div>
             <Footer />
+
+            {isModalOpen && selectedProperty && (
+                <div className="modal" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content" ref={modalRef}>
+                            <div className="modal-header">
+                                <h5 className="modal-title">Change Visibility</h5>
+                                <button type="button" className="close" onClick={closeModal}>
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Do you want to make this property {selectedProperty.viewable ? 'invisible' : 'visible'}?</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-primary" onClick={changeVisibility}>Yes, change it</button>
+                                <button type="button" className="btn btn-secondary" onClick={closeModal}>Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
-    )
-}
+    );
+};
 
 export default MyProperties;
