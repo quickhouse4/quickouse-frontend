@@ -54,29 +54,29 @@ const AllSms = () => {
                                 <div className="card h-100 shadow-sm" style={getStatusStyle(capitalizeFirstLetter(item.Options))}>
                                     <div className="card-body">
                                         <div>
-                                            <span style={{ fontSize: "12px", marginLeft: "16px" }}>Status:</span>
+                                            <span style={{ fontSize: "12px", marginLeft: "16px", fontWeight: "bold" }}>Status:</span>
                                             <span style={{ fontSize: "12px", marginLeft: "16px" }}>{capitalizeFirstLetter(item.Options)}</span>
                                         </div>
                                         <p className="card-text d-flex justify-content-between">
                                             <div>
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3" }}>Type:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3",fontWeight: "bold" }}>Type:</span>
                                                 <span style={{ fontSize: "12px" }}>{capitalizeFirstLetter(item.Type)}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3" }}>Price:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3",fontWeight: "bold" }}>Price:</span>
                                                 <span style={{ fontSize: "12px", marginRight: "10px" }}>{formatPrice(item.price)} rwf {" "} </span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3" }}>Province:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3",fontWeight: "bold" }}>Province:</span>
                                                 <span style={{ fontSize: "12px" }}>{item.province}</span>
                                                 <br />
                                             </div>
                                             <div>
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3" }}>District:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3",fontWeight: "bold"}}>District:</span>
                                                 <span style={{ fontSize: "12px" }}>{item.district}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3" }}>Sector:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3",fontWeight: "bold" }}>Sector:</span>
                                                 <span style={{ fontSize: "12px" }}>{item.sector}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3" }}>Phone:</span><a href={`tel:${item.phone}`} style={{ fontSize: "12px" }}>{item.phone}</a>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3",fontWeight: "bold" }}>Phone:</span><a href={`tel:${item.phone}`} style={{ fontSize: "12px" }}>{item.phone}</a>
                                             </div>
                                         </p>
                                     </div>
