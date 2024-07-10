@@ -148,15 +148,15 @@ const UssdMessage = () => {
   const getBackgroundColor = (options) => {
     switch (options) {
       case "Nkeneye kugura":
-        return "#C1E1FF"; // Light Orange
+        return "#C1E1FF";
       case "Ndagurisha":
-        return "#ffec1a"; // Yellow
+        return "#ffec1a";
       case "Ndakodesha(Tenant)":
-        return "#C1E1FF"; // Light Blue
+        return "#C1E1FF";
       case "Ndakodesha(Landlord)":
-        return "#ffec1a"; // Yellow
+        return "#ffec1a";
       default:
-        return "#FFFFFF"; // Default White
+        return "#FFFFFF";
     }
   };
   // #C1FFD7 Light Green #FFFAC1; // Light Yellow
@@ -175,7 +175,7 @@ const UssdMessage = () => {
           <div className='navbar1 d-flex justify-content-center align-items-center'>
             <ul >
               <li className="dropdown1">
-                <Link to="/" className="" onClick={() => setToggle(!toggle)} >
+                <Link to="/allSms" className="" onClick={() => setToggle(!toggle)} >
                   <h4 className="text-center fs-3" style={{ fontWeight: "600" }}>SMS</h4>
                 </Link>
                 {/* <i className="bi bi-chevron-down "></i> <ul className={!toggle ? "dropdown1" : "dropdown1-active d-flex flex-column"}>
