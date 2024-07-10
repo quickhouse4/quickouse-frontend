@@ -237,7 +237,7 @@ const CommonList = ({ label, setLoading }) => {
       />
       <div class="row common">
         <div className='d-flex justify-content-center'>
-          <h4 class="fs-3" style={{fontWeight:"500"}}>ORDINARY</h4>
+          <h4 class="fs-3" style={{fontWeight:"500",color:"transparent"}}>ORDINARY</h4>
         </div>
         {commonLoading ? (
           <h2 class="text-center mt-5 pt-5">

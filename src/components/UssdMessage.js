@@ -19,19 +19,16 @@ const UssdMessage = () => {
   let commonLoading = ''
   let allError = "";
   const { ussdLoading, ussd, ussdError } = useSelector((state) => state.getUssdMessage)
-  const { offerLoading, offerFilters, offerError } = useSelector((state) => state.offerFilter);
-  const { offerSaleLoading, offerSaleFilters, offerSaleError } = useSelector((state) => state.offerFilterSale);
-
-  const { requestLoading, requestFilters, requestError } = useSelector((state) => state.requestFilter)
-  const { requestSaleLoading, requestSaleFilters, requestSaleError } = useSelector((state) => state.requestFilterSale)
+  const { offerFilters, offerError } = useSelector((state) => state.offerFilter);
+  const { offerSaleFilters, offerSaleError } = useSelector((state) => state.offerFilterSale);
+  const { requestFilters, requestError } = useSelector((state) => state.requestFilter)
+  const { requestSaleFilters, requestSaleError } = useSelector((state) => state.requestFilterSale)
 
   const [loading, setLoading] = useState(false);
 
 
   const dispatch = useDispatch()
   const [toggle, setToggle] = useState(false)
-  const [menuToggle, setMenuToggle] = useState(false)
-  const [menuToggle1, setMenuToggle1] = useState(false)
   const [label, setLabel] = useState()
 
   let pageLimit = 25;
@@ -147,6 +144,22 @@ const UssdMessage = () => {
         return options;
     }
   };
+
+  const getBackgroundColor = (options) => {
+    switch (options) {
+      case "Nkeneye kugura":
+        return "#C1E1FF"; // Light Orange
+      case "Ndagurisha":
+        return "#ffec1a"; // Yellow
+      case "Ndakodesha(Tenant)":
+        return "#C1E1FF"; // Light Blue
+      case "Ndakodesha(Landlord)":
+        return "#ffec1a"; // Yellow
+      default:
+        return "#FFFFFF"; // Default White
+    }
+  };
+  // #C1FFD7 Light Green #FFFAC1; // Light Yellow
   return (
     <>
       <Header setLabel={setLabel} />
@@ -165,7 +178,7 @@ const UssdMessage = () => {
                 <Link to="/" className="" onClick={() => setToggle(!toggle)} >
                   <h4 className="text-center fs-3" style={{ fontWeight: "600" }}>SMS</h4>
                 </Link>
-                {/*<i className="bi bi-chevron-down "></i> <ul className={!toggle ? "dropdown1" : "dropdown1-active d-flex flex-column"}>
+                {/* <i className="bi bi-chevron-down "></i> <ul className={!toggle ? "dropdown1" : "dropdown1-active d-flex flex-column"}>
                   <li className="dropdown1"><a onClick={() => setMenuToggle(!menuToggle)}><Link>Offer</Link><i className="bi bi-chevron-right"></i></a>
                     <ul className={!menuToggle ? "" : "dropdown1-active"}>
                       <li>
@@ -230,7 +243,11 @@ const UssdMessage = () => {
                           <div class="card-body shadow-lg bg-light rounded border border-light ">
                             <div class="card-text d-flex justify-content-between">
                               <div>
-                                <div className="sms-style">
+                                <div className="sms-style" style={{
+                                  backgroundColor: getBackgroundColor(item.Options),
+                                  borderRadius: "5px",
+                                  padding: "2px",
+                                }} >
                                   <span className="sms-title">Status:</span>
                                   {" "}
                                   <span className="sms-text">{getOptionsDisplayText(capitalizeFirstLetter(item.Options))}</span>
@@ -274,7 +291,7 @@ const UssdMessage = () => {
                       </Link>
                     ))
                 }
-                </>
+              </>
             )}
         </div>
       </div>
