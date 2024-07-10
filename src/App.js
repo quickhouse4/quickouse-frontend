@@ -31,6 +31,7 @@ import Transactions from "./screen/Transactions";
 import Expenses from "./screen/Expenses";
 import MyLists from "./screen/MyLists";
 import MyPropertes from "./screen/MyPropertes";
+import AllSms from "./screen/AllSms";
 
 function App() {
   const dispatch = useDispatch();
@@ -128,7 +129,11 @@ function App() {
       <Route path="/myProperties">
         <MyPropertes />
       </Route>
+      <Route path="/allSms">
+        <AllSms />
+      </Route>
     </Router>
+
   );
 }
 

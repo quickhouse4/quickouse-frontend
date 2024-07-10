@@ -845,6 +845,9 @@ li {
   .top {
     margin-top: 0px !important;
   }
+  .top-all{
+    margin-top: 0px !important;
+  }
 
   .statistics {
     width: 100% !important;
@@ -976,7 +979,9 @@ li {
 .top {
   margin-top: 70px;
 }
-
+.top-all{
+  margin-top: 100px;
+}
 .postByName {
   display: flex;
   align-items: center;
