@@ -20,18 +20,18 @@ const AllSms = () => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
-    const getStatusStyle = (status) => {
-        switch (status) {
-            case 'For Rent':
-                return { backgroundColor: '#C1FFD7' };
-            case 'For Rent Out':
-                return { backgroundColor: '#FFECB3' };
-            case 'For Sale':
-                return { backgroundColor: '#FFCDD2' };
-            case 'For Buy':
-                return { backgroundColor: '#B3E5FC' };
+    const getStatusStyle = (options) => {
+        switch (options) {
+            case 'Nkeneye kugura':
+                return { backgroundColor: "#C1E1FF" ,padding: "2px" ,borderRadius: "5px"};
+            case 'Ndagurisha':
+                return { backgroundColor: "#ffec1a" ,padding: "2px" ,borderRadius: "5px" };
+            case 'Ndakodesha(Tenant)':
+                return { backgroundColor: "#C1E1FF" ,padding: "2px" ,borderRadius: "5px"};
+            case 'Ndakodesha(Landlord)':
+                return { backgroundColor: "#ffec1a" ,padding: "2px" ,borderRadius: "5px"};
             default:
-                return { backgroundColor: '#FFFFFF' };
+                return { backgroundColor: '#FFFFFF' ,padding: "2px" ,borderRadius: "5px"};
         }
     };
 
@@ -51,11 +51,11 @@ const AllSms = () => {
                     <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                         {ussd.map((item, index) => (
                             <div className="col" key={index}>
-                                <div className="card h-100 shadow-sm" style={getStatusStyle(capitalizeFirstLetter(item.Options))}>
+                                <div className="card h-100 shadow-sm">
                                     <div className="card-body">
-                                        <div>
-                                            <span style={{ fontSize: "12px", marginLeft: "16px", fontWeight: "bold" }}>Status:</span>
-                                            <span style={{ fontSize: "12px", marginLeft: "16px" }}>{capitalizeFirstLetter(item.Options)}</span>
+                                        <div className='ml-1'>
+                                            <span style={{ fontSize: "12px", marginLeft: "16px", fontWeight: "bold",color: "#0E7BE3" }}>Status:</span>
+                                            <span style={{ fontSize: "12px", marginLeft: "16px" , ...getStatusStyle(item.Options) }}>{capitalizeFirstLetter(item.Options)}</span>
                                         </div>
                                         <p className="card-text d-flex justify-content-between">
                                             <div>

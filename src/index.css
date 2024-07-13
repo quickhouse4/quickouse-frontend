@@ -845,9 +845,9 @@ li {
   .top {
     margin-top: 0px !important;
   }
-  .top-all{
+  /* .top-all{
     margin-top: 0px !important;
-  }
+  } */
 
   .statistics {
     width: 100% !important;
@@ -1000,4 +1000,13 @@ li {
 .no-gutters {
   margin-right: 0 !important;
   margin-left: 0 !important;
+}
+
+.card-title1{
+font-size: "12px" !important;
+  color: "#0E7BE3" ; 
+  font-weight: "bold"
+}
+.card-text1{
+  font-size: "12px" !important;
 }

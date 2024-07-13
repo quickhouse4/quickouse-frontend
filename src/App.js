@@ -32,11 +32,12 @@ import Expenses from "./screen/Expenses";
 import MyLists from "./screen/MyLists";
 import MyPropertes from "./screen/MyPropertes";
 import AllSms from "./screen/AllSms";
+import AllAppMessage from "./screen/AllAppMessage";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(visitorsTrack())
+    dispatch(visitorsTrack())
   }, [dispatch]);
 
 
@@ -131,6 +132,9 @@ function App() {
       </Route>
       <Route path="/allSms">
         <AllSms />
+      </Route>
+      <Route path="/all-app-message">
+        <AllAppMessage />
       </Route>
     </Router>
 
