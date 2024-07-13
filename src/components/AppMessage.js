@@ -30,15 +30,15 @@ const AppMessage = () => {
     const capitalizedStatus = capitalizeFirstLetter(status);
     switch (capitalizedStatus) {
       case "For Rent":
-        return { background: "#B3E5FC", borderRadius: "5px", paddingLeft: "2px" };
+        return { background: "#B3E5FC", borderRadius: "5px", padding: "3px" };
       case "For Rent Out":
-        return { background: "#FFCDD2", borderRadius: "5px", paddingLeft: "2px" };
+        return { background: "#FFCDD2", borderRadius: "5px", padding: "3px" };
       case "For Sale":
-        return { background: "#FFCDD2", borderRadius: "5px", paddingLeft: "2px" };
+        return { background: "#FFCDD2", borderRadius: "5px", padding: "3px" };
       case "For Buy":
-        return { background: "#B3E5FC", borderRadius: "5px", paddingLeft: "2px" };
+        return { background: "#B3E5FC", borderRadius: "5px", padding: "3px" };
       default:
-        return { background: "#FFFFFF", borderRadius: "5px", paddingLeft: "2px" };
+        return { background: "#FFFFFF", borderRadius: "5px", padding: "3px" };
     }
   }
   return (
@@ -46,9 +46,9 @@ const AppMessage = () => {
       <Header setLabel={setLabel} />
       <div class="col-md-3 property-col prime-list top">
         <div class="common">
-          <div className='d-flex justify-content-center'>
+          <Link to="/all-app-message" className='d-flex justify-content-center'>
             <h4 class="fs-3" style={{ fontWeight: "500" }}>APP MESSAGES</h4>
-          </div>
+          </Link>
           {
             loading ? (
               <h2 class="text-center mt-5 pt-5">
@@ -78,10 +78,10 @@ const AppMessage = () => {
                           <div class="card-body shadow-lg bg-light rounded border border-light ">
                             <div class="card-text d-flex ">
                               <div>
-                                <div className="sms-style" style={getStatusStyle(item.businessStatus)}>
-                                  <span className="sms-title">Status:</span>
+                                <div className="sms-style" >
+                                  <span className="sms-title" >Status:</span>
                                   {" "}
-                                  <span className="sms-text">{capitalizeFirstLetter(item.businessStatus)}</span>
+                                  <span style={getStatusStyle(item.businessStatus)} className="sms-text">{capitalizeFirstLetter(item.businessStatus)}</span>
                                 </div>
                                 <div className="sms-style">
                                   <span className="sms-title" >Type:</span>

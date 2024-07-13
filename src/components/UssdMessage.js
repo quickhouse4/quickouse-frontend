@@ -26,7 +26,6 @@ const UssdMessage = () => {
 
   const [loading, setLoading] = useState(false);
 
-
   const dispatch = useDispatch()
   const [toggle, setToggle] = useState(false)
   const [label, setLabel] = useState()
@@ -172,7 +171,7 @@ const UssdMessage = () => {
             Service Launching Soon!
           </span>
         ) :
-          <div className='navbar1 d-flex justify-content-center align-items-center'>
+          <div className='navbar1 d-flex justify-content-center align-items-center' style={{marginTop:"-10px"}}>
             <ul >
               <li className="dropdown1">
                 <Link to="/allSms" className="" onClick={() => setToggle(!toggle)} >
@@ -243,14 +242,11 @@ const UssdMessage = () => {
                           <div class="card-body shadow-lg bg-light rounded border border-light ">
                             <div class="card-text d-flex justify-content-between">
                               <div>
-                                <div className="sms-style" style={{
-                                  backgroundColor: getBackgroundColor(item.Options),
-                                  borderRadius: "5px",
-                                  padding: "2px",
-                                }} >
+                                <div className="sms-style" >
                                   <span className="sms-title">Status:</span>
                                   {" "}
-                                  <span className="sms-text">{getOptionsDisplayText(capitalizeFirstLetter(item.Options))}</span>
+                                  <span style={{backgroundColor: getBackgroundColor(item.Options), borderRadius: "5px",
+                                  padding: "2px",}} className="sms-text">{getOptionsDisplayText(capitalizeFirstLetter(item.Options))}</span>
                                 </div>
                                 <div className="sms-style">
                                   <span className="sms-title">Type:</span>
