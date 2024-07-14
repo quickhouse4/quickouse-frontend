@@ -147,13 +147,13 @@ const UssdMessage = () => {
   const getBackgroundColor = (options) => {
     switch (options) {
       case "Nkeneye kugura":
-        return "#C1E1FF";
+        return "#0E7BE3";
       case "Ndagurisha":
-        return "#ffec1a";
+        return "#e60000";
       case "Ndakodesha(Tenant)":
-        return "#C1E1FF";
+        return "#0E7BE3";
       case "Ndakodesha(Landlord)":
-        return "#ffec1a";
+        return "#e60000";
       default:
         return "#FFFFFF";
     }
@@ -243,40 +243,39 @@ const UssdMessage = () => {
                             <div class="card-text d-flex justify-content-between">
                               <div>
                                 <div className="sms-style" >
-                                  <span className="sms-title">Status:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}} >Status:</span>
                                   {" "}
-                                  <span style={{backgroundColor: getBackgroundColor(item.Options), borderRadius: "5px",
-                                  padding: "2px",}} className="sms-text">{getOptionsDisplayText(capitalizeFirstLetter(item.Options))}</span>
+                                  <span className="sms-text">{getOptionsDisplayText(capitalizeFirstLetter(item.Options))}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Type:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}}>Type:</span>
                                   {" "}
                                   <span className="sms-text">{capitalizeFirstLetter(item.Type)}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Price:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}}>Price:</span>
                                   {" "}
                                   <span className="sms-text">{formatPrice(item.price)} rwf</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Province:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}}>Province:</span>
                                   {" "}
                                   <span className="sms-text">{item.province}</span>
                                 </div>
                               </div>
                               <div>
                                 <div className="sms-style">
-                                  <span className="sms-title">District:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}}>District:</span>
                                   {" "}
                                   <span className="sms-text">{item.district}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Sector:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}}>Sector:</span>
                                   {" "}
                                   <span className="sms-text">{item.sector}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Phone:</span>
+                                  <span className="sms-title" style={{color: getBackgroundColor(item.Options)}}>Phone:</span>
                                   {" "}
                                   <span className="sms-text"><a href={`${item.phone}`}>{item.phone}</a></span>
                                 </div>
