@@ -30,15 +30,15 @@ const AppMessage = () => {
     const capitalizedStatus = capitalizeFirstLetter(status);
     switch (capitalizedStatus) {
       case "For Rent":
-        return { background: "#B3E5FC", borderRadius: "5px", padding: "3px" };
+        return { color: "#0E7BE3" };
       case "For Rent Out":
-        return { background: "#FFCDD2", borderRadius: "5px", padding: "3px" };
+        return { color: "#e60000" };
       case "For Sale":
-        return { background: "#FFCDD2", borderRadius: "5px", padding: "3px" };
+        return { color: "#e60000" };
       case "For Buy":
-        return { background: "#B3E5FC", borderRadius: "5px", padding: "3px" };
+        return { color: "#0E7BE3" };
       default:
-        return { background: "#FFFFFF", borderRadius: "5px", padding: "3px" };
+        return { color: "#FFFFFF" };
     }
   }
   return (
@@ -79,29 +79,29 @@ const AppMessage = () => {
                             <div class="card-text d-flex ">
                               <div>
                                 <div className="sms-style" >
-                                  <span className="sms-title" >Status:</span>
+                                  <span style={getStatusStyle(item.businessStatus)} className="sms-title" >Status:</span>
                                   {" "}
-                                  <span style={getStatusStyle(item.businessStatus)} className="sms-text">{capitalizeFirstLetter(item.businessStatus)}</span>
+                                  <span className="sms-text">{capitalizeFirstLetter(item.businessStatus)}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title" >Type:</span>
+                                  <span style={getStatusStyle(item.businessStatus)} className="sms-title" >Type:</span>
                                   {" "}
                                   <span className="sms-text">{capitalizeFirstLetter(item.type)}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Price:</span>
+                                  <span style={getStatusStyle(item.businessStatus)} className="sms-title">Price:</span>
                                   {" "}
                                   <span className="sms-text">{formatPrice(item.price)} {item.currency}</span>
                                 </div>
                               </div>
                               <div className="pl-2">
                                 <div className="sms-style">
-                                  <span className="sms-title">Location:</span>
+                                  <span style={getStatusStyle(item.businessStatus)} className="sms-title">Location:</span>
                                   {" "}
                                   <span className="sms-text">{item.province}{" "}{item.district}{" "}{item.sector}</span>
                                 </div>
                                 <div className="sms-style">
-                                  <span className="sms-title">Phone:</span>
+                                  <span style={getStatusStyle(item.businessStatus)} className="sms-title">Phone:</span>
                                   {" "}
                                   <span className="sms-text"><a href={`0${item.postedBy && item.postedBy.phoneNumber}`}>0{item.postedBy && item.postedBy.phoneNumber}</a></span>
                                 </div>

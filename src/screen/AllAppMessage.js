@@ -21,21 +21,36 @@ const AllAppMessage = () => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
-    const getStatusStyle = (status) => {
+    // const getStatusStyle = (status) => {
+    //     const capitalizedStatus = capitalizeFirstLetter(status);
+    //     switch (capitalizedStatus) {
+    //         case "For Rent":
+    //             return { background: "#B3E5FC", borderRadius: "5px", padding: "2px 5px" };
+    //         case "For Rent Out":
+    //             return { background: "#FFCDD2", borderRadius: "5px", padding: "2px 5px" };
+    //         case "For Sale":
+    //             return { background: "#FFCDD2", borderRadius: "5px", padding: "2px 5px" };
+    //         case "For Buy":
+    //             return { background: "#B3E5FC", borderRadius: "5px", padding: "2px 5px" };
+    //         default:
+    //             return { background: "#FFFFFF", borderRadius: "5px", padding: "2px 5px" };
+    //     }
+    // };
+    function getStatusStyle(status) {
         const capitalizedStatus = capitalizeFirstLetter(status);
         switch (capitalizedStatus) {
-            case "For Rent":
-                return { background: "#B3E5FC", borderRadius: "5px", padding: "2px 5px" };
-            case "For Rent Out":
-                return { background: "#FFCDD2", borderRadius: "5px", padding: "2px 5px" };
-            case "For Sale":
-                return { background: "#FFCDD2", borderRadius: "5px", padding: "2px 5px" };
-            case "For Buy":
-                return { background: "#B3E5FC", borderRadius: "5px", padding: "2px 5px" };
-            default:
-                return { background: "#FFFFFF", borderRadius: "5px", padding: "2px 5px" };
+          case "For Rent":
+            return { color: "#0E7BE3" };
+          case "For Rent Out":
+            return { color: "#e60000" };
+          case "For Sale":
+            return { color: "#e60000" };
+          case "For Buy":
+            return { color: "#0E7BE3" };
+          default:
+            return { color: "#FFFFFF" };
         }
-    };
+      }
 
     return (
         <>
@@ -57,24 +72,24 @@ const AllAppMessage = () => {
                                     <div className="card-body">
                                         <p className="card-text d-flex justify-content-between">
                                             <div>
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold" }}>Status:</span>
-                                                <span style={{ fontSize: "12px", ...getStatusStyle(item.businessStatus) }}>{capitalizeFirstLetter(item.businessStatus)}</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold",...getStatusStyle(item.businessStatus) }}>Status:</span>
+                                                <span style={{ fontSize: "12px",  }}>{capitalizeFirstLetter(item.businessStatus)}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold" }}>Type:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold",...getStatusStyle(item.businessStatus) }}>Type:</span>
                                                 <span style={{ fontSize: "12px" }}>{capitalizeFirstLetter(item.title)}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold" }}>Price:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold",...getStatusStyle(item.businessStatus) }}>Price:</span>
                                                 <span style={{ fontSize: "12px", marginRight: "10px" }}>{formatPrice(item.price)} {item.currency}</span>
                                                 <br />
                                             </div>
                                             <div>
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold" }}>Province:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold",...getStatusStyle(item.businessStatus) }}>Province:</span>
                                                 <span style={{ fontSize: "12px" }}>{item.province}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold" }}>District:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold",...getStatusStyle(item.businessStatus) }}>District:</span>
                                                 <span style={{ fontSize: "12px" }}>{item.district}</span>
                                                 <br />
-                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold" }}>Sector:</span>
+                                                <span style={{ fontSize: "12px", color: "#0E7BE3", fontWeight: "bold",...getStatusStyle(item.businessStatus) }}>Sector:</span>
                                                 <span style={{ fontSize: "12px" }}>{item.sector}</span>
                                             </div>
                                         </p>

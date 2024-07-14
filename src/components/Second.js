@@ -11,6 +11,7 @@ function Second({label,setLoading}) {
         <UssdMessage />
         <CommonList label={label} setLoading={setLoading}/>
         <AppMessage/>
+        
         {/* <UssdMessage /> */}
         {/* <PrimeList/> */}
       </div>
