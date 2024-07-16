@@ -15,7 +15,7 @@ const ResetPassword = () => {
     const { loading } = useSelector((state) => state.resetPassword)
     const dispatch = useDispatch()
     const history = useHistory()
-    const { token } = useParams()
+    const { emailToken } = useParams()
 
     const onChangePassword = (e) => {
         const em = e.target.value
@@ -25,7 +25,7 @@ const ResetPassword = () => {
             setPassword({ value: em, message: "Type a Password" })
         }
     }
-
+console.log(emailToken)
     const confirmPasswordHandler = async (e) => {
         e.preventDefault()
         if (password.value == "" || password.value == null) {
@@ -34,7 +34,7 @@ const ResetPassword = () => {
             const payload = {
                 password: password.value
             }
-            dispatch(resetUserPassword(token, payload))
+            dispatch(resetUserPassword(emailToken, payload))
             toast.success("your password has been changed successfully, login to continue");
             setTimeout(() => {
               history.push("/login");
