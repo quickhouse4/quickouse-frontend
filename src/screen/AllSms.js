@@ -42,9 +42,9 @@ const AllSms = () => {
             case "Ndagurisha":
                 return { color: "#e60000", fontWeight: "bold" };
             case "Ndakodesha(Tenant)":
-                return { color: "#e60000", fontWeight: "bold" };
-            case "Ndakodesha(Landlord)":
                 return { color: "#0E7BE3", fontWeight: "bold" };
+            case "Ndakodesha(Landlord)":
+                return { color:  "#e60000", fontWeight: "bold" };
             default:
                 return { color: "#FFFFFF", fontWeight: "bold" };
         }
