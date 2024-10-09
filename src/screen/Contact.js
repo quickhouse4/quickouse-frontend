@@ -29,7 +29,7 @@ function Contact() {
     if (em != "") {
       setLastName({ value: em })
     } else {
-      setLastName({ value: em, message: "Write your Last Name" });
+      setLastName({ value: em, message:  "Write your Last Name" });
     }
   }
 
@@ -47,7 +47,7 @@ function Contact() {
     if (em != "") {
       setPhoneNumber({ value: em });
     } else {
-      setPhoneNumber({ value: em, message: "Write your Phone Number" });
+      setPhoneNumber({ value: em, message:"Write your Phone Number" });
     }
   }
 
