@@ -20,7 +20,7 @@ export const createDeal = (payload, token, history) => async (dispatch) => {
             type: CREATE_DEAL_REQUEST
         })
 
-        const response = await axios.post("http://197.243.26.162/api/order",
+        const response = await axios.post("https://quickhouse.herokuapp.com/api/order",
             payload,
             {
                 headers: {
@@ -50,7 +50,7 @@ export const getDeals = () => async (dispatch) => {
         dispatch({
             type: DEAL_REQUEST
         })
-        const response = await axios.get(`http://197.243.26.162/api/deals?page=1&limit=25`)
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/deals?page=1&limit=25`)
         dispatch({
             type: DEAL_SUCCESS,
             payload: response.data.data.docs,
@@ -70,7 +70,7 @@ export const getSingleDeal = (id) => async (dispatch) => {
         dispatch({
             type: DEAL_DETAIL_REQUEST
         })
-        const response = await axios.get(`http://197.243.26.162/api/deal/${id}`,)
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/deal/${id}`,)
         dispatch({
             type: DEAL_DETAIL_SUCCESS,
             payload: response.data.data
@@ -88,7 +88,7 @@ export const personDeal = (requesterId, token) => async (dispatch) => {
         dispatch({
             type: MY_DEAL_REQUEST
         })
-        const response = await axios.get(`http://197.243.26.162/api/myDeals?page=1&limit=10&requesterId=${requesterId}`, {
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/myDeals?page=1&limit=10&requesterId=${requesterId}`, {
             headers: {
                 token: token
             }

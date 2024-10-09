@@ -103,7 +103,7 @@ const Register = () => {
       try {
         setLoading(true);
         const response = await axios.post(
-          "http://197.243.26.162/api/auth/signup",
+          "https://quickhouse.herokuapp.com/api/auth/signup",
           payload
         );
         history.push("/login");
