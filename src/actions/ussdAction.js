@@ -70,7 +70,7 @@ export const offersFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `http://197.243.26.162/api/ussdproperties/rent/offer?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse.herokuapp.com/api/ussdproperties/rent/offer?page=${pageCount}&limit=${pageLimit}`
         );
         dispatch({
             type: FILTER_OFFER_SUCCESS,
@@ -97,7 +97,7 @@ export const offersSaleFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `http://197.243.26.162/api/ussdproperties/sales/offer?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse.herokuapp.com/api/ussdproperties/sales/offer?page=${pageCount}&limit=${pageLimit}`
         );
 
         dispatch({
@@ -124,7 +124,7 @@ export const requestFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `http://197.243.26.162/api/ussdproperties/rent/request?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse.herokuapp.com/api/ussdproperties/rent/request?page=${pageCount}&limit=${pageLimit}`
         );
         dispatch({
             type: FILTER_REQUEST_SUCCESS,
@@ -149,7 +149,7 @@ export const requestSaleFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `http://197.243.26.162/api/ussdproperties/sales/request?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse.herokuapp.com/api/ussdproperties/sales/request?page=${pageCount}&limit=${pageLimit}`
         );
        
         dispatch({
@@ -173,7 +173,7 @@ export const getAppMessage = () => async (dispatch) => {
         dispatch({
             type: GET_APP_MESSAGE_REQUEST
         })
-        const response = await axios.get("http://197.243.26.162/api/orders")
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/orders")
         dispatch({
             type: GET_APP_MESSAGE_SUCCESS,
             payload: response.data.data
@@ -190,7 +190,7 @@ export const getDetailsMessage = (id) => async (dispatch) => {
         dispatch({
             type: GET_DETAILS_MESSAGE_REQUEST
         })
-        const response = await axios.get(`http://197.243.26.162/api/order/${id}`)
+        const response = await axios.get(`https://quickhouse.herokuapp.com/api/order/${id}`)
         dispatch({
             type: GET_DETAILS_MESSAGE_SUCCESS,
             payload: response.data.data

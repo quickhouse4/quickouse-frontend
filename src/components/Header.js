@@ -199,7 +199,7 @@ function Header({ setLabel }) {
           return;
         }
         const { data } = await axios.get(
-          `http://197.243.26.162/api/myProfile`,
+          `https://quickhouse.herokuapp.com/api/myProfile`,
           {
             headers: {
               token: token,
