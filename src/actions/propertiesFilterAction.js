@@ -50,7 +50,7 @@ export const vacantPlotFilter = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/rent/vacantPlots?page=1&limit=10"
+      "http://197.243.26.162/api/properties/rent/vacantPlots?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_VACANT_PLOT_SUCCESS, payload: response.data.data.docs });
@@ -66,7 +66,7 @@ export const vacantPlotFilterSale = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/sale/vacantPlots?page=1&limit=10"
+      "http://197.243.26.162/api/properties/sale/vacantPlots?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_VACANT_PLOT_SALE_SUCCESS, payload: response.data.data.docs });
@@ -83,7 +83,7 @@ export const warehouseFilter = () => async (dispatch) => {
       type: FILTER_WAREHOUSE_REQUEST
     });
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/rent/warehouse?page=1&limit=10"
+      "http://197.243.26.162/api/properties/rent/warehouse?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_WAREHOUSE_SUCCESS, payload: response.data.data.docs });
@@ -101,7 +101,7 @@ export const warehouseFiltersale = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/sale/warehouse?page=1&limit=10"
+      "http://197.243.26.162/api/properties/sale/warehouse?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_WAREHOUSE_SALE_SUCCESS, payload: response.data.data.docs });
@@ -119,7 +119,7 @@ export const commercialFilter = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/rent/commercial?page=1&limit=10"
+      "http://197.243.26.162/api/properties/rent/commercial?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_COMMERCIAL_SUCCESS, payload: response.data.data.docs });
@@ -137,7 +137,7 @@ export const commercialFilterSale = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/sale/commercial?page=1&limit=10"
+      "http://197.243.26.162/api/properties/sale/commercial?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_COMMERCIAL_SALE_SUCCESS, payload: response.data.data.docs });
@@ -154,7 +154,7 @@ export const apartmentsFilter = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/rent/apartments?page=1&limit=10"
+      "http://197.243.26.162/api/properties/rent/apartments?page=1&limit=10"
     )
 
     dispatch({ type: FILTER_APARTMENTS_SUCCESS, payload: response.data.data.docs });
@@ -172,7 +172,7 @@ export const apartmentsFilterSale = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/sale/apartments?page=1&limit=10"
+      "http://197.243.26.162/api/properties/sale/apartments?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_APARTMENTS_SALE_SUCCESS, payload: response.data.data.docs });
@@ -191,7 +191,7 @@ export const residentialsFilter = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/rent/residential?page=1&limit=10"
+      "http://197.243.26.162/api/properties/rent/residential?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_RESIDENTIAL_SUCCESS, payload: response.data.data.docs });
@@ -208,7 +208,7 @@ export const residentialsFilterSale = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/sale/residential?page=1&limit=10"
+      "http://197.243.26.162/api/properties/sale/residential?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_RESIDENTIAL_SALE_SUCCESS, payload: response.data.data.docs });
@@ -227,7 +227,7 @@ export const officesFilter = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/rent/offices?page=1&limit=10"
+      "http://197.243.26.162/api/properties/rent/offices?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_OFFICE_SUCCESS, payload: response.data.data.docs });
@@ -244,7 +244,7 @@ export const officesFilterSale = () => async (dispatch) => {
     });
 
     const response = await axios.get(
-      "https://quickhouse.herokuapp.com/api/properties/sale/offices?page=1&limit=10"
+      "http://197.243.26.162/api/properties/sale/offices?page=1&limit=10"
     );
 
     dispatch({ type: FILTER_OFFICE_SALE_SUCCESS, payload: response.data.data.docs });

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://quickhouse.herokuapp.com/api",
+  baseURL: "http://197.243.26.162/api",
   headers: {
     "Content-type": "application/json"
   }

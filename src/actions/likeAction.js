@@ -8,7 +8,7 @@ import {
 export const createLike = (id, token) => async (dispatch) => {
     try {
         dispatch({ type: CREATE_LIKE_REQUEST })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/likeProperty/${id}`,
+        const response = await axios.get(`http://197.243.26.162/api/likeProperty/${id}`,
             {
                 headers: {
                     token: token,
