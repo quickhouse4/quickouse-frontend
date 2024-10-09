@@ -35,8 +35,8 @@ export const cashinRequest = (payload, token) => async (dispatch) => {
         dispatch({
             type: CASHIN_REQUEST,
         });
-        //https://quickhouse.herokuapp.com/api
-        const response = await axios.post('https://quickhouse.herokuapp.com/api/cashin', payload, {
+        //http://197.243.26.162/api
+        const response = await axios.post('http://197.243.26.162/api/cashin', payload, {
             headers: {
                 token: token,
             }
@@ -62,7 +62,7 @@ export const cashoutRequest = (payload, token) => async (dispatch) => {
         dispatch({
             type: CASHOUT_REQUEST,
         });
-        const response = await axios.post('https://quickhouse.herokuapp.com/api/cashout', payload, {
+        const response = await axios.post('http://197.243.26.162/api/cashout', payload, {
             headers: {
                 token: token,
             }
@@ -96,7 +96,7 @@ export const paymentStatusAction = (id) => async (dispatch) => {
         dispatch({
             type: CHECK_PAYMENT_STATUS_REQUEST,
         });
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/checkpaymentstatus/${id}`);
+        const response = await axios.get(`http://197.243.26.162/api/checkpaymentstatus/${id}`);
         dispatch({
             type: CHECK_PAYMENT_STATUS_SUCCESS,
             payload: response.data
@@ -115,7 +115,7 @@ export const revenueAction = (token) => async (dispatch) => {
         dispatch({
             type: REVENUE_REQUEST,
         });
-        const response = await axios.get('https://quickhouse.herokuapp.com/api/getallpayments', {
+        const response = await axios.get('http://197.243.26.162/api/getallpayments', {
             headers: {
                 token: token,
             }
@@ -138,7 +138,7 @@ export const userAmountAction = (token) => async (dispatch) => {
         dispatch({
             type: GET_USER_PAYMENT_REQUEST,
         });
-        const response = await axios.get('https://quickhouse.herokuapp.com/api/getuserpayment', {
+        const response = await axios.get('http://197.243.26.162/api/getuserpayment', {
             headers: {
                 token: token,
             }
@@ -161,7 +161,7 @@ export const expenseAction = (token) => async (dispatch) => {
         dispatch({
             type: EXPENSE_REQUEST,
         });
-        const response = await axios.get('https://quickhouse.herokuapp.com/api/getAllExpense', {
+        const response = await axios.get('http://197.243.26.162/api/getAllExpense', {
             headers: {
                 token: token,
             }
@@ -184,7 +184,7 @@ export const userRevenueAction = (token) => async (dispatch) => {
         dispatch({
             type: GET_USER_REVENUE_REQUEST,
         });
-        const response = await axios.get('https://quickhouse.herokuapp.com/api/userRevenue', {
+        const response = await axios.get('http://197.243.26.162/api/userRevenue', {
             headers: {
                 token: token,
             }
@@ -207,7 +207,7 @@ export const getTransactionAction = (token) => async (dispatch) => {
         dispatch({
             type: GET_TRANSACTION_REQUEST,
         });
-        const response = await axios.get('https://quickhouse.herokuapp.com/api/transactions', {
+        const response = await axios.get('http://197.243.26.162/api/transactions', {
             headers: {
                 token: token,
             }
@@ -229,7 +229,7 @@ export const getUserExpense = (token) => async (dispatch) => {
         dispatch({
             type: GET_USER_EXPENSES_REQUEST,
         });
-        const response = await axios.get('https://quickhouse.herokuapp.com/api/eachUserExpenses', {
+        const response = await axios.get('http://197.243.26.162/api/eachUserExpenses', {
             headers: {
                 token: token,
             }

@@ -3,6 +3,7 @@ import UssdMessage from "./UssdMessage";
 import CommonList from "./CommonList";
 import PrimeList from './PrimeList'
 import AppMessage from "./AppMessage";
+import Contact from "../screen/Contact";
 
 function Second({label,setLoading}) {
   return (
@@ -15,6 +16,7 @@ function Second({label,setLoading}) {
         {/* <UssdMessage /> */}
         {/* <PrimeList/> */}
       </div>
+      <Contact />
     </div>
   );
 }
