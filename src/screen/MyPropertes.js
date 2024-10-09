@@ -55,7 +55,7 @@ const MyProperties = () => {
                 visible: `${!selectedProperty.viewable}`
             }
             console.log("payload", payload)
-            const res = await axios.patch(`http://197.243.26.162/api/property/visibility/${selectedProperty._id}`, payload, {
+            const res = await axios.patch(`https://quickhouse.herokuapp.com/api/property/visibility/${selectedProperty._id}`, payload, {
                 headers: {
                     token: token
                 }
@@ -70,7 +70,7 @@ const MyProperties = () => {
     const deleteHandler = async (id) => {
         if (window.confirm("Are you sure you want to delete this property?")) {
             try {
-                await axios.delete(`http://197.243.26.162/api/property/${id}`, {
+                await axios.delete(`https://quickhouse.herokuapp.com/api/property/${id}`, {
                     headers: {
                         token: token
                     }

@@ -37,9 +37,9 @@ export const listProperties = (page, limit) => async (dispatch) => {
   try {
 
     dispatch({ type: PROPERTIES_REQUEST });
-    
+
     const response = await axios.get(
-      `http://197.243.26.162/api/allProperties?page=${page}&limit=${limit}`
+      `https://quickhouse.herokuapp.com/api/allProperties?page=${page}&limit=${limit}`
     );
 
     dispatch({
@@ -66,7 +66,7 @@ export const singleProperty = (id) => async (dispatch) => {
     dispatch({ type: PROPERTY_DETAILS_REQUEST });
 
     const response = await axios.get(
-      `http://197.243.26.162/api/property/${id}`
+      `https://quickhouse.herokuapp.com/api/property/${id}`
     );
 
     dispatch({ type: PROPERTY_DETAILS_SUCCESS, payload: response.data.data });
@@ -82,7 +82,7 @@ export const createProperty = (payload, token, history) => async (dispatch) => {
     });
 
     const response = await axios.post(
-      "http://197.243.26.162/api/property",
+      "https://quickhouse.herokuapp.com/api/property",
       payload[0],
       {
         headers: {
@@ -116,7 +116,7 @@ export const createSpecialProperty =
       });
 
       const response = await axios.post(
-        "http://197.243.26.162/api/specialProperty",
+        "https://quickhouse.herokuapp.com/api/specialProperty",
         payload[0],
         {
           headers: {
@@ -142,7 +142,7 @@ export const createSpecialProperty =
 export const SpecialProperties = (page, limit) => async (dispatch) => {
   try {
     const response = await axios.get(
-      `http://197.243.26.162/api/specialProperties?page=${page}&limit=${limit}`
+      `https://quickhouse.herokuapp.com/api/specialProperties?page=${page}&limit=${limit}`
     );
     dispatch({
       type: SPECIAL_PROPERTY,
@@ -167,7 +167,7 @@ export const allData =
         });
 
         const response = await axios.get(
-          `http://197.243.26.162/api/properties/search?search=${search}`
+          `https://quickhouse.herokuapp.com/api/properties/search?search=${search}`
         );
 
         dispatch({
@@ -188,7 +188,7 @@ export const propertyForRent = (pageCount, pageLimit) => async (dispatch) => {
     dispatch({ type: PROPERTIES_FOR_RENT_REQUEST });
 
     const response = await axios.get(
-      `http://197.243.26.162/api/properties/rent?page=${pageCount}&limit=${pageLimit}`
+      `https://quickhouse.herokuapp.com/api/properties/rent?page=${pageCount}&limit=${pageLimit}`
     );
 
     dispatch({
@@ -211,7 +211,7 @@ export const propertyForSale = (pageCount, pageLimit) => async (dispatch) => {
     dispatch({ type: PROPERTIES_FOR_SALE_REQUEST });
 
     const response = await axios.get(
-      `http://197.243.26.162/api/properties/sale?page=${pageCount}&limit=${pageLimit}`
+      `https://quickhouse.herokuapp.com/api/properties/sale?page=${pageCount}&limit=${pageLimit}`
     );
 
     dispatch({
@@ -232,7 +232,7 @@ export const myProperties = (token) => async (dispatch) => {
     dispatch({ type: MY_PROPERTIES_REQUEST });
 
     const response = await axios.get(
-      `http://197.243.26.162/api/myproperty`,
+      `https://quickhouse.herokuapp.com/api/myproperty`,
       {
         headers: {
           token: token,
@@ -255,7 +255,7 @@ export const blockProperty = (id, payload, token) => async (dispatch) => {
     dispatch({ type: BLOCK_PROPERTY_REQUEST });
 
     const response = await axios.put(
-      `http://197.243.26.162/api/property/visibility/${id}`,
+      `https://quickhouse.herokuapp.com/api/property/visibility/${id}`,
       payload,
       {
         headers: {
