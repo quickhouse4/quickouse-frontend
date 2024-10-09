@@ -199,7 +199,7 @@ function Header({ setLabel }) {
           return;
         }
         const { data } = await axios.get(
-          `https://quickhouse.herokuapp.com/api/myProfile`,
+          `http://197.243.26.162/api/myProfile`,
           {
             headers: {
               token: token,
@@ -341,7 +341,7 @@ function Header({ setLabel }) {
                 <>
                   <li>
                     <a className="nav-link scrollto">
-                      <Link className="nav-link" onClick={handlePropert} data-toggle="modal">List Your propperty</Link>
+                      <Link className="nav-link" onClick={handlePropert} data-toggle="modal">List Your property</Link>
                     </a>
                   </li>
                   <li>
