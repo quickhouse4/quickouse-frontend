@@ -99,7 +99,7 @@ function Contact() {
 
   return (
     <>
-      {/* <Header setLabel={setLabel}/>  data-aos='zoom-in-up'*/}
+      {/* <Header setLabel={setLabel}/> */}
       <div className='pt-0 pb-5 pb-md-11' >
         <div className=' py-5 px-lg-5 '>
           <div className='mt-5 text-center' data-wow-delay='0.1s' >
@@ -186,7 +186,6 @@ function Contact() {
           </div>
         </div>
       </div>
-
       {/* <Footer /> */}
     </>
   );
