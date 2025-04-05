@@ -151,7 +151,7 @@ export const requestSaleFilter = (pageCount, pageLimit) => async (dispatch) => {
         const response = await axios.get(
             `https://quickhouse.herokuapp.com/api/ussdproperties/sales/request?page=${pageCount}&limit=${pageLimit}`
         );
-       
+
         dispatch({
             type: FILTER_REQUEST_SALE_SUCCESS,
             payload: response.data.data.docs,
@@ -173,10 +173,14 @@ export const getAppMessage = () => async (dispatch) => {
         dispatch({
             type: GET_APP_MESSAGE_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/orders")
+        const response = await axios.get("https://quickhouse.herokuapp.com/api/orders?page=1&limit=20")
         dispatch({
             type: GET_APP_MESSAGE_SUCCESS,
-            payload: response.data.data
+            payload: response.data.data.docs,
+            totalDocs: response.data.data.totalDocs,
+            limit: response.data.data.limit,
+            page: response.data.data.page,
+            totalPagesforRent: response.data.data.totalPages,
         })
     } catch (error) {
         dispatch({
@@ -186,7 +190,7 @@ export const getAppMessage = () => async (dispatch) => {
 }
 
 export const getDetailsMessage = (id) => async (dispatch) => {
-    try{
+    try {
         dispatch({
             type: GET_DETAILS_MESSAGE_REQUEST
         })
@@ -195,7 +199,7 @@ export const getDetailsMessage = (id) => async (dispatch) => {
             type: GET_DETAILS_MESSAGE_SUCCESS,
             payload: response.data.data
         })
-    }catch(error){
+    } catch (error) {
         dispatch({
             type: GET_DETAILS_MESSAGE_FAIL
         })
