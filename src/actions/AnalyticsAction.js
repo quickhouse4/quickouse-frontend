@@ -58,7 +58,7 @@ export const getDataAnalytic = (token) => async (dispatch) => {
         dispatch({
             type: GET_ANALYTICS_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/viewsAnalytics", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/viewsAnalytics", {
             headers: {
                 token: token
             }
@@ -81,7 +81,7 @@ export const getYearViews = (token, year) => async (dispatch) => {
         dispatch({
             type: GET_YEAR_VIEWS_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/viewsAnalytics?yearData=${year}`, {
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/viewsAnalytics?yearData=${year}`, {
             headers: {
                 token: token
             }
@@ -104,7 +104,7 @@ export const getYearLikes = (token, year) => async (dispatch) => {
         dispatch({
             type: GET_YEAR_LIKES_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/likes?yearData=${year}`, {
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/likes?yearData=${year}`, {
             headers: {
                 token: token
             }
@@ -127,7 +127,7 @@ export const getLikeAnalytic = (token) => async (dispatch) => {
         dispatch({
             type: GET_LIKE_ANALYTICS_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/likes", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/likes", {
             headers: {
                 token: token
             }
@@ -150,7 +150,7 @@ export const getPostNumber = (token) => async (dispatch) => {
         dispatch({
             type: POST_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/myPosts", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/myPosts", {
             headers: {
                 token: token
             }
@@ -173,7 +173,7 @@ export const getLikeNumber = (token) => async (dispatch) => {
         dispatch({
             type: LIKE_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/allLikes", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/allLikes", {
             headers: {
                 token: token
             }
@@ -194,7 +194,7 @@ export const getViewsNumber = (token) => async (dispatch) => {
         dispatch({
             type: VIEWS_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/myViews", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/myViews", {
             headers: {
                 token: token
             }
@@ -215,7 +215,7 @@ export const getPlotNumber = (token) => async (dispatch) => {
         dispatch({
             type: PLOT_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts/plot", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/posts/plot", {
             headers: {
                 token: token
             }
@@ -238,7 +238,7 @@ export const getHouseNumber = (token) => async (dispatch) => {
         dispatch({
             type: HOUSE_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts/house", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/posts/house", {
             headers: {
                 token: token
             }
@@ -261,7 +261,7 @@ export const getRentPosts = (token) => async (dispatch) => {
         dispatch({
             type: RENT_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts/forRent", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/posts/forRent", {
             headers: {
                 token: token
             }
@@ -284,7 +284,7 @@ export const getSalePosts = (token) => async (dispatch) => {
         dispatch({
             type: SALE_NUMBER_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api//posts/forSale", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api//posts/forSale", {
             headers: {
                 token: token
             }
@@ -307,7 +307,7 @@ export const getTotalPosts = (token) => async (dispatch) => {
         dispatch({
             type: TOTAL_POST_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/posts", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/posts", {
             headers: {
                 token: token
             }
@@ -329,7 +329,7 @@ export const getTotalViews = (token) => async (dispatch) => {
         dispatch({
             type: TOTAL_VIEWS_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/totalViews", {
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/totalViews", {
             headers: {
                 token: token
             }
@@ -351,7 +351,7 @@ export const visitorsTrack = () => async (dispatch) => {
         dispatch({
             type: VISITORS_TRACK_REQUEST
         })
-        const response = await axios.post("https://quickhouse.herokuapp.com/api/visits");
+        const response = await axios.post("https://quickhouse-436caeb406a0.herokuapp.com/api/visits");
         dispatch({
             type: VISITORS_TRACK_SUCCESS,
             response: response.data.data
@@ -370,7 +370,7 @@ export const getVisitorAnalytics = (token, year) => async (dispatch) => {
         dispatch({
             type: VISITOR_ANALYTIC_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/analyticsVisits?yearData=${year}`, {
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/analyticsVisits?yearData=${year}`, {
             headers: {
                 token: token
             }
@@ -392,7 +392,7 @@ export const getTotalViewAnalytics = (year) => async (dispatch) => {
         dispatch({
             type: GET_TOTAL_VIEW_ANALYTIC_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/totalAnalyticsViews?yearData=${year}`);
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/totalAnalyticsViews?yearData=${year}`);
         dispatch({
             type: GET_TOTAL_VIEW_ANALYTIC_SUCCESS,
             response: response.data.data
@@ -410,7 +410,7 @@ export const getTotalLikeAnalytics = (year) => async (dispatch) => {
         dispatch({
             type: GET_TOTAL_LIKE_ANALYTIC_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/totalAnalyticsLikes?yearData=${year}`);
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/totalAnalyticsLikes?yearData=${year}`);
         dispatch({
             type: GET_TOTAL_LIKE_ANALYTIC_SUCCESS,
             response: response.data.data

@@ -31,7 +31,7 @@ export const getClientUssd = () => async (dispatch) => {
         dispatch({
             type: GET_USSD_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/ussdProperties")
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/ussdProperties")
         dispatch({
             type: GET_USSD_SUCCESS,
             payload: response.data.data
@@ -49,7 +49,7 @@ export const getSingleUssd = (id) => async (dispatch) => {
         dispatch({
             type: GET_ONEUSSD_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/ussd/${id}`,)
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/ussd/${id}`,)
         dispatch({
             type: GET_ONEUSSD_SUCCESS,
             payload: response.data.data
@@ -70,7 +70,7 @@ export const offersFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `https://quickhouse.herokuapp.com/api/ussdproperties/rent/offer?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse-436caeb406a0.herokuapp.com/api/ussdproperties/rent/offer?page=${pageCount}&limit=${pageLimit}`
         );
         dispatch({
             type: FILTER_OFFER_SUCCESS,
@@ -97,7 +97,7 @@ export const offersSaleFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `https://quickhouse.herokuapp.com/api/ussdproperties/sales/offer?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse-436caeb406a0.herokuapp.com/api/ussdproperties/sales/offer?page=${pageCount}&limit=${pageLimit}`
         );
 
         dispatch({
@@ -124,7 +124,7 @@ export const requestFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `https://quickhouse.herokuapp.com/api/ussdproperties/rent/request?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse-436caeb406a0.herokuapp.com/api/ussdproperties/rent/request?page=${pageCount}&limit=${pageLimit}`
         );
         dispatch({
             type: FILTER_REQUEST_SUCCESS,
@@ -149,7 +149,7 @@ export const requestSaleFilter = (pageCount, pageLimit) => async (dispatch) => {
         });
 
         const response = await axios.get(
-            `https://quickhouse.herokuapp.com/api/ussdproperties/sales/request?page=${pageCount}&limit=${pageLimit}`
+            `https://quickhouse-436caeb406a0.herokuapp.com/api/ussdproperties/sales/request?page=${pageCount}&limit=${pageLimit}`
         );
 
         dispatch({
@@ -173,7 +173,7 @@ export const getAppMessage = () => async (dispatch) => {
         dispatch({
             type: GET_APP_MESSAGE_REQUEST
         })
-        const response = await axios.get("https://quickhouse.herokuapp.com/api/orders?page=1&limit=20")
+        const response = await axios.get("https://quickhouse-436caeb406a0.herokuapp.com/api/orders?page=1&limit=20")
         dispatch({
             type: GET_APP_MESSAGE_SUCCESS,
             payload: response.data.data.docs,
@@ -194,7 +194,7 @@ export const getDetailsMessage = (id) => async (dispatch) => {
         dispatch({
             type: GET_DETAILS_MESSAGE_REQUEST
         })
-        const response = await axios.get(`https://quickhouse.herokuapp.com/api/order/${id}`)
+        const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/order/${id}`)
         dispatch({
             type: GET_DETAILS_MESSAGE_SUCCESS,
             payload: response.data.data

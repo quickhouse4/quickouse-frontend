@@ -11,7 +11,7 @@ export const getProfile = (token) => async (dispatch) => {
             type: GET_PROFILE_REQUEST
         })
         const response = await axios.get(
-            `https://quickhouse.herokuapp.com/api/myProfile`,
+            `https://quickhouse-436caeb406a0.herokuapp.com/api/myProfile`,
             {
                 headers: {
                     token: token,

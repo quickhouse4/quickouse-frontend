@@ -24,7 +24,7 @@ const MyLists = () => {
     }, [dispatch]);
 
     const deleteHandler = async (id) => {
-        const response = await axios.delete(`https://quickhouse.herokuapp.com/ussd/${id}`);
+        const response = await axios.delete(`https://quickhouse-436caeb406a0.herokuapp.com/ussd/${id}`);
         if (response.status === 200) {
             window.location.reload();
         }

@@ -49,7 +49,7 @@ function Login() {
       try {
         setLoading(true);
         const response = await axios.post(
-          "https://quickhouse.herokuapp.com/api/auth/signin",
+          "https://quickhouse-436caeb406a0.herokuapp.com/api/auth/signin",
           payload
         );
         localStorage.setItem("token", response.data.data.token);

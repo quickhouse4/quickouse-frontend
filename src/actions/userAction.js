@@ -31,7 +31,7 @@ export const userLogin = (payload) => async (dispatch) => {
   const history = useHistory()
   try {
     const response = axios
-      .post("https://quickhouse.herokuapp.com/api/auth/signin", payload)
+      .post("https://quickhouse-436caeb406a0.herokuapp.com/api/auth/signin", payload)
       .then(function (res) {
         localStorage.setItem("token", res.data.data.token);
         localStorage.setItem("email", res.data.data.userData.email);
@@ -56,7 +56,7 @@ export const updateProfile = (payload, token, history) => async (dispatch) => {
     dispatch({
       type: UPDATE_PROFILE_REQUEST
     });
-    const response = await axios.patch("https://quickhouse.herokuapp.com/api/update/myProfile",
+    const response = await axios.patch("https://quickhouse-436caeb406a0.herokuapp.com/api/update/myProfile",
       payload,
       {
         headers: {
@@ -82,7 +82,7 @@ export const getOneUser = (id, token) => async (dispatch) => {
     dispatch({
       type: GET_USER_REQUEST
     })
-    const response = await axios.get(`https://quickhouse.herokuapp.com/api/oneUser/${id}`, {
+    const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/oneUser/${id}`, {
       headers: {
         token
       }
@@ -106,7 +106,7 @@ export const getAllUser = (token, page, limit) => async (dispatch) => {
       type: ALL_USER_REQUEST
     })
 
-    const response = await axios.get(`https://quickhouse.herokuapp.com/api/allUsers?page=${page}}&limit=${limit}`, {
+    const response = await axios.get(`https://quickhouse-436caeb406a0.herokuapp.com/api/allUsers?page=${page}}&limit=${limit}`, {
       headers: {
         token: token
       }
@@ -139,7 +139,7 @@ export const userForgotPassword = (payload) => async (dispatch) => {
       }
     };
 
-    const response = await axios.post("https://quickhouse.herokuapp.com/api/forgotPassword",
+    const response = await axios.post("https://quickhouse-436caeb406a0.herokuapp.com/api/forgotPassword",
       payload,
       config
     )
@@ -162,7 +162,7 @@ export const resetUserPassword = (token, payload) => async (dispatch) => {
       type: RESET_PASSWORD_REQUEST
     })
 
-    const response = await axios.put(`https://quickhouse.herokuapp.com/api/reset/${token}`, payload)
+    const response = await axios.put(`https://quickhouse-436caeb406a0.herokuapp.com/api/reset/${token}`, payload)
     console.log(response.data)
 
     dispatch({
@@ -183,7 +183,7 @@ export const deletedUser = (id, token) => async (dispatch) => {
     dispatch({
       type: DELETE_USER_REQUEST
     })
-    const response = await axios.delete(`https://quickhouse.herokuapp.com/api/deleteUser/${id}`, {
+    const response = await axios.delete(`https://quickhouse-436caeb406a0.herokuapp.com/api/deleteUser/${id}`, {
       headers: {
         token: token
       }
@@ -206,7 +206,7 @@ export const userRoleUpdate = (id, payload, token ,history) => async (dispatch) 
     dispatch({
       type: UPDATE_ROLE_REQUEST
     })
-    const response = await axios.put(`https://quickhouse.herokuapp.com/api/userRole/${id}`, payload, {
+    const response = await axios.put(`https://quickhouse-436caeb406a0.herokuapp.com/api/userRole/${id}`, payload, {
       headers: {
         token: token,
       }

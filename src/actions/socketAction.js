@@ -20,7 +20,7 @@ const socketUrl = process.env.NODE_ENV === 'production'
     : 'ws://localhost:5000';
 
 const sockUrl = process.env.NODE_ENV === 'production'
-    ? 'https://quickhouse.herokuapp.com'
+    ? 'https://quickhouse-436caeb406a0.herokuapp.com'
     : 'http://localhost:5000';
 
 export const setUpSocket = () => async (dispatch, getState) => {

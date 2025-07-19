@@ -199,7 +199,7 @@ function Header({ setLabel }) {
           return;
         }
         const { data } = await axios.get(
-          `https://quickhouse.herokuapp.com/api/myProfile`,
+          `https://quickhouse-436caeb406a0.herokuapp.com/api/myProfile`,
           {
             headers: {
               token: token,
